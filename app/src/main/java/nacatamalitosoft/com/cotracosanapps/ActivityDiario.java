@@ -10,6 +10,6 @@ public class ActivityDiario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diario);
 
-        getSupportActionBar().setTitle("");
+        //getSupportActionBar().setTitle("");
     }
 }
