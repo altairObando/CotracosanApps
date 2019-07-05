@@ -8,16 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
 
 public class GridAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<String> arrayList;
+    private List<Buses> arrayList;
 
 
-    public  GridAdapter(Context context, ArrayList<String> arrayList)
+    public  GridAdapter(Context context, List<Buses> buses)
     {
-        this.context=context;
-        this.arrayList = arrayList;
+        this.context = context;
+        this.arrayList = buses;
     }
     @Override
     public int getCount() {
@@ -42,7 +45,7 @@ public class GridAdapter extends BaseAdapter {
             view=layoutInflater.inflate(R.layout.item_bus,null);
         }
         TextView titulo = (TextView) view.findViewById(R.id.item_titulo);
-        titulo.setText(arrayList.get(i));
+        titulo.setText(arrayList.get(i).getPlaca());
         return view;
     }
 }

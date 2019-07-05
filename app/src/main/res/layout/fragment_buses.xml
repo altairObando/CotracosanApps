@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".FragmentBuses">
 
-    <!-- TODO: Update blank fragment layout -->
+
 
     <GridView
         android:id="@+id/mainGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
         android:columnWidth="80dp"
         android:numColumns="auto_fit"
         android:gravity="center"
