@@ -1,0 +1,28 @@
+Lista de metodos y servicios alojados en
+http://cotracosan.somee.com/
+Para las fechas tienen que enviarse en el formato
+mm/dd/yyyy
+==================================================
+	http://cotracosan.tk/ApiVehiculos
+===================================================
+// 1. Obtener los buses de un vehiculo
+ http://cotracosan.tk/ApiVehiculos/getVehiculosPorSocio?socioId=''
+
+// 2. Cuánto dinero hizo un bus en un determinado día.
+http://cotracosan.tk/ApiVehiculos/getMontoRecaudado?vehiculoId=''&fecha=''
+
+// 3. Cuánto dinero hicieron todos los buses de un socio en un intervalo de tiempo
+http://cotracosan.tk/ApiVehiculos/getMontoTotalRecaudado?socioId=''&fechaInicio=''&fechaFin=''
+
+==================================================
+	http://cotracosan.tk/ApiCarreras
+===================================================
+// 1. Obtener todas las carreras
+http://cotracosan.tk/ApiCarreras/getCarreras
+
+==================================================
+	http://cotracosan.tk/ApiAccount
+===================================================
+// 1. Realizar el incio de sesion  retorna un valor bool si es verdadero retorna el socioId tambien
+http://cotracosan.tk/ApiAccount/IniciarSesion?Usuario=''&Contrasenia=''
+
