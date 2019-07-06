@@ -3,7 +3,6 @@ package nacatamalitosoft.com.cotracosanapps;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -81,9 +80,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment fragment = null;
         if (id == R.id.nav_camera) {
-            fragment = new FragmentBuses();
+            // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -97,10 +95,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contendor_fragmentos, fragment)
-                .commit();
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

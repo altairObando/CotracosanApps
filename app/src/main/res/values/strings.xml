@@ -1,15 +1,8 @@
 <resources>
     <string name="app_name">CotracosanApps</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="mainOpc1">Carreras</string>
-    <string name="mainOpc2">Créditos</string>
-    <string name="mainOpc3">Abonos</string>
-    <string name="mainOpc4">Configuraciones</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Abrir Navegación</string>
+    <string name="navigation_drawer_close">Cerrar Navegación</string>
+    <string name="nav_header_title">Cotracosan 2019</string>
+    <string name="nav_header_desc">Cabecera navegación</string>
+    <string name="action_settings">Ajustes</string>
 </resources>
