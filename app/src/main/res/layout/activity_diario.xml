@@ -4,6 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDiario">
+    tools:context=".ActivityDiario"
+    android:padding="30dp">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtCarreras"/>
+
+            <TextView
+                android:id="@+id/txtCarreras"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtCarreras"
+                android:layout_toRightOf="@id/textView"/>
+
+            <TextView
+                android:id="@+id/textViewCred"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtCredito"
+                android:layout_below="@id/textView"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/txtCreditos"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtCredito"
+                android:layout_below="@id/txtCarreras"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/textViewCred"/>
+
+
+            <TextView
+                android:id="@+id/textViewAb"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtAbonos"
+                android:layout_below="@id/textViewCred"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/txtAbonos"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtAbonos"
+                android:layout_below="@id/txtCreditos"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/textViewAb"/>
+
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>

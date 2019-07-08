@@ -22,14 +22,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
-
-import static android.content.Intent.getIntent;
 
 
 public class FragmentBuses extends Fragment {
@@ -48,6 +44,10 @@ public class FragmentBuses extends Fragment {
     private Context context;
     private List<Buses> buses;
     int socioId;
+    public String mensaj ="vacio";
+
+    private static FragmentBuses fragmentBuses;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,8 +56,10 @@ public class FragmentBuses extends Fragment {
         // A la hora de mostrar el fragmento de los buses se puede filtrar por el socioId
         // el valor del socioId es un valor entero que se puede obtener mediante una interfaz
         // que comunique desde MainActivity hacia el fragmentBuses
-        socioId = 3; // Valor de prueba
+        socioId = 1; // Valor de prueba
         new BusesTask().execute();
+
+        Toast.makeText(getContext(), this.mensaj, Toast.LENGTH_LONG);
        /* ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("M123456");
         arrayList.add("M654321");
@@ -73,7 +75,8 @@ public class FragmentBuses extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), ActivityDiario.class);
+                Intent intent = new Intent(getActivity(), ActivityDiario.class);
+                //intent.putExtra("id", buses.get(gridView.getSelectedItemPosition()).getId());
                 startActivity(intent);
             }
         });
@@ -119,6 +122,7 @@ public class FragmentBuses extends Fragment {
                         gridView.setAdapter(adapter);
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        mensaj = e.getMessage();
                     }
                 }
             }, new Response.ErrorListener() {

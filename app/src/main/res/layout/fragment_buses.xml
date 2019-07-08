@@ -14,7 +14,8 @@
         android:columnWidth="80dp"
         android:numColumns="auto_fit"
         android:gravity="center"
-        android:verticalSpacing="10dp"/>
+        android:verticalSpacing="20dp"
+        android:paddingTop="100dp"/>
 
 
 </LinearLayout>

@@ -5,4 +5,9 @@
     <string name="nav_header_title">Cotracosan 2019</string>
     <string name="nav_header_desc">Cabecera navegación</string>
     <string name="action_settings">Ajustes</string>
+    <string name="txtCredito">Creditos</string>
+    <string name="txtAbonos">Abonos</string>
+    <string name="txtBuses">Buses</string>
+    <string name="txtCuenta">Configuración</string>
+    <string name="txtCarreras">Carreras</string>
 </resources>
