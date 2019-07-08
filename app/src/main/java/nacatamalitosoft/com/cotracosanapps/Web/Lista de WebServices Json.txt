@@ -8,10 +8,10 @@ mm/dd/yyyy
 // 1. Obtener los buses de un vehiculo
  http://cotracosan.tk/ApiVehiculos/getVehiculosPorSocio?socioId=''
 
-// 2. Cuánto dinero hizo un bus en un determinado día.
+// 2. Cuï¿½nto dinero hizo un bus en un determinado dï¿½a.
 http://cotracosan.tk/ApiVehiculos/getMontoRecaudado?vehiculoId=''&fecha=''
 
-// 3. Cuánto dinero hicieron todos los buses de un socio en un intervalo de tiempo
+// 3. Cuï¿½nto dinero hicieron todos los buses de un socio en un intervalo de tiempo
 http://cotracosan.tk/ApiVehiculos/getMontoTotalRecaudado?socioId=''&fechaInicio=''&fechaFin=''
 
 ==================================================
@@ -20,6 +20,15 @@ http://cotracosan.tk/ApiVehiculos/getMontoTotalRecaudado?socioId=''&fechaInicio=
 // 1. Obtener todas las carreras
 http://cotracosan.tk/ApiCarreras/getCarreras
 
+==================================================
+	http://cotracosan.tk/ApiCreditos
+===================================================
+// 1. Todos los creditos efectuados a un bus o a todos
+parametro idBus opcional, si no se pasa se obtienen todos los buses.
+http://cotracosan.tk/ApiCarreras/GetCreditos?idBus=0
+// 2. Lista de aquiellos crÃ©ditos que estan
+// pendientes por bus, las fechas son opcionales y sirven para filtrar entre fechas o un dia fijo (fechaInicio solo)
+http://cotracosan.tk/ApiCarreras/GetCreditosPorBus?idBus=1&fechaInicio=MM/dd/yyyy&fechaFin=MM/dd/yyyy
 ==================================================
 	http://cotracosan.tk/ApiAccount
 ===================================================
