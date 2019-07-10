@@ -1,10 +1,12 @@
 package nacatamalitosoft.com.cotracosanapps;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +43,7 @@ public class FragmentBuses extends Fragment {
 
     }
     private GridView gridView;
-    private GridAdapter adapter;
-    private Context context;
+
     private List<Buses> buses;
     int socioId;
     public String mensaj ="vacio";
@@ -50,7 +51,7 @@ public class FragmentBuses extends Fragment {
     ProgressDialog progressDialog;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_buses, container, false);
@@ -66,7 +67,7 @@ public class FragmentBuses extends Fragment {
         progressDialog.show();
         new BusesTask().execute();
 
-        Toast.makeText(getContext(), this.mensaj, Toast.LENGTH_LONG);
+        //Toast.makeText(getContext(), this.mensaj, Toast.LENGTH_LONG).show();
        /* ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("M123456");
         arrayList.add("M654321");
@@ -93,6 +94,7 @@ public class FragmentBuses extends Fragment {
     // Esto no es necesario pero podria ser util
     // Crear una tarea asincronica para aligerar o separar los procesos en el hilo principal
     // Usando un hilo adicional.
+    @SuppressLint("StaticFieldLeak")
     public class BusesTask extends AsyncTask<Void, Void, Void>{
 
         @Override
