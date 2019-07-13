@@ -112,9 +112,6 @@ http://cotracosan.tk/ApiArticulos/getGastosPorArticulos
 parametros opcionales:
 	fechaInicio datetime
 	fechaFin datetime
-
-
-
 ===================================================
 	http://cotracosan.tk/ApiAccount
 ===================================================
