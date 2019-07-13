@@ -1,28 +1,121 @@
-Lista de metodos y servicios alojados en
+ï»¿Lista de metodos y servicios alojados en
 http://cotracosan.somee.com/
 Para las fechas tienen que enviarse en el formato
 mm/dd/yyyy
+
+
 ==================================================
 	http://cotracosan.tk/ApiVehiculos
 ===================================================
-// 1. Obtener los buses de un vehiculo
+
+1. Obtener los buses de un vehiculo
  http://cotracosan.tk/ApiVehiculos/getVehiculosPorSocio?socioId=''
 
-// 2. Cuánto dinero hizo un bus en un determinado día.
+2. Cuanto dinero hizo un bus en un determinado dia.
 http://cotracosan.tk/ApiVehiculos/getMontoRecaudado?vehiculoId=''&fecha=''
 
-// 3. Cuánto dinero hicieron todos los buses de un socio en un intervalo de tiempo
-http://cotracosan.tk/ApiVehiculos/getMontoTotalRecaudado?socioId=''&fechaInicio=''&fechaFin=''
+3. Cuanto dinero hicieron todos los buses de un socio en un intervalo de tiempo
+http://cotracosan.tk/ApiVehiculos/getMontoTotalRecaudado?socioId=56&fechaInicio=''&fechaFin=''
+4. Muestra un consolidado de un bus en un dia o entre fechas.
+http://cotracosan.tk/ApiVehiculos/getConsolidadoVehiculo/2
+parametros opcionales:
+	fechaInicio datetime
+	fechaFin datetime
+5. Abonos por bus. Ambas consultas.
+
+http://cotracosan.tk/ApiVehiculos/getAbonosPorVehiculo?vehiculoId=3434
+parametros opcionales:
+	fechaInicio datetime
+	fechaFin datetime
+
 
 ==================================================
 	http://cotracosan.tk/ApiCarreras
 ===================================================
-// 1. Obtener todas las carreras
+
+1. Obtener todas las carreras
 http://cotracosan.tk/ApiCarreras/getCarreras
 
+2. Eliminar una carrera.
+http://cotracosan.tk/ApiCarreras/DeleteCarrera?carreraId=34
+observacion: 
+	Este metodo retorna:
+		eliminado bool -> estado de la eliminacion
+		mensaje String -> resultados de la consulta. 
+
+
 ==================================================
+	http://cotracosan.tk/ApiCreditos
+===================================================
+1. Todos los creditos efectuados a un bus o a todos
+parametro idBus opcional, si no se pasa se obtienen todos los buses.
+http://cotracosan.tk/ApiCreditos/GetCreditos?idBus=0
+
+2. Lista de aquiellos crÃ©ditos que estan pendientes por bus, 
+   las fechas son opcionales y sirven para filtrar entre fechas o un dia fijo (fechaInicio solo)
+http://cotracosan.tk/ApiCreditos/GetCreditosPorBus?idBus=1&fechaInicio=MM/dd/yyyy&fechaFin=MM/dd/yyyy
+
+3. CrÃ©ditos pendientes total de un socio. descendentes.
+http://cotracosan.tk/ApiCreditos/GetCreditosPendientePorSocio/5
+parametros opcionales:
+	fechaInicio datetime
+	fechaFin datetime
+
+4. Lista de los ultimos creditos realizados de forma descendente
+http://cotracosan.tk/ApiCreditos/GetUltimosCreditos
+parametro opcional:
+	max int   -> numero maximo de creditos en la respuesta
+5. Eliminar un credito y sus abonos
+http://cotracosan.tk/ApiCreditos/DeleteCredito
+observacion: 
+	Este metodo retorna:
+		eliminado bool -> estado de la eliminacion
+		mensaje String -> resultados de la consulta. 
+===================================================
+	http://cotracosan.tk/ApiAbonos
+===================================================
+1. Agregar un abono
+
+http://cotracosan.tk/ApiAbonos/AddAbono?fechaAbono=mm/dd/YYY&MontoDeAbono=34343&CreditoId=33
+ * Nota todos los campos son requeridos.
+ ** El codigo del abono se genera en el servidor al agregar el abono.
+ observacion: 
+	Este metodo retorna:
+		guardado bool -> estado de la eliminacion
+		mensaje String -> resultados de la consulta.
+
+2. Eliminar un abono
+http://cotracosan.tk/ApiAbonos/DeleteAbono?abonoId=343434
+
+observacion: 
+	Este metodo retorna:
+		eliminado bool -> estado de la eliminacion
+		mensaje String -> resultados de la consulta.
+
+===================================================
+	http://cotracosan.tk/ApiSocios
+===================================================
+
+1. Lista de abonos realizados de los buses de un socio. 
+http://cotracosan.tk/ApiSocios/GetAbonosPorSocio?socioId=34
+parametros opcionales:
+	fechaInicio datetime
+	fechaFin datetime
+
+
+
+===================================================
+		http://cotracosan.tk/ApiArticulos
+===================================================
+1. Listado de gastos por rubro.
+http://cotracosan.tk/ApiArticulos/getGastosPorArticulos
+parametros opcionales:
+	fechaInicio datetime
+	fechaFin datetime
+===================================================
 	http://cotracosan.tk/ApiAccount
 ===================================================
+
 // 1. Realizar el incio de sesion  retorna un valor bool si es verdadero retorna el socioId tambien
 http://cotracosan.tk/ApiAccount/IniciarSesion?Usuario=''&Contrasenia=''
 

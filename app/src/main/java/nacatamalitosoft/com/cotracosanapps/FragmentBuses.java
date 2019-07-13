@@ -1,9 +1,12 @@
 package nacatamalitosoft.com.cotracosanapps;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,16 +43,15 @@ public class FragmentBuses extends Fragment {
 
     }
     private GridView gridView;
-    private GridAdapter adapter;
-    private Context context;
+
     private List<Buses> buses;
     int socioId;
     public String mensaj ="vacio";
 
-    private static FragmentBuses fragmentBuses;
+    ProgressDialog progressDialog;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_buses, container, false);
@@ -57,9 +59,15 @@ public class FragmentBuses extends Fragment {
         // el valor del socioId es un valor entero que se puede obtener mediante una interfaz
         // que comunique desde MainActivity hacia el fragmentBuses
         socioId = 1; // Valor de prueba
+        // Mostrar un cuadro de dialogo para saber si se esta obteniendo la informacion.
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage("Obteniendo tus vehiculos");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         new BusesTask().execute();
 
-        Toast.makeText(getContext(), this.mensaj, Toast.LENGTH_LONG);
+        //Toast.makeText(getContext(), this.mensaj, Toast.LENGTH_LONG).show();
        /* ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("M123456");
         arrayList.add("M654321");
@@ -86,6 +94,7 @@ public class FragmentBuses extends Fragment {
     // Esto no es necesario pero podria ser util
     // Crear una tarea asincronica para aligerar o separar los procesos en el hilo principal
     // Usando un hilo adicional.
+    @SuppressLint("StaticFieldLeak")
     public class BusesTask extends AsyncTask<Void, Void, Void>{
 
         @Override
@@ -117,6 +126,8 @@ public class FragmentBuses extends Fragment {
                             // Agregamos el nuevo objeto a la lista.
                             buses.add(bus);
                         }
+                        if(buses.size() == 0)
+                            Toast.makeText(getContext(),"No posee vehiculos", Toast.LENGTH_SHORT).show();
                     // Estando fuera del for actualizamos el adaptador.
                         GridAdapter adapter = new GridAdapter(getContext(), buses);
                         gridView.setAdapter(adapter);
@@ -124,11 +135,14 @@ public class FragmentBuses extends Fragment {
                         e.printStackTrace();
                         mensaj = e.getMessage();
                     }
+                    progressDialog.dismiss();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
                 }
             });
             // Obtener la instancia unica para las solicitudes HTTP
