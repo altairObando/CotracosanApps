@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
@@ -45,6 +46,7 @@ public class FragmentBuses extends Fragment {
     private List<Buses> buses;
     int socioId;
     public String mensaj ="vacio";
+    int accion;
 
     private static FragmentBuses fragmentBuses;
 
@@ -58,26 +60,27 @@ public class FragmentBuses extends Fragment {
         // que comunique desde MainActivity hacia el fragmentBuses
         socioId = 1; // Valor de prueba
         new BusesTask().execute();
-
-        Toast.makeText(getContext(), this.mensaj, Toast.LENGTH_LONG);
-       /* ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("M123456");
-        arrayList.add("M654321");
-        arrayList.add("M136521");
-        arrayList.add("M246531");
-        arrayList.add("M123456");
-        arrayList.add("M123456");
-        adapter = new GridAdapter(getContext(), arrayList);
-        gridView.setAdapter(adapter);*/
-
-
+        accion = Integer.parseInt(Objects.requireNonNull(getArguments().getString("tipoAccion")));
         gridView = view.findViewById(R.id.mainGridView);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), ActivityDiario.class);
-                //intent.putExtra("id", buses.get(gridView.getSelectedItemPosition()).getId());
-                startActivity(intent);
+                int posicion = buses.get(i).getId();
+
+                switch (accion)
+                {
+                    case 0: {
+                        Intent intent = new Intent(getActivity(), ActivityDiario.class);
+                        intent.putExtra("idBus", String.valueOf(posicion));
+                        startActivity(intent);
+                    }
+                    case 1: {
+
+                    }
+                    default:
+                        Toast.makeText(getContext(), "No es posible realizar accion alguna",Toast.LENGTH_LONG);
+                }
+
             }
         });
         return view;

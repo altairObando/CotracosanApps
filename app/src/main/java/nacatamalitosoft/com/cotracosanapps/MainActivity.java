@@ -82,17 +82,30 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Buses) {
+            Bundle bundle = new Bundle();
+            bundle.putString("tipoAccion", "0");
             FragmentBuses fragment = new FragmentBuses();
+            fragment.setArguments(bundle);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.contendor_fragmentos, fragment).commit();
 
         } else if (id == R.id.Carreras) {
 
+            Bundle bundle = new Bundle();
+            bundle.putString("tipoAccion", "1");
+            FragmentBuses fragment = new FragmentBuses();
+            fragment.setArguments(bundle);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.contendor_fragmentos, fragment).commit();
         } else if (id == R.id.Creditos) {
 
         } else if (id == R.id.Abonos) {
 
-        } else if (id == R.id.Configuracion) {
+        }
+        else if(id == R.id.Consolidado) {
+
+        }
+        else if (id == R.id.Configuracion) {
 
         } else if (id == R.id.nav_send) {
 
