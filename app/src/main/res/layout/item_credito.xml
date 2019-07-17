@@ -40,8 +40,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/CodigoCredito"
-        android:layout_below="@+id/MontoCredito"
+        android:layout_below="@+id/RestoCredito"
         android:text="Fecha"
         tools:text="00/00/0000" />
+    <TextView
+        android:id="@+id/RestoCredito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CodigoCredito"
+        android:layout_below="@+id/MontoCredito"
+        android:text="Resto"
+        tools:text="Pendiente por Pagar" />
 
 </RelativeLayout>
