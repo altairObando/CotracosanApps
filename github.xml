@@ -1,0 +1,11 @@
+<application>
+  <component name="GithubAccounts">
+    <account id="a613b293-8bda-4722-810a-eaa83ff33859" name="altairObando">
+      <server host="github.com" />
+    </account>
+  </component>
+  <component name="GithubSettings">
+    <option name="LOGIN" value="altairObando" />
+    <option name="AUTH_TYPE" value="BASIC" />
+  </component>
+</application>
