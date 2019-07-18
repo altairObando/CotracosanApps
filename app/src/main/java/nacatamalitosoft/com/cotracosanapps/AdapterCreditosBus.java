@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
@@ -15,10 +16,10 @@ import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
 
 public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.ViewHolderAdapterCreditosBus> {
 
-    public AdapterCreditosBus(List<Credito> lista) {
+    public AdapterCreditosBus(ArrayList<Credito> lista) {
         this.lista = lista;
     }
-    List<Credito> lista;
+    ArrayList<Credito> lista;
 
     @NonNull
     @Override

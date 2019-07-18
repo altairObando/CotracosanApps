@@ -43,6 +43,7 @@ public final class UserSingleton {
         try{
             UserDbHelper db = new UserDbHelper(context);
             db.CerrarSesion(currentUser.getId());
+            currentUser = null;
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

@@ -1,9 +1,23 @@
 package nacatamalitosoft.com.cotracosanapps.Modelos;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Credito {
+
+
+    public Credito(int id, String codigoCredito, Date fecha, double montoTotal, double totalAbonado, int numeroAbonos, boolean creditoAnulado, boolean estadoCredito, ArrayList<DetalleDeCredito> detallesDeCreditos) {
+        this.id = id;
+        this.codigoCredito = codigoCredito;
+        this.fecha = fecha;
+        this.montoTotal = montoTotal;
+        this.totalAbonado = totalAbonado;
+        this.numeroAbonos = numeroAbonos;
+        this.creditoAnulado = creditoAnulado;
+        this.estadoCredito = estadoCredito;
+        this.detallesDeCreditos = detallesDeCreditos;
+    }
+
     public int getId() {
         return id;
     }
@@ -28,19 +42,19 @@ public class Credito {
         this.fecha = fecha;
     }
 
-    public float getMontoTotal() {
+    public double getMontoTotal() {
         return montoTotal;
     }
 
-    public void setMontoTotal(float montoTotal) {
+    public void setMontoTotal(double montoTotal) {
         this.montoTotal = montoTotal;
     }
 
-    public float getTotalAbonado() {
+    public double getTotalAbonado() {
         return totalAbonado;
     }
 
-    public void setTotalAbonado(float totalAbonado) {
+    public void setTotalAbonado(double totalAbonado) {
         this.totalAbonado = totalAbonado;
     }
 
@@ -52,6 +66,14 @@ public class Credito {
         this.numeroAbonos = numeroAbonos;
     }
 
+    public boolean isCreditoAnulado() {
+        return creditoAnulado;
+    }
+
+    public void setCreditoAnulado(boolean creditoAnulado) {
+        this.creditoAnulado = creditoAnulado;
+    }
+
     public boolean isEstadoCredito() {
         return estadoCredito;
     }
@@ -60,32 +82,22 @@ public class Credito {
         this.estadoCredito = estadoCredito;
     }
 
-    public List<DetalleDeCredito> getDetallesDeCreditos() {
+    public ArrayList<DetalleDeCredito> getDetallesDeCreditos() {
         return detallesDeCreditos;
     }
 
-    public void setDetallesDeCreditos(List<DetalleDeCredito> detallesDeCreditos) {
-        this.detallesDeCreditos = detallesDeCreditos;
-    }
-
-    public Credito(int id, String codigoCredito, Date fecha, float montoTotal, float totalAbonado, int numeroAbonos, boolean estadoCredito, List<DetalleDeCredito> detallesDeCreditos) {
-        this.id = id;
-        this.codigoCredito = codigoCredito;
-        this.fecha = fecha;
-        this.montoTotal = montoTotal;
-        this.totalAbonado = totalAbonado;
-        this.numeroAbonos = numeroAbonos;
-        this.estadoCredito = estadoCredito;
+    public void setDetallesDeCreditos(ArrayList<DetalleDeCredito> detallesDeCreditos) {
         this.detallesDeCreditos = detallesDeCreditos;
     }
 
     private int id;
     private String codigoCredito;
     private Date fecha;
-    private float montoTotal;
-    private float totalAbonado;
+    private double montoTotal;
+    private double totalAbonado;
     private int numeroAbonos;
+    private boolean creditoAnulado;
     private boolean estadoCredito;
-    private List<DetalleDeCredito> detallesDeCreditos;
+    private ArrayList<DetalleDeCredito> detallesDeCreditos;
 
 }

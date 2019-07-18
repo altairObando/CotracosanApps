@@ -1,6 +1,16 @@
 package nacatamalitosoft.com.cotracosanapps.Modelos;
 
 public class DetalleDeCredito {
+
+    public DetalleDeCredito(int id, int articuloId, String codigoArticulo, String nombreArticulo, int cantidad, double precio) {
+        this.id = id;
+        this.articuloId = articuloId;
+        this.codigoArticulo = codigoArticulo;
+        this.nombreArticulo = nombreArticulo;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
     public int getId() {
         return id;
     }
@@ -41,20 +51,11 @@ public class DetalleDeCredito {
         this.cantidad = cantidad;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
-
-    public DetalleDeCredito(int id, int articuloId, String codigoArticulo, String nombreArticulo, int cantidad, float precio) {
-        this.id = id;
-        this.articuloId = articuloId;
-        this.codigoArticulo = codigoArticulo;
-        this.nombreArticulo = nombreArticulo;
-        this.cantidad = cantidad;
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -63,5 +64,5 @@ public class DetalleDeCredito {
     private String codigoArticulo;
     private String nombreArticulo;
     private int cantidad;
-    private float precio;
+    private double precio;
 }
