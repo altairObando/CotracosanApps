@@ -125,8 +125,8 @@ parametros opcionales:
 // Cambiado a metodo POST
 http://cotracosan.tk/ApiAccount/IniciarSesion
 Parametros de la aplicacion
-string Usuario
-string Contrasenia
+string username
+string contrasenia
 
 2. Cambiar Contraseña [HttpPost]
 http://cotracosan.tk/ApiAccount/CambiarContraseña

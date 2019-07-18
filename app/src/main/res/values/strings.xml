@@ -16,4 +16,10 @@
     <string name="hitUsuarioLogin">Usuario</string>
     <string name="hintContrasenia">Contraseña</string>
     <string name="menu_salir">Cerrar Sesión</string>
+    <string name="btnCambiarImagen">boton para cambiar imagen del perfil</string>
+    <string name="iconoUsuario">Icono de detalle usuario</string>
+    <string name="lblSample">Nombre de usuario / correo</string>
+    <string name="iconoCorreo">Icono para mostrar el detalle de correo</string>
+    <string name="iconoContraseña">Icono para mostrar el cambio de contraseña</string>
+    <string name="lblContraseña">Cambiar Contraseña</string>
 </resources>

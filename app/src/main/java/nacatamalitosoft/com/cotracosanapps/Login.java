@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,6 +19,9 @@ import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 import nacatamalitosoft.com.cotracosanapps.localDB.User;
@@ -94,8 +98,8 @@ public class Login extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             // Url  de la consulta
-            String uri = "http://cotracosan.tk/ApiAccount/IniciarSesion?username="+user+"&contrasenia="+pass;
-            StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+            String uri = "http://cotracosan.tk/ApiAccount/IniciarSesion";
+            StringRequest request = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
@@ -125,15 +129,15 @@ public class Login extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                 }
-            }); /*{
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params  = new HashMap<>();
+                    Map<String, String> params = new HashMap<>();
                     params.put("username", user);
                     params.put("contrasenia", pass);
-                    return  params;
-                }*/
-
+                    return params;
+                }
+            };
             // Añadir peticion Http
             VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
             return null;
