@@ -13,13 +13,13 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imageViewUserImage"
+        android:layout_width="128px"
+        android:layout_height="128px"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:layout_marginEnd="2dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:layout_width="match_parent"

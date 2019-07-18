@@ -10,4 +10,10 @@
     <string name="txtBuses">Buses</string>
     <string name="txtCuenta">Configuración</string>
     <string name="txtCarreras">Carreras</string>
+    <string name="btnLoginText">Iniciar Sesión</string>
+    <string name="btnCancelarText">Cancelar</string>
+    <string name="loginIconDescription">Icono cotracosan login</string>
+    <string name="hitUsuarioLogin">Usuario</string>
+    <string name="hintContrasenia">Contraseña</string>
+    <string name="menu_salir">Cerrar Sesión</string>
 </resources>

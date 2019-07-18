@@ -20,6 +20,11 @@
             android:id="@+id/Abonos"
             android:icon="@drawable/piggybank"
             android:title="@string/txtAbonos" />
+
+        <item
+            android:id="@+id/Consolidado"
+            android:icon="@drawable/diagram"
+            android:title="Consolidado"/>
         <item
             android:id="@+id/Configuracion"
             android:icon="@drawable/ic_menu_manage"
