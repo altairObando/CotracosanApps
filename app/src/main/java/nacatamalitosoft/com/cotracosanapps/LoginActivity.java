@@ -27,7 +27,7 @@ import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 import nacatamalitosoft.com.cotracosanapps.localDB.User;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private EditText etUsuario, etPassword;
     private Button btnLogin, btnCancelar;
     ProgressDialog dialog;
@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
             etPassword = findViewById(R.id.etPassword);
             btnLogin = findViewById(R.id.btnLogin);
             btnCancelar = findViewById(R.id.btnCancelar);
-            dialog = new ProgressDialog(Login.this, R.style.AppTheme_Dark_Dialog);
+            dialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -10,4 +10,6 @@
     <string name="iconoCorreo">Icono para mostrar el detalle de correo</string>
     <string name="iconoContraseña">Icono para mostrar el cambio de contraseña</string>
     <string name="lblContraseña">Cambiar Contraseña</string>
+    <string name="lblDetalleUsuario">Nombre de usuario:</string>
+    <string name="lblCorreoDetalles">Correo Electronico:</string>
 </resources>

@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import nacatamalitosoft.com.cotracosanapps.R;
 
-public class UserDetails extends AppCompatActivity {
+public class ImagePreviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_details);
+        setContentView(R.layout.activity_image_preview);
     }
 }

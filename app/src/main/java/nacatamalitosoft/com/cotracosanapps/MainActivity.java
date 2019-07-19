@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 public class MainActivity extends AppCompatActivity
@@ -80,11 +81,13 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(MainActivity.this, UserDetailsActivity.class);
+            startActivity(i);
             return true;
         }else if(id == R.id.action_exit){
             // Cambiar el usuario a logged false.
             UserSingleton.CerrarSesion(MainActivity.this);
-            Intent i = new Intent(MainActivity.this, Login.class);
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             return true;
