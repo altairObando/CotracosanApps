@@ -71,6 +71,7 @@ observacion:
 	Este metodo retorna:
 		eliminado bool -> estado de la eliminacion
 		mensaje String -> resultados de la consulta. 
+
 ===================================================
 	http://cotracosan.tk/ApiAbonos
 ===================================================
@@ -91,6 +92,10 @@ observacion:
 	Este metodo retorna:
 		eliminado bool -> estado de la eliminacion
 		mensaje String -> resultados de la consulta.
+
+3. Todos los abonos de un credito
+
+http://cotracosan.tk/ApiAbonos/AbonosPorCredito?creditoid=3434343434
 
 ===================================================
 	http://cotracosan.tk/ApiSocios
@@ -117,5 +122,30 @@ parametros opcionales:
 ===================================================
 
 // 1. Realizar el incio de sesion  retorna un valor bool si es verdadero retorna el socioId tambien
-http://cotracosan.tk/ApiAccount/IniciarSesion?Usuario=''&Contrasenia=''
+// Cambiado a metodo POST
+http://cotracosan.tk/ApiAccount/IniciarSesion
+Parametros de la aplicacion
+string username
+string contrasenia
 
+2. Cambiar Contraseña [HttpPost]
+http://cotracosan.tk/ApiAccount/CambiarContraseña
+Parametros del servicio
+	string usuarioId
+	string nuevaContrasenia
+
+return {
+	completado : boolean,
+	mensaje : string
+}
+
+3. Cambiar Imagen del perfil [HttpPost]
+http://cotracosan.tk/ApiAccount/CambiarImagen
+parametros :
+	string idUsuario
+	string imagen (string en base64)
+
+return {
+	completado : boolean,
+	mensaje : string
+}

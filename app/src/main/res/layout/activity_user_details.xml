@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserManager.UserDetailsActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="25dp"
+        android:id="@+id/imagenDetallePerfil"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/schoolbus"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFFFF"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/ivCameraOptions"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
+        android:layout_marginStart="70dp"
+        android:src="@drawable/camera"
+        android:contentDescription="@string/btnCambiarImagen" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="10dp"
+        tools:ignore="UseCompoundDrawables">
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/user"
+            android:contentDescription="@string/iconoUsuario" />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:text="@string/lblDetalleUsuario"/>
+            <TextView
+                android:id="@+id/tvUsuarioDetalles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:text="@string/lblSample"
+                android:textColor="@color/oil"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="10dp"
+        tools:ignore="UseCompoundDrawables">
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/email"
+            android:contentDescription="@string/iconoCorreo" />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:text="@string/lblCorreoDetalles"/>
+            <TextView
+                android:id="@+id/tvCorreoDetalles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:text="@string/lblSample"
+                android:textColor="@color/oil"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="10dp"
+        tools:ignore="UseCompoundDrawables">
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/padlock"
+            android:contentDescription="@string/iconoContraseña" />
+        <TextView
+            android:id="@+id/tvCambiarContraseña"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_marginStart="8dp"
+            android:padding="8dp"
+            android:text="@string/lblContraseña"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</LinearLayout>
