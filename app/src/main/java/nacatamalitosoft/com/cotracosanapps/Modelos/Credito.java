@@ -1,9 +1,10 @@
 package nacatamalitosoft.com.cotracosanapps.Modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Credito {
+public class Credito implements Serializable {
 
 
     public Credito(int id, String codigoCredito, Date fecha, double montoTotal, double totalAbonado, int numeroAbonos, boolean creditoAnulado, boolean estadoCredito, ArrayList<DetalleDeCredito> detallesDeCreditos) {

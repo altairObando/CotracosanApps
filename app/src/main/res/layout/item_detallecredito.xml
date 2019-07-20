@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp">
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/cash"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/CodigoArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="CRED-00000"
+        tools:text="Codigo Articulo"/>
+
+    <TextView
+        android:id="@+id/SubTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="CRED-00000"
+
+        tools:text="00000000.00000"/>
+
+    <TextView
+        android:id="@+id/NombreArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/CodigoArticulo"
+        android:layout_below="@id/CodigoArticulo"
+        android:text="Monto"
+        tools:text="Nombre Articulo"
+        />
+    <TextView
+        android:id="@+id/Cantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CodigoArticulo"
+        android:layout_below="@+id/NombreArticulo"
+        android:text="Fecha"
+        tools:text="Cantidad" />
+    <TextView
+        android:id="@+id/Precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CodigoArticulo"
+        android:layout_below="@+id/Cantidad"
+        android:text="Resto"
+        tools:text="Precio" />
+
+</RelativeLayout>

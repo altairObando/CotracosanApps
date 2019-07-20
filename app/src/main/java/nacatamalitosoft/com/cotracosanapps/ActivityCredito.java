@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +37,13 @@ public class ActivityCredito extends AppCompatActivity {
         recyclerView  = (RecyclerView) findViewById(R.id.ReciclerId);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Credito temp = listaCredito.get(recyclerView.getChildAdapterPosition(v));
+
+            }
+        });
 
     }
 
