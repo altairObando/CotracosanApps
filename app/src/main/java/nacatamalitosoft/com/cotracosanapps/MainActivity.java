@@ -119,6 +119,10 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.contendor_fragmentos, fragment).commit();
         } else if (id == R.id.Creditos) {
 
+            Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
+            i.putExtra("operacion", 2);
+            i.putExtra("socioId", 1);
+            startActivity(i);
         } else if (id == R.id.Abonos) {
 
         }

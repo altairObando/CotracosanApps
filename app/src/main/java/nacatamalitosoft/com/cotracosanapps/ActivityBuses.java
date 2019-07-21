@@ -32,25 +32,57 @@ public class ActivityBuses extends AppCompatActivity {
 
     private List<Buses> buses;
     int socioId;
+    int operacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_buses);
+        socioId = (int)getIntent().getIntExtra("socioId", 0);
+        operacion =(int)getIntent().getIntExtra("operacion", 0);
+        if(socioId!=0)
+        {
+            progressDialog = new ProgressDialog(getBaseContext());
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setMessage("Obteniendo tus vehiculos");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            new BusesTask().execute();
 
-        progressDialog = new ProgressDialog(getBaseContext());
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setMessage("Obteniendo tus vehiculos");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        new BusesTask().execute();
+            gridView = findViewById(R.id.mainGridView);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    switch (operacion)
+                    {
+                        case 0 :{
+                            Toast.makeText(getApplicationContext(), "Sin Operacion Indicada",
+                                    Toast.LENGTH_LONG);
+                        };break;
+                        case 1:
+                        {
+                            Intent i = new Intent(getApplicationContext(), ActivityDiario.class);
+                            i.putExtra("idBus", buses.get(position).getId());
+                            startActivity(i);
+                        };break;
+                        case 2:{
+                            Intent i = new Intent(getApplicationContext(), ActivityCredito.class);
+                            i.putExtra("idBus", buses.get(position).getId());
+                            startActivity(i);
 
-        gridView = findViewById(R.id.mainGridView);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), ActivityDiario.class);
-            }
-        });
+                        };break;
+                        default:{
+                            Toast.makeText(getApplicationContext(), "¡¡¡¡FALTAL ERROR!!!!",
+                                    Toast.LENGTH_LONG);
+                        };break;
+                    }
+
+
+                }
+            });
+        }
+        else
+            Toast.makeText(getApplicationContext(), "No es posible realizar la operacion",
+                    Toast.LENGTH_LONG);
 
     }
 
