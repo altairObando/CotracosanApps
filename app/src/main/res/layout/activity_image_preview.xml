@@ -4,6 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8000000"
     tools:context=".UserManager.ImagePreviewActivity">
 
+    <ImageView
+        android:id="@+id/imagenPerfilVistaPrevia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="301dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="302dp"
+        android:contentDescription="@string/avatar"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars[1]"
+        tools:visibility="visible"
+        android:padding="5dp"
+        android:background="@android:color/white"/>
 </android.support.constraint.ConstraintLayout>
