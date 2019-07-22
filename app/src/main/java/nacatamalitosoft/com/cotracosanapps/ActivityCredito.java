@@ -35,6 +35,8 @@ public class ActivityCredito extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listacredito);
+        idBus = (int)getIntent().getIntExtra("idBus", 0);
+
         progressDialog = new ProgressDialog(getApplicationContext());
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("Obteniendo los Creditos");

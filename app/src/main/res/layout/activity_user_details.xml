@@ -15,7 +15,7 @@
         android:layout_height="200dp"
         android:src="@drawable/schoolbus"
         app:civ_border_width="2dp"
-        app:civ_border_color="#FFFFF"
+        app:civ_border_color="#FFFFFF"
         android:layout_gravity="center"/>
 
     <ImageView
