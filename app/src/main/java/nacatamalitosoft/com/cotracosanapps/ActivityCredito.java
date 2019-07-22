@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
 import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
@@ -38,6 +41,7 @@ public class ActivityCredito extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listacredito);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         idBus = (int)getIntent().getIntExtra("idBus", 0);
 
         progressDialog = new ProgressDialog(ActivityCredito.this);
@@ -48,7 +52,7 @@ public class ActivityCredito extends AppCompatActivity {
         new getCredito().execute();
 
         recyclerView  = (RecyclerView) findViewById(R.id.ReciclerId);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +73,7 @@ public class ActivityCredito extends AppCompatActivity {
         DetalleDeCredito tempDet;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditos?idBus=" + idBus;
+            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditosPorBus?idBus=" + idBus;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -140,7 +144,7 @@ public class ActivityCredito extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "No hay Creditos", Toast.LENGTH_LONG ).show();
                         else
                         {
-                            AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna);
+                            AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityCredito.this);
                             recyclerView.setAdapter(credito);
                         }
                         if(progressDialog.isShowing())
@@ -161,5 +165,20 @@ public class ActivityCredito extends AppCompatActivity {
             VolleySingleton.getInstance(ActivityCredito.this).addToRequestQueue(request);
             return null;
         }
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

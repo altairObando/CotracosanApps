@@ -1,8 +1,10 @@
 package nacatamalitosoft.com.cotracosanapps.UserManager;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -25,7 +27,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     private void loadImagenPerfil() {
-
+        new updateUserImage().execute();
     }
 
     @Override
@@ -41,5 +43,19 @@ public class ImagePreviewActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @SuppressLint("StaticFieldLeak")
+    public class updateUserImage extends AsyncTask<Void, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            String base64 = UserSingleton.getCurrentUser(getApplicationContext()).getAvatar().split(",")[1];
+            byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            ImageView view = findViewById(R.id.imagenPerfilVistaPrevia);
+            view.setImageBitmap(bitmap);
+        }
     }
 }

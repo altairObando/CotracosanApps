@@ -2,8 +2,11 @@ package nacatamalitosoft.com.cotracosanapps;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
 
@@ -16,7 +19,7 @@ public class DetalleCredito extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_credito);
-
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         codigoCredito = (TextView)findViewById(R.id.txtCodigoCredito);
         fechaCredito = (TextView)findViewById(R.id.txtFechaCredito);
         montoCredito = (TextView)findViewById(R.id.txtMontoCredito);
@@ -32,5 +35,20 @@ public class DetalleCredito extends AppCompatActivity {
             AdapterDetalleCredito adapter = new AdapterDetalleCredito(this, credito.getDetallesDeCreditos());
             listView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

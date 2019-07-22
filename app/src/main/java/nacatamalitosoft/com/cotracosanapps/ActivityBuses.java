@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
@@ -37,6 +39,7 @@ public class ActivityBuses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_buses);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         socioId = (int)getIntent().getIntExtra("socioId", 0);
         operacion =(int)getIntent().getIntExtra("operacion", 0);
         if(socioId!=0)
@@ -140,5 +143,20 @@ public class ActivityBuses extends AppCompatActivity {
             VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
             return null;
         }
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

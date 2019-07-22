@@ -1,5 +1,7 @@
 package nacatamalitosoft.com.cotracosanapps;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,28 +17,36 @@ import java.util.List;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
 import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
 
-public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.ViewHolderAdapterCreditosBus>
-implements View.OnClickListener{
+public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.ViewHolderAdapterCreditosBus> implements View.OnClickListener{
 
-    public AdapterCreditosBus(ArrayList<Credito> lista) {
+    private Context context;
+    public AdapterCreditosBus(ArrayList<Credito> lista, Context context) {
         this.lista = lista;
+        this.context = context;
     }
     ArrayList<Credito> lista;
     private  View.OnClickListener listener;
-
     @NonNull
     @Override
     public AdapterCreditosBus.ViewHolderAdapterCreditosBus onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_bus, null, false);
-
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.item_credito, null, false);
         view.setOnClickListener(this);
         return new ViewHolderAdapterCreditosBus(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCreditosBus.ViewHolderAdapterCreditosBus viewHolderAdapterCreditosBus, int i) {
+    public void onBindViewHolder(@NonNull AdapterCreditosBus.ViewHolderAdapterCreditosBus viewHolderAdapterCreditosBus, final int i) {
         viewHolderAdapterCreditosBus.setData(lista.get(i));
+        viewHolderAdapterCreditosBus.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Credito credito = lista.get(i);
+                Intent intent = new Intent(context, DetalleCredito.class);
+                intent.putExtra("objetoCredito", credito);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

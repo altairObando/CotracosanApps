@@ -29,7 +29,6 @@ import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etUsuario, etPassword;
-    private Button btnLogin, btnCancelar;
     ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
             // Buscar las referencias a UI
             etUsuario = findViewById(R.id.etUsuario);
             etPassword = findViewById(R.id.etPassword);
-            btnLogin = findViewById(R.id.btnLogin);
-            btnCancelar = findViewById(R.id.btnCancelar);
+            Button btnLogin = findViewById(R.id.btnLogin);
+            Button btnCancelar = findViewById(R.id.btnCancelar);
             dialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,7 +126,9 @@ public class LoginActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+                    if(dialog.isShowing())
+                        dialog.dismiss();
                 }
             }) {
                 @Override
