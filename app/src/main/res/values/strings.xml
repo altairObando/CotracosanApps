@@ -25,4 +25,8 @@
     <string name="lblDetalleUsuario">Nombre de usuario:</string>
     <string name="lblCorreoDetalles">Correo Electronico:</string>
     <string name="avatar">Imagen del usuario</string>
+    <string name="etContraseniaActual">Contraseña Actual</string>
+    <string name="etNuevaContrasenia">Nueva Contraseña</string>
+    <string name="etRepitaContrasenia">Repita Contraseña</string>
+    <string name="btncambiarContrasenia">Cambiar Contraseña</string>
 </resources>
