@@ -1,6 +1,8 @@
 package nacatamalitosoft.com.cotracosanapps.Modelos;
 
-public class Buses {
+import java.io.Serializable;
+
+public class Buses implements Serializable {
     private int id;
     private int socioId;
     private String placa;

@@ -1,10 +1,12 @@
 package nacatamalitosoft.com.cotracosanapps;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,15 +29,32 @@ public class ActivityCredito extends AppCompatActivity {
     ArrayList<Credito> listaCredito;
     RecyclerView recyclerView;
     int idBus;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listacredito);
+        idBus = (int)getIntent().getIntExtra("idBus", 0);
+
+        progressDialog = new ProgressDialog(getApplicationContext());
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage("Obteniendo los Creditos");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        new getCredito().execute();
 
         recyclerView  = (RecyclerView) findViewById(R.id.ReciclerId);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Credito temp = listaCredito.get(recyclerView.getChildAdapterPosition(v));
+                Intent i = new Intent(getApplicationContext(), DetalleCredito.class);
+                i.putExtra("objetoCredito", temp);
+                startActivity(i);
+            }
+        });
 
     }
 

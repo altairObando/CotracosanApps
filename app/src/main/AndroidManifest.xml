@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="nacatamalitosoft.com.cotracosanapps">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,9 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        tools:ignore="UnusedAttribute">
-        <activity android:name=".UserManager.ChangePasswordActivity"/>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".UserManager.ChangePasswordActivity"></activity>
         <activity android:name=".UserManager.ImagePreviewActivity" />
         <activity android:name=".UserManager.UserDetailsActivity" />
         <activity
@@ -29,8 +26,8 @@
             android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
         <activity android:name=".ActivityDiario" />

@@ -1,6 +1,8 @@
 package nacatamalitosoft.com.cotracosanapps.Modelos;
 
-public class DetalleDeCredito {
+import java.io.Serializable;
+
+public class DetalleDeCredito implements Serializable {
 
     public DetalleDeCredito(int id, int articuloId, String codigoArticulo, String nombreArticulo, int cantidad, double precio) {
         this.id = id;

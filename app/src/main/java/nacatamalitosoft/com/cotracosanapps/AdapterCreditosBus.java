@@ -14,18 +14,22 @@ import java.util.List;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
 import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
 
-public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.ViewHolderAdapterCreditosBus> {
+public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.ViewHolderAdapterCreditosBus>
+implements View.OnClickListener{
 
     public AdapterCreditosBus(ArrayList<Credito> lista) {
         this.lista = lista;
     }
     ArrayList<Credito> lista;
+    private  View.OnClickListener listener;
 
     @NonNull
     @Override
     public AdapterCreditosBus.ViewHolderAdapterCreditosBus onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_bus, null, false);
+
+        view.setOnClickListener(this);
         return new ViewHolderAdapterCreditosBus(view);
     }
 
@@ -37,6 +41,19 @@ public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.
     @Override
     public int getItemCount() {
         return lista.size();
+    }
+
+    public  void setOnClickListener(View.OnClickListener listener)
+    {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(listener!=null)
+        {
+            listener.onClick(v);
+        }
     }
 
     public class ViewHolderAdapterCreditosBus extends RecyclerView.ViewHolder {
