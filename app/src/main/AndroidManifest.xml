@@ -13,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".DetalleCredito"/>
         <activity android:name=".UserManager.ChangePasswordActivity"></activity>
         <activity android:name=".UserManager.ImagePreviewActivity" />
         <activity android:name=".UserManager.UserDetailsActivity" />
+        <activity android:name=".ActivityBuses"/>
+        <activity android:name=".ActivityCredito"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
