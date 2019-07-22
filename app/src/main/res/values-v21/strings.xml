@@ -12,4 +12,5 @@
     <string name="lblContraseña">Cambiar Contraseña</string>
     <string name="lblDetalleUsuario">Nombre de usuario:</string>
     <string name="lblCorreoDetalles">Correo Electronico:</string>
+    <string name="avatar">Imagen del usuario</string>
 </resources>

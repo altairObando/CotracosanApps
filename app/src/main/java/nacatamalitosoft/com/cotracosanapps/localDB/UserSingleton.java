@@ -2,6 +2,10 @@ package nacatamalitosoft.com.cotracosanapps.localDB;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
 
 import static nacatamalitosoft.com.cotracosanapps.localDB.UserContract.UserEntry.*;
 
@@ -47,5 +51,13 @@ public final class UserSingleton {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void updateUserImage(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        byte[] bytes = outputStream.toByteArray();
+        String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
+        currentUser.setAvatar(temp);
     }
 }

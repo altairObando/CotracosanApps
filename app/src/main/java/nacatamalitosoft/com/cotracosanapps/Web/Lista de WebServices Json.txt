@@ -132,6 +132,7 @@ string contrasenia
 http://cotracosan.tk/ApiAccount/CambiarContraseña
 Parametros del servicio
 	string usuarioId
+	string viejaContrasenia
 	string nuevaContrasenia
 
 return {
@@ -143,7 +144,7 @@ return {
 http://cotracosan.tk/ApiAccount/CambiarImagen
 parametros :
 	string idUsuario
-	string imagen (string en base64)
+	string imagenBase64 (string en base64)
 
 return {
 	completado : boolean,
