@@ -17,7 +17,7 @@ http://cotracosan.tk/ApiVehiculos/getMontoRecaudado?vehiculoId=''&fecha=''
 3. Cuanto dinero hicieron todos los buses de un socio en un intervalo de tiempo
 http://cotracosan.tk/ApiVehiculos/getMontoTotalRecaudado?socioId=56&fechaInicio=''&fechaFin=''
 4. Muestra un consolidado de un bus en un dia o entre fechas.
-http://cotracosan.tk/ApiVehiculos/getConsolidadoVehiculo?vehiculoID=2
+http://cotracosan.tk/ApiVehiculos/getConsolidadoVehiculo?vehiculoId=2
 parametros opcionales:
 	fechaInicio datetime
 	fechaFin datetime
