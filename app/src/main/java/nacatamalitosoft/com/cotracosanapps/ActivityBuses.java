@@ -41,7 +41,7 @@ public class ActivityBuses extends AppCompatActivity {
         operacion =(int)getIntent().getIntExtra("operacion", 0);
         if(socioId!=0)
         {
-            progressDialog = new ProgressDialog(getBaseContext());
+            progressDialog = new ProgressDialog(ActivityBuses.this);
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setMessage("Obteniendo tus vehiculos");
             progressDialog.setCancelable(false);
@@ -56,7 +56,7 @@ public class ActivityBuses extends AppCompatActivity {
                     {
                         case 0 :{
                             Toast.makeText(getApplicationContext(), "Sin Operacion Indicada",
-                                    Toast.LENGTH_LONG);
+                                    Toast.LENGTH_LONG).show();
                         };break;
                         case 1:
                         {
@@ -72,7 +72,7 @@ public class ActivityBuses extends AppCompatActivity {
                         };break;
                         default:{
                             Toast.makeText(getApplicationContext(), "¡¡¡¡FALTAL ERROR!!!!",
-                                    Toast.LENGTH_LONG);
+                                    Toast.LENGTH_LONG).show();
                         };break;
                     }
 
@@ -82,7 +82,7 @@ public class ActivityBuses extends AppCompatActivity {
         }
         else
             Toast.makeText(getApplicationContext(), "No es posible realizar la operacion",
-                    Toast.LENGTH_LONG);
+                    Toast.LENGTH_LONG).show();
 
     }
 

@@ -18,11 +18,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
 import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
+import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
 public class ActivityCredito extends AppCompatActivity {
 
@@ -37,7 +40,7 @@ public class ActivityCredito extends AppCompatActivity {
         setContentView(R.layout.activity_listacredito);
         idBus = (int)getIntent().getIntExtra("idBus", 0);
 
-        progressDialog = new ProgressDialog(getApplicationContext());
+        progressDialog = new ProgressDialog(ActivityCredito.this);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("Obteniendo los Creditos");
         progressDialog.setCancelable(false);
@@ -109,10 +112,21 @@ public class ActivityCredito extends AppCompatActivity {
                                 //Agregando a lista de detalles
                                 listaDetalle.add(tempDet);
                             }
-
+                            String fechaResult ="";
+                            Date fecha = null;
+                            try{
+                                fechaResult = obj.getString("Fecha").replace("/\"","" ).toString();
+                            }catch(Exception e){
+                                fechaResult = "07/22/2019";
+                            }
+                            try {
+                                fecha = (Date) new SimpleDateFormat("MM/dd/yyyy").parse(fechaResult);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                             //Creando un nuevo objeto de Credito
                             temp = new Credito(obj.getInt("Id"), obj.getString("CodigoCredito"),
-                                    Date.valueOf(obj.getString("Fecha")), obj.getDouble("MontoTotal"),
+                                    fecha, obj.getDouble("MontoTotal"),
                                     obj.getDouble("TotalAbonado"), obj.getInt("NumeroAbonos"),
                                     obj.getBoolean("CreditoAnulado"), obj.getBoolean("EstadoDeCredito"),
                                     listaDetalle);
@@ -129,8 +143,8 @@ public class ActivityCredito extends AppCompatActivity {
                             AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna);
                             recyclerView.setAdapter(credito);
                         }
-
-
+                        if(progressDialog.isShowing())
+                            progressDialog.dismiss();
 
 
                     }catch (JSONException ex)
@@ -144,6 +158,7 @@ public class ActivityCredito extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+            VolleySingleton.getInstance(ActivityCredito.this).addToRequestQueue(request);
             return null;
         }
     }
