@@ -13,12 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetalleCredito"/>
-        <activity android:name=".UserManager.ChangePasswordActivity"></activity>
+        <activity
+            android:name=".Creditos.CajaActivity"
+            android:label="@string/title_activity_caja"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Creditos.ui.CajaActivity" />
+        <activity android:name=".DetalleCredito" />
+        <activity android:name=".UserManager.ChangePasswordActivity" />
         <activity android:name=".UserManager.ImagePreviewActivity" />
         <activity android:name=".UserManager.UserDetailsActivity" />
-        <activity android:name=".ActivityBuses"/>
-        <activity android:name=".ActivityCredito"/>
+        <activity android:name=".ActivityBuses" />
+        <activity android:name=".ActivityCredito" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
