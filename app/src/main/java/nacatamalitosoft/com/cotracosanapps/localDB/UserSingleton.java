@@ -25,9 +25,9 @@ public final class UserSingleton {
                             cursor.getString(cursor.getColumnIndex(USER)),
                             cursor.getString(cursor.getColumnIndex(EMAIL)),
                             cursor.getString(cursor.getColumnIndex(ISLOGGED)),
-                            cursor.getString(cursor.getColumnIndex(AVATAR))
-
-                    );
+                            cursor.getString(cursor.getColumnIndex(AVATAR)),
+                            cursor.getString(cursor.getColumnIndex(ROL))
+                            );
                 }else{
                     currentUser = null;
                 }

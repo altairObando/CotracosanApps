@@ -23,6 +23,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
                 + USER + " TEXT NOT NULL,"
                 + EMAIL + " TEXT NOT NULL,"
                 + AVATAR + " TEXT NOT NULL,"
+                + ROL + " TEXT NOT NULL, "
                 + ISLOGGED + " TEXT,"
                 + " UNIQUE (" + ID + "))");
     }
@@ -31,7 +32,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         return db.query(
                 TABLE_NAME,
-                new String[]{ ID, SOCIOID, USER, EMAIL, AVATAR, ISLOGGED },
+                new String[]{ ID, SOCIOID, USER, EMAIL, AVATAR, ISLOGGED, ROL },
                 ISLOGGED + " LIKE ? ",
                 new String [] {"1"},
                 null,

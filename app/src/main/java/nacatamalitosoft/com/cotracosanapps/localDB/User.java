@@ -11,14 +11,16 @@ public class User {
     private String email;
     private String isLogged;
     private String avatar;
+    private String rol;
 
-    public User(String id, String socioId, String usuario, String email, String isLogged, String avatar) {
+    public User(String id, String socioId, String usuario, String email, String isLogged, String avatar, String rol) {
         this.id = id;
         this.socioId = socioId;
         this.usuario = usuario;
         this.email = email;
         this.isLogged = isLogged;
         this.avatar = avatar;
+        this.rol = rol;
     }
 
     public String getId() {
@@ -77,7 +79,16 @@ public class User {
         values.put(EMAIL, this.email);
         values.put(ISLOGGED, this.isLogged);
         values.put(AVATAR, this.avatar);
+        values.put(ROL, this.rol);
         return values;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
 

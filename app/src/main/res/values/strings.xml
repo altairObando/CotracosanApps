@@ -2,7 +2,7 @@
     <string name="app_name">CotracosanApps</string>
     <string name="navigation_drawer_open">Abrir Navegación</string>
     <string name="navigation_drawer_close">Cerrar Navegación</string>
-    <string name="nav_header_title">Cotracosan 2019</string>
+    <string name="nav_header_title">Cotracosan</string>
     <string name="nav_header_desc">Cabecera navegación</string>
     <string name="action_settings">Ajustes</string>
     <string name="txtCredito">Creditos</string>

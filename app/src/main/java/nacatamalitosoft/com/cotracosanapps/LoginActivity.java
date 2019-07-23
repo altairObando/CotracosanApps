@@ -1,17 +1,17 @@
 package nacatamalitosoft.com.cotracosanapps;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import nacatamalitosoft.com.cotracosanapps.Creditos.CajaActivity;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 import nacatamalitosoft.com.cotracosanapps.localDB.User;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Chequear si el usuario ya ha inciado sesion.
         if(usuarioEstalogueado()){
-            MostrarPantallaPrincipal();
+            seleccionarMenu(UserSingleton.getCurrentUser(this).getRol());
             finish();
         }else{
             // Buscar las referencias a UI
@@ -83,14 +84,21 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    private void MostrarPantallaCajero() {
+        Intent i = new Intent(this, CajaActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+
+    @SuppressLint("StaticFieldLeak")
     public class LoginTask extends AsyncTask<Void, Void, Void> {
 
         private String user;
         private String pass;
         private User userResult;
-        public boolean login;
-        public String mensaje;
-        public LoginTask(String usuario, String password){
+        boolean login;
+        String mensaje;
+        LoginTask(String usuario, String password){
             this.user = usuario;
             this.pass = password;
         }
@@ -112,8 +120,9 @@ public class LoginActivity extends AppCompatActivity {
                             String username = objectResponse.getString("usuario");
                             String email = objectResponse.getString("email");
                             String imagen = objectResponse.getString("imagen");
-                            userResult = new User(id, socioId,username, email, "1", imagen);
-                            MostrarPantallaPrincipal();
+                            String rol = objectResponse.getString("rol");
+                            userResult = new User(id, socioId,username, email, "1", imagen, rol);
+                            seleccionarMenu(rol);
                             UserSingleton.GuardarNuevoUsuario(getApplicationContext(), userResult);
                             finish();
                         }else{
@@ -132,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }) {
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
+                protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("username", user);
                     params.put("contrasenia", pass);
@@ -149,6 +158,14 @@ public class LoginActivity extends AppCompatActivity {
             dialog.setIndeterminate(true);
             dialog.setCancelable(false);
             dialog.show();
+        }
+    }
+
+    private void seleccionarMenu(String rol) {
+        if ("Administrador".equals(rol)) {
+            MostrarPantallaPrincipal();
+        } else if ("Cajero".equals(rol)) {
+            MostrarPantallaCajero();
         }
     }
 }

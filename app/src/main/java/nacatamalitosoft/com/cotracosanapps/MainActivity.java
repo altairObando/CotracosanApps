@@ -21,6 +21,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         // Actualizar con la imagen del perfil
         new updateUserImage().execute();
+
     }
 
     @Override
@@ -90,6 +94,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -151,6 +156,8 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             ImageView view = findViewById(R.id.imageViewUserImage);
+            TextView usuario = findViewById(R.id.tvNombreDeUsuario);
+            usuario.setText(UserSingleton.getCurrentUser(MainActivity.this).getUsuario());
             view.setImageBitmap(bitmap);
         }
     }
