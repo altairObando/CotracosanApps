@@ -17,4 +17,10 @@
     <string name="etNuevaContrasenia">Nueva Contraseña</string>
     <string name="etRepitaContrasenia">Repita Contraseña</string>
     <string name="btncambiarContrasenia">Cambiar Contraseña</string>
+    <string name="sampleCodigoCredito">Codigo: XXXXXX</string>
+    <string name="sampleFecha">Fecha: 23/07/2019</string>
+    <string name="vehiculo">Vehiculo</string>
+    <string name="btnBuscarArticulo">Buscar Articulo</string>
+    <string name="buscar">Buscar</string>
+    <string name="listArticulosHeader">Articulos seleccionados</string>
 </resources>

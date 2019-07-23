@@ -1,9 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Creditos.Acciones.Creditos">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Primera fila -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-</android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvCodigoCredito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sampleCodigoCredito"
+                    android:layout_marginEnd="4dp"
+                    android:padding="4dp"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvCreditoFecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sampleFecha"
+                    android:layout_marginStart="4dp"
+                    android:padding="4dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <!-- Segunda Fila -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vehiculo"
+                    android:padding="4dp"
+                    android:textSize="18sp" />
+                <Spinner
+                    android:id="@+id/spinnerVehiculos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+            <!-- Layout para la busqueda de articulos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText android:id="@+id/etUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/btnBuscarArticulo"
+                        android:importantForAutofill="no" tools:targetApi="o" />
+                </android.support.design.widget.TextInputLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/buscar"
+                    android:drawableEnd="@android:drawable/ic_menu_search"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+            <!-- Aqui se muestra el detalle de credito -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/listArticulosHeader"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+            <ListView
+                android:id="@+id/listaDetalles"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!-- Fin del detalle -->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
