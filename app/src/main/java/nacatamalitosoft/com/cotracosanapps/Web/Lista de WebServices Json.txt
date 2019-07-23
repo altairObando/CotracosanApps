@@ -8,7 +8,7 @@ mm/dd/yyyy
 	http://cotracosan.tk/ApiVehiculos
 ===================================================
 
-1. Obtener los buses de un vehiculo
+1. Obtener los buses de un socio
  http://cotracosan.tk/ApiVehiculos/getVehiculosPorSocio?socioId=''
 
 2. Cuanto dinero hizo un bus en un determinado dia.
@@ -28,6 +28,11 @@ parametros opcionales:
 	fechaInicio datetime
 	fechaFin datetime
 
+6. Obtener todos los buses activos
+http://cotracosan.tk/ApiVehiculos/getVehiculos
+
+retorna : Id, SocioId, Placa
+
 
 ==================================================
 	http://cotracosan.tk/ApiCarreras
@@ -43,6 +48,9 @@ observacion:
 		eliminado bool -> estado de la eliminacion
 		mensaje String -> resultados de la consulta. 
 
+3. Obtener carreras por vehiculo
+http://cotracosan.tk/ApiCarreras/getCarrerasPorVehiculo?vehiculoId=323223
+parametros opcionales: fechaInicio, fechaFin, max
 
 ==================================================
 	http://cotracosan.tk/ApiCreditos
@@ -117,6 +125,12 @@ http://cotracosan.tk/ApiArticulos/getGastosPorArticulos
 parametros opcionales:
 	fechaInicio datetime
 	fechaFin datetime
+
+
+2. Todos los articulos
+http://cotracosan.tk/ApiArticulos/getArticulos
+Result:
+    Id, Codigo, Descripcion, Precio
 ===================================================
 	http://cotracosan.tk/ApiAccount
 ===================================================
