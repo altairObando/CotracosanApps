@@ -41,7 +41,7 @@ public class ActivityAbonos extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(ActivityAbonos.this);
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setMessage("Obteniendo los Creditos");
+        progressDialog.setMessage("Obteniendo los CreditosActivity");
         progressDialog.setCancelable(false);
         progressDialog.show();
         new getAbonos().execute();

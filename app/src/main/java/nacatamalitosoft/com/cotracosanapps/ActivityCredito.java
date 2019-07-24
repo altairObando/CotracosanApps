@@ -46,7 +46,7 @@ public class ActivityCredito extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(ActivityCredito.this);
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setMessage("Obteniendo los Creditos");
+        progressDialog.setMessage("Obteniendo los CreditosActivity");
         progressDialog.setCancelable(false);
         progressDialog.show();
         new getCredito().execute();
@@ -83,7 +83,7 @@ public class ActivityCredito extends AppCompatActivity {
                         JSONObject object = new JSONObject(response);
 
                         //Convirtiendo la respuesta a un arreglo
-                        JSONArray jsonArray = object.getJSONArray("Creditos");
+                        JSONArray jsonArray = object.getJSONArray("CreditosActivity");
 
 
                         //Inicializando la nueva lista de creditos
@@ -136,12 +136,12 @@ public class ActivityCredito extends AppCompatActivity {
                                     listaDetalle);
 
 
-                            //Agregando a la lista de Creditos
+                            //Agregando a la lista de CreditosActivity
                             listaInterna.add(temp);
                         }
 
                         if(listaInterna.size() ==0)
-                            Toast.makeText(getBaseContext(), "No hay Creditos", Toast.LENGTH_LONG ).show();
+                            Toast.makeText(getBaseContext(), "No hay CreditosActivity", Toast.LENGTH_LONG ).show();
                         else
                         {
                             AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityCredito.this);
