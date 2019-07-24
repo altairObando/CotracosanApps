@@ -45,10 +45,10 @@ public class AdapterDetalleCredito extends BaseAdapter {
         }
 
         TextView codigoArticulo, nombreArticulo, cantidad, precio, subTotal;
-        codigoArticulo = (TextView)convertView.findViewById(R.id.CodigoArticulo);
-        nombreArticulo = (TextView)convertView.findViewById(R.id.NombreArticulo);
-        cantidad = (TextView)convertView.findViewById(R.id.Cantidad);
-        precio = (TextView)convertView.findViewById(R.id.Precio);
+        codigoArticulo = (TextView)convertView.findViewById(R.id.CodigoAbono);
+        nombreArticulo = (TextView)convertView.findViewById(R.id.CodigoCredito);
+        cantidad = (TextView)convertView.findViewById(R.id.FechaAbono);
+        precio = (TextView)convertView.findViewById(R.id.P);
         subTotal = (TextView)convertView.findViewById(R.id.SubTotal);
 
         codigoArticulo.setText("Codigo: " + listaDetalle.get(position).getCodigoArticulo());
