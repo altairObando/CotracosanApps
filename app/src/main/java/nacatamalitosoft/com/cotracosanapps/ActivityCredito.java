@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -52,17 +53,9 @@ public class ActivityCredito extends AppCompatActivity {
         new getCredito().execute();
 
         recyclerView  = (RecyclerView) findViewById(R.id.ReciclerId);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Credito temp = listaCredito.get(recyclerView.getChildAdapterPosition(v));
-                Intent i = new Intent(getApplicationContext(), DetalleCredito.class);
-                i.putExtra("objetoCredito", temp);
-                startActivity(i);
-            }
-        });
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation()));
     }
 
     public class getCredito extends AsyncTask<Void, Void, Void>{
