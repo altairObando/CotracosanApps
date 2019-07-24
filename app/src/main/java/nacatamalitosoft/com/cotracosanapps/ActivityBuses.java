@@ -64,7 +64,8 @@ public class ActivityBuses extends AppCompatActivity {
                         case 1:
                         {
                             Intent i = new Intent(getApplicationContext(), ActivityDiario.class);
-                            i.putExtra("idBus", buses.get(position).getId());
+                            int idbus = buses.get(position).getId();
+                            i.putExtra("idBus", idbus);
                             startActivity(i);
                         };break;
                         case 2:{

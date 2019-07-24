@@ -34,7 +34,7 @@ public class ActivityDiario extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras!=null)
         {
-            idBus = Integer.parseInt(Objects.requireNonNull(extras.getString("idBus")));
+            idBus = extras.getInt("idBus", 0);
             new ObtenerValores().execute();
             txtCarreras =(TextView) findViewById(R.id.txtCarreras);
             txtCarreras.setText(carrera);
