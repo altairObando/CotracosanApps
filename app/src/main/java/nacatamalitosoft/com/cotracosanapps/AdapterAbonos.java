@@ -23,7 +23,6 @@ public class AdapterAbonos extends RecyclerView.Adapter<AdapterAbonos.ViewHolder
 
     private ArrayList<Abonos> listaAbonos;
     private Context context;
-    DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
 
     @NonNull
     @Override
@@ -60,7 +59,7 @@ public class AdapterAbonos extends RecyclerView.Adapter<AdapterAbonos.ViewHolder
         {
             codigoAbono.setText("Abono: " + abonos.getCodigoAbono());
             codigoCredito.setText("Credito: CRED-" +abonos.getCreditoId() );
-            fechaAbono.setText("Fecha: " + dateFormat.format(abonos.getFechaDeAbono()));
+            fechaAbono.setText("Fecha: " + abonos.getFechaDeAbono());
             montoAbono.setText("Monto: " + abonos.getMontoDeAbono());
         }
     }

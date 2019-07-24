@@ -68,22 +68,30 @@ public class ActivityAbonos extends AppCompatActivity {
                         {
                             Date fecha=null;
                             JSONObject temp = jsonArray.getJSONObject(i);
-                            String cadena = temp.getString("Fecha");
+                            String cadena = temp.getString("FechaDeAbono");
+
                             try{
-                                fecha = new SimpleDateFormat("MM/dd/yyyy").parse(cadena);
+                                cadena = cadena.replace("/\"","" ).toString();
+                            }catch(Exception e){
+
+                                cadena = "07/22/2019";
+                            }
+                            try{
+                                fecha =(Date) new SimpleDateFormat("MM/dd/yyyy").parse(cadena);
                             }catch (Exception ex)
                             {
+                                if(progressDialog.isShowing())
+                                    progressDialog.dismiss();
                                 ex.getMessage();
                             }
                             abonos = new Abonos(temp.getInt("IdAbono"), temp.getInt("CreditoId"), temp.getInt("VehiculoId"),
-                                    temp.getString("Placa"), fecha, temp.getString("CodigoAbono"), temp.getDouble("MontoAbono"),
+                                    temp.getString("Placa"), fecha, temp.getString("CodigoAbono"), temp.getDouble("MontoDeAbono"),
                                     temp.getBoolean("AbonoAnulado"));
 
                             listaInterna.add(abonos);
                         }
 
-                        if(progressDialog.isShowing())
-                            progressDialog.dismiss();
+                        listaAbonos = listaInterna;
 
                         if(listaInterna.size() ==0)
                             Toast.makeText(getBaseContext(), "No hay Abonos", Toast.LENGTH_LONG ).show();
@@ -93,9 +101,14 @@ public class ActivityAbonos extends AppCompatActivity {
                             recyclerView.setAdapter(credito);
                         }
 
+                        if(progressDialog.isShowing())
+                            progressDialog.dismiss();
+
 
                     }catch (JSONException ex)
                     {
+                        if(progressDialog.isShowing())
+                            progressDialog.dismiss();
                         Toast.makeText(ActivityAbonos.this, ex.getMessage(), Toast.LENGTH_LONG);
                     }
                 }
