@@ -2,10 +2,15 @@ package nacatamalitosoft.com.cotracosanapps.Creditos.Acciones;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,29 +34,30 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.ListaDetallesAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.VehiculosAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.CajaActivity;
+import nacatamalitosoft.com.cotracosanapps.Modelos.Articulos;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
 import nacatamalitosoft.com.cotracosanapps.R;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Creditos extends Fragment {
-    ListView listaDetalle;
+public class CreditosActivity extends Fragment {
     ProgressDialog dialog;
     List<Buses> listaBuses;
     Spinner spBuses;
-    listItemClick itemClick;
     TextView tvCodigoCredito;
     Button btnBuscar;
     EditText textBusqueda;
-    public Creditos() {
+    ListView listaDetalles;
+    List<Articulos> dataSet;
+    ListaDetallesAdapter adapter;
+    FloatingActionButton fab;
+    public CreditosActivity() {
         // Required empty public constructor
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_creditos, container, false);
@@ -71,16 +77,38 @@ public class Creditos extends Fragment {
                 startActivityForResult(busqueda, 0);
             }
         });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Comprobar que existan elementos seleccionados.
+                if(dataSet.size() > 0){
+                    RealizarCreditoDialog dialog = new RealizarCreditoDialog();
+                    dialog.listener = new RealizarCreditoDialog.onItemClickListener() {
+                        @Override
+                        public void onDialogPositiveClickListener(DialogFragment dialog) {
+
+                        }
+                    };
+                    dialog.show(getActivity().getSupportFragmentManager(), "ComprobandoCredito");
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Agregue un articulo", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         return view;
     }
 
     private void setReferences(View view) {
         tvCodigoCredito = view.findViewById(R.id.tvCodigoCredito);
-        listaDetalle = view.findViewById(R.id.listaDetalles);
         spBuses = view.findViewById(R.id.spinnerVehiculos);
         dialog = new ProgressDialog(getContext());
         btnBuscar = view.findViewById(R.id.btnBuscarArticulos);
         textBusqueda = view.findViewById(R.id.etBuscarArticulo);
+        listaDetalles = view.findViewById(R.id.listaDetalles);
+        dataSet = new ArrayList<>();
+        adapter = new ListaDetallesAdapter(getActivity().getApplicationContext(), new ArrayList<Articulos>());
+        listaDetalles.setAdapter(adapter);
+        fab = view.findViewById(R.id.fab);
     }
 
     // Cargar los creditos.
@@ -163,7 +191,19 @@ public class Creditos extends Fragment {
         }
     }
 
-    public interface listItemClick{
-        void mostrarArticulos();
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK)
+        {
+            if(requestCode == 0){
+                Articulos articulo = (Articulos) data.getExtras().get("articulo");
+                int cantidad = data.getExtras().getInt("cantidad");
+                double precioFinal = cantidad > 0 ? cantidad * articulo.getPrecio() :articulo.getPrecio();
+                articulo.setPrecio(precioFinal);
+                dataSet.add(articulo);
+                adapter.updateDataSet(dataSet);
+            }
+        }
     }
 }

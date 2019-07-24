@@ -18,8 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.Busqueda;
-import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.Creditos;
+import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.BusquedaActivity;
+import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.CreditosActivity;
 import nacatamalitosoft.com.cotracosanapps.LoginActivity;
 import nacatamalitosoft.com.cotracosanapps.R;
 import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
@@ -36,7 +36,7 @@ public class CajaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_caja);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Cotracosan Creditos");
+        setTitle("Cotracosan CreditosActivity");
         tabLayout = findViewById(R.id.tabCaja);
         viewPager = findViewById(R.id.viewpager);
         // Adaptar
@@ -61,8 +61,8 @@ public class CajaActivity extends AppCompatActivity {
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Creditos(), "Creditos");
-        adapter.addFragment(new Busqueda(), "Buscar Creditos");
+        adapter.addFragment(new CreditosActivity(), "CreditosActivity");
+        adapter.addFragment(new BusquedaActivity(), "Buscar CreditosActivity");
         viewPager.setAdapter(adapter);
     }
     public class ViewPagerAdapter extends FragmentPagerAdapter{
