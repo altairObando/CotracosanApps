@@ -17,7 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Abonos;
@@ -45,7 +47,8 @@ public class ActivityAbonos extends AppCompatActivity {
 
     public class getAbonos extends AsyncTask<Void, Void, Void>
     {
-
+        ArrayList<Abonos> listaInterna;
+        Abonos abonos;
         @Override
         protected Void doInBackground(Void... voids) {
             String uri = "http://cotracosan.tk/ApiVehiculos/getAbonosPorVehiculo?vehiculoId=" + idBus;
@@ -55,6 +58,37 @@ public class ActivityAbonos extends AppCompatActivity {
                     try{
                         JSONObject object = new JSONObject(response);
                         JSONArray jsonArray = object.getJSONArray("Abonos");
+                        listaInterna = new ArrayList<>();
+                        for(int i=0;i<jsonArray.length();i++)
+                        {
+                            Date fecha=null;
+                            JSONObject temp = jsonArray.getJSONObject(i);
+                            String cadena = temp.getString("Fecha");
+                            try{
+                                fecha = new SimpleDateFormat("MM/dd/yyyy").parse(cadena);
+                            }catch (Exception ex)
+                            {
+                                ex.getMessage();
+                            }
+                            abonos = new Abonos(temp.getInt("IdAbono"), temp.getInt("CreditoId"), temp.getInt("VehiculoId"),
+                                    temp.getString("Placa"), fecha, temp.getString("CodigoAbono"), temp.getDouble("MontoAbono"),
+                                    temp.getBoolean("AbonoAnulado"));
+
+                            listaInterna.add(abonos);
+                        }
+
+                        if(progressDialog.isShowing())
+                            progressDialog.dismiss();
+
+                        if(listaInterna.size() ==0)
+                            Toast.makeText(getBaseContext(), "No hay Abonos", Toast.LENGTH_LONG ).show();
+                        else
+                        {
+                            AdapterAbonos credito = new AdapterAbonos(listaInterna, ActivityAbonos.this);
+                            recyclerView.setAdapter(credito);
+                        }
+
+
                     }catch (JSONException ex)
                     {
                         Toast.makeText(ActivityAbonos.this, ex.getMessage(), Toast.LENGTH_LONG);
