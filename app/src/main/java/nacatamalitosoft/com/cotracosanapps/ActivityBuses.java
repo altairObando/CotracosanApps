@@ -58,32 +58,35 @@ public class ActivityBuses extends AppCompatActivity {
                     switch (operacion)
                     {
                         case 0 :{
-                            Toast.makeText(getApplicationContext(), "Sin Operacion Indicada",
+                            Toast.makeText(ActivityBuses.this, "Sin Operacion Indicada",
                                     Toast.LENGTH_LONG).show();
                         };break;
                         case 1:
                         {
-                            Intent i = new Intent(getApplicationContext(), ActivityDiario.class);
+                            Intent i = new Intent(ActivityBuses.this, ActivityDiario.class);
                             int idbus = buses.get(position).getId();
                             i.putExtra("idBus", idbus);
                             startActivity(i);
                         };break;
                         case 2:{
-                            Intent i = new Intent(getApplicationContext(), ActivityCredito.class);
+                            Intent i = new Intent(ActivityBuses.this, ActivityCredito.class);
                             i.putExtra("idBus", buses.get(position).getId());
                             startActivity(i);
 
                         };break;
                         case 3:{
-                            Intent i = new Intent(getApplicationContext(), ActivityCredito.class);
+                            Intent i = new Intent(ActivityBuses.this, ActivityCredito.class);
                             i.putExtra("idBus", buses.get(position).getId());
                             startActivity(i);
                         };break;
                         case 4:{
-
+                            Intent i = new Intent(ActivityBuses.this, ActivityAbonos.class);
+                            int idbus = buses.get(position).getId();
+                            i.putExtra("idBus", idbus);
+                            startActivity(i);
                         };break;
                         default:{
-                            Toast.makeText(getApplicationContext(), "¡¡¡¡FALTAL ERROR!!!!",
+                            Toast.makeText(ActivityBuses.this, "¡¡¡¡FALTAL ERROR!!!!",
                                     Toast.LENGTH_LONG).show();
                         };break;
                     }

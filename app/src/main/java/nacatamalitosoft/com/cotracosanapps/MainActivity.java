@@ -24,11 +24,14 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
+import nacatamalitosoft.com.cotracosanapps.localDB.User;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +49,22 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                new updateUserImage().execute();
+            }
+        };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
         // Actualizar con la imagen del perfil
+        navigationView.getHeaderView(0);
         new updateUserImage().execute();
 
     }
@@ -150,11 +161,11 @@ public class MainActivity extends AppCompatActivity
             byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         }
-
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            ImageView view = findViewById(R.id.imageViewUserImage);
-            TextView usuario = findViewById(R.id.tvNombreDeUsuario);
+            View header = navigationView.getHeaderView(0);
+            CircleImageView view = header.findViewById(R.id.imageViewUserImage);
+            TextView usuario = header.findViewById(R.id.tvNombreDeUsuario);
             usuario.setText(UserSingleton.getCurrentUser(MainActivity.this).getUsuario());
             view.setImageBitmap(bitmap);
         }

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -43,6 +44,10 @@ public class ActivityAbonos extends AppCompatActivity {
         progressDialog.setMessage("Obteniendo los Creditos");
         progressDialog.setCancelable(false);
         progressDialog.show();
+        new getAbonos().execute();
+
+        recyclerView = (RecyclerView)findViewById(R.id.ReciclerAbonos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     public class getAbonos extends AsyncTask<Void, Void, Void>
@@ -57,7 +62,7 @@ public class ActivityAbonos extends AppCompatActivity {
                 public void onResponse(String response) {
                     try{
                         JSONObject object = new JSONObject(response);
-                        JSONArray jsonArray = object.getJSONArray("Abonos");
+                        JSONArray jsonArray = object.getJSONArray("abonos");
                         listaInterna = new ArrayList<>();
                         for(int i=0;i<jsonArray.length();i++)
                         {
@@ -97,10 +102,13 @@ public class ActivityAbonos extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
 
+                    Toast.makeText(ActivityAbonos.this, error.getMessage(), Toast.LENGTH_LONG ).show();
                 }
             });
-            VolleySingleton.getInstance(ActivityAbonos.this).addToRequestQueue(request);
+            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
             return null;
         }
     }
