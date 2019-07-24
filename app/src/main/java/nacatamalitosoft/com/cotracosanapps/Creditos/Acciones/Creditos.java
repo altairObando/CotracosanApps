@@ -1,15 +1,20 @@
 package nacatamalitosoft.com.cotracosanapps.Creditos.Acciones;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,6 +43,10 @@ public class Creditos extends Fragment {
     ProgressDialog dialog;
     List<Buses> listaBuses;
     Spinner spBuses;
+    listItemClick itemClick;
+    TextView tvCodigoCredito;
+    Button btnBuscar;
+    EditText textBusqueda;
     public Creditos() {
         // Required empty public constructor
     }
@@ -46,15 +55,36 @@ public class Creditos extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_creditos, container, false);
-        listaDetalle = view.findViewById(R.id.listaDetalles);
-        spBuses = view.findViewById(R.id.spinnerVehiculos);
-        dialog = new ProgressDialog(getContext());
+        setReferences(view);
         // Obtener los buses.
         new VehiculosTask().execute();
+        // Obtener el codigo del credito nuevo
+        new CreditosTask().execute();
+        // Agregar escucha al boton buscar.
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtener los parametros de la busqueda
+                String parametro = textBusqueda.getText().toString();
+                Intent busqueda = new Intent(getActivity(), ResultadosBusquedaActivity.class);
+                busqueda.putExtra("parametro", parametro);
+                startActivityForResult(busqueda, 0);
+            }
+        });
         return view;
     }
 
+    private void setReferences(View view) {
+        tvCodigoCredito = view.findViewById(R.id.tvCodigoCredito);
+        listaDetalle = view.findViewById(R.id.listaDetalles);
+        spBuses = view.findViewById(R.id.spinnerVehiculos);
+        dialog = new ProgressDialog(getContext());
+        btnBuscar = view.findViewById(R.id.btnBuscarArticulos);
+        textBusqueda = view.findViewById(R.id.etBuscarArticulo);
+    }
+
     // Cargar los creditos.
+    @SuppressLint("StaticFieldLeak")
     class VehiculosTask extends AsyncTask<Void, Void, Void>
     {
         @Override
@@ -104,5 +134,36 @@ public class Creditos extends Fragment {
             return null;
         }
     }
+    // Obtener el ultimo codigo
+    @SuppressLint("StaticFieldLeak")
+    class CreditosTask extends AsyncTask<Void, Void, Void>{
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            StringRequest request = new StringRequest(Request.Method.GET, "http://cotracosan.tk/ApiCreditos/GetUltimoCodigo", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    try {
+                        JSONObject response = new JSONObject(s);
+                        String codigo = response.getString("codigoCredito").split("-")[1];
+                        int nuevo = Integer.parseInt(codigo);
+                        tvCodigoCredito.setText("Codigo: CRED-"+ (nuevo +1));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getContext(), "Error al obtener el codigo del credito", Toast.LENGTH_SHORT).show();
+                }
+            });
+            VolleySingleton.getInstance(getContext()).addToRequestQueue(request);
+            return null;
+        }
+    }
+
+    public interface listItemClick{
+        void mostrarArticulos();
+    }
 }

@@ -13,10 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Creditos.Acciones.ResultadosBusquedaActivity"></activity>
         <activity
             android:name=".Creditos.CajaActivity"
             android:label="@string/title_activity_caja"
-            android:theme="@style/AppTheme.Caja"></activity>
+            android:theme="@style/AppTheme.Caja" />
         <activity android:name=".DetalleCredito" />
         <activity android:name=".UserManager.ChangePasswordActivity" />
         <activity android:name=".UserManager.ImagePreviewActivity" />

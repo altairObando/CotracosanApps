@@ -52,7 +52,7 @@ public class CajaActivity extends AppCompatActivity {
         textView1.setText("Creditos");
         textView2.setText("Buscar Creditos");
 
-        textView1.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.cart_shopping, 0,0);
+        textView1.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.cart, 0,0);
         textView2.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.ic_menu_search, 0,0);
 
         tabLayout.getTabAt(0).setCustomView(textView1);

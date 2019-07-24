@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
+import nacatamalitosoft.com.cotracosanapps.R;
 
 public class VehiculosAdapter extends BaseAdapter {
     Context context;
@@ -38,8 +39,8 @@ public class VehiculosAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         if(view == null)
-            view = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, null);
-        TextView textView = view.findViewById(android.R.id.text1);
+            view = LayoutInflater.from(context).inflate(R.layout.simple_dropdown_list_item, null);
+        TextView textView = view.findViewById(R.id.text1);
         textView.setText(buses.get(i).getPlaca());
         return view;
     }
