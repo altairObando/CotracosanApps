@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Articulos;
+import nacatamalitosoft.com.cotracosanapps.R;
 
 public class ListaDetallesAdapter extends BaseAdapter {
     private final List<Articulos> data;
@@ -38,12 +39,16 @@ public class ListaDetallesAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         if(view == null)
-            view = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_2, null);
-        TextView textView1 = view.findViewById(android.R.id.text1);
-        TextView textView2 = view.findViewById(android.R.id.text2);
-        textView1.setText(data.get(i).getDescripcion());
-        textView2.setText("C$ "+ data.get(i).getPrecio());
+            view = LayoutInflater.from(context).inflate(R.layout.resultados_busqueda_item, parent);
 
+        TextView txtDescripcion = view.findViewById(R.id.tvDescripcionArticulo);
+        TextView txtCodigo = view.findViewById(R.id.tvCodigoArticulo);
+        TextView txtPrecio = view.findViewById(R.id.tvPrecioArticulo);
+
+        txtDescripcion.setText(data.get(i).getDescripcion());
+        txtCodigo.setText("Sub total: C$ "+ data.get(i).getPrecio());
+        txtPrecio.setText("");
+        txtPrecio.setCompoundDrawablesRelativeWithIntrinsicBounds(0, android.R.drawable.ic_delete, 0,0);
         return view;
     }
 

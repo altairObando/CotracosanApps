@@ -11,5 +11,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@string/font_fontFamily_medium"
         android:padding="8dp"
-        tools:text="@string/lblSample" />
+        tools:text="@string/lblSample"
+        android:textAlignment="center"/>
 </LinearLayout>

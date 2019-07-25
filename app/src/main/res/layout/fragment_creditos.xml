@@ -51,10 +51,16 @@
                 android:textSize="18sp" />
             <Spinner
                 android:id="@+id/spinnerVehiculos"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:spinnerMode="dialog"
                 style="@android:style/Theme.Holo.Dialog"/>
+            <TextView
+                android:id="@+id/tvTotalCredito"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textEnd"
+                android:text="C$ 0.0"/>
         </LinearLayout>
         <!-- Layout para la busqueda de articulos -->
         <LinearLayout
@@ -90,10 +96,11 @@
             android:text="@string/listArticulosHeader"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
         <!-- Fin del detalle -->
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/listaDetalles"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/recycler_view_item_2" />
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

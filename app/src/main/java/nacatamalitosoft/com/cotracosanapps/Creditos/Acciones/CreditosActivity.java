@@ -12,6 +12,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.DetallesAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.ListaDetallesAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.VehiculosAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.CajaActivity;
@@ -46,12 +50,12 @@ public class CreditosActivity extends Fragment {
     ProgressDialog dialog;
     List<Buses> listaBuses;
     Spinner spBuses;
-    TextView tvCodigoCredito;
+    TextView tvCodigoCredito, totalCredito;
     Button btnBuscar;
     EditText textBusqueda;
-    ListView listaDetalles;
+    RecyclerView listaDetalles;
     List<Articulos> dataSet;
-    ListaDetallesAdapter adapter;
+    DetallesAdapter adapter;
     FloatingActionButton fab;
     public CreditosActivity() {
         // Required empty public constructor
@@ -82,14 +86,7 @@ public class CreditosActivity extends Fragment {
             public void onClick(View v) {
                 // Comprobar que existan elementos seleccionados.
                 if(dataSet.size() > 0){
-                    RealizarCreditoDialog dialog = new RealizarCreditoDialog();
-                    dialog.listener = new RealizarCreditoDialog.onItemClickListener() {
-                        @Override
-                        public void onDialogPositiveClickListener(DialogFragment dialog) {
 
-                        }
-                    };
-                    dialog.show(getActivity().getSupportFragmentManager(), "ComprobandoCredito");
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(), "Agregue un articulo", Toast.LENGTH_LONG).show();
                 }
@@ -99,18 +96,36 @@ public class CreditosActivity extends Fragment {
     }
 
     private void setReferences(View view) {
+        totalCredito = view.findViewById(R.id.tvTotalCredito);
         tvCodigoCredito = view.findViewById(R.id.tvCodigoCredito);
         spBuses = view.findViewById(R.id.spinnerVehiculos);
         dialog = new ProgressDialog(getContext());
         btnBuscar = view.findViewById(R.id.btnBuscarArticulos);
         textBusqueda = view.findViewById(R.id.etBuscarArticulo);
         listaDetalles = view.findViewById(R.id.listaDetalles);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        listaDetalles.setLayoutManager(layoutManager);
+        listaDetalles.setHasFixedSize(true);
+        listaDetalles.addItemDecoration(new DividerItemDecoration(listaDetalles.getContext(), layoutManager.getOrientation()));
+
         dataSet = new ArrayList<>();
-        adapter = new ListaDetallesAdapter(getActivity().getApplicationContext(), new ArrayList<Articulos>());
+        adapter = new DetallesAdapter(getActivity(), new ArrayList<Articulos>(), new DetallesAdapter.adapterClick() {
+            @Override
+            public void onItemDeleteClick(Articulos articulos) {
+                dataSet.remove(articulos);
+                adapter.updateDataSet(dataSet);
+                updateTotalCredito();
+            }
+        });
         listaDetalles.setAdapter(adapter);
         fab = view.findViewById(R.id.fab);
     }
-
+    void updateTotalCredito(){
+        double suma = 0;
+        for(Articulos a: dataSet)
+            suma += a.getPrecio();
+        totalCredito.setText("C$ " + suma);
+    }
     // Cargar los creditos.
     @SuppressLint("StaticFieldLeak")
     class VehiculosTask extends AsyncTask<Void, Void, Void>
@@ -202,6 +217,7 @@ public class CreditosActivity extends Fragment {
                 double precioFinal = cantidad > 0 ? cantidad * articulo.getPrecio() :articulo.getPrecio();
                 articulo.setPrecio(precioFinal);
                 dataSet.add(articulo);
+                updateTotalCredito();
                 adapter.updateDataSet(dataSet);
             }
         }

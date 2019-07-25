@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                new updateUserImage().execute();
+                //new updateUserImage().execute();
             }
         };
         drawer.addDrawerListener(toggle);
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         // Actualizar con la imagen del perfil
         navigationView.getHeaderView(0);
-        new updateUserImage().execute();
+        //new updateUserImage().execute();
 
     }
 

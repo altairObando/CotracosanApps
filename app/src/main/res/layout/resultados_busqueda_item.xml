@@ -19,7 +19,7 @@
         android:id="@+id/tvCodigoArticulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginTop="50dp"
         android:text="Codigo"
         android:textAppearance="?android:textAppearanceListItemSecondary"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="280dp"
         android:text="C$ 0.0"
         android:textAppearance="?android:textAppearanceListItemSecondary"
         tools:targetApi="lollipop" />
