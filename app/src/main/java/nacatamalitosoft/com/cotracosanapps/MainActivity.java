@@ -19,14 +19,10 @@ import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
-import nacatamalitosoft.com.cotracosanapps.localDB.User;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 public class MainActivity extends AppCompatActivity
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         // Actualizar con la imagen del perfil
         navigationView.getHeaderView(0);
-        //new updateUserImage().execute();
+        new updateUserImage().execute();
 
     }
 

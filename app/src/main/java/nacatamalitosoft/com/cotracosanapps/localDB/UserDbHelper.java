@@ -8,7 +8,7 @@ import static nacatamalitosoft.com.cotracosanapps.localDB.UserContract.UserEntry
 
 
 public class UserDbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "Identity.db";
+    private static final String DATABASE_NAME = "cotracosan.db";
     private static final int VERSION = 1;
     public UserDbHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -24,7 +24,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
                 + EMAIL + " TEXT NOT NULL,"
                 + AVATAR + " TEXT NOT NULL,"
                 + ROL + " TEXT NOT NULL, "
-                + ISLOGGED + " TEXT,"
+                + ISLOGGED + " TEXT, "
                 + " UNIQUE (" + ID + "))");
     }
 
@@ -32,7 +32,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         return db.query(
                 TABLE_NAME,
-                new String[]{ ID, SOCIOID, USER, EMAIL, AVATAR, ISLOGGED, ROL },
+                null,
                 ISLOGGED + " LIKE ? ",
                 new String [] {"1"},
                 null,
@@ -42,7 +42,17 @@ public class UserDbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE " + TABLE_NAME);
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
+                + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + ID + " TEXT NOT NULL,"
+                + SOCIOID + " TEXT NOT NULL,"
+                + USER + " TEXT NOT NULL,"
+                + EMAIL + " TEXT NOT NULL,"
+                + AVATAR + " TEXT NOT NULL,"
+                + ROL + " TEXT NOT NULL, "
+                + ISLOGGED + " TEXT, "
+                + " UNIQUE (" + ID + "))");
     }
 
     public long AddNewUserLogged(User userResult) {

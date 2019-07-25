@@ -10,10 +10,9 @@ class UserContract {
         static String SOCIOID = "SocioId";
         static String USER = "Usuario";
         static String EMAIL = "Email";
+        static String ROL = "Rol";
         static String AVATAR = "Avatar";
         static String ISLOGGED = "IsLogged";
-        static String ROL = "Rol";
-
     }
 }
 
