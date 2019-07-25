@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivityDetalleCarrera"
+    android:gravity="center_horizontal">
+    <TextView
+        android:id="@+id/CodigoCarrera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/FechaDeCarrera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+    <TextView
+        android:id="@+id/Placa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+    <TextView
+        android:id="@+id/MontoRecaudado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+    <TextView
+        android:id="@+id/Multa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+    <TextView
+        android:id="@+id/MontoRestante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+    <TextView
+        android:id="@+id/LugarFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+    <TextView
+        android:id="@+id/TurnoOficial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+    <TextView
+        android:id="@+id/HoraLlegada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo Carrera"
+        android:textSize="30sp"
+        android:paddingTop="10dp"/>
+
+
+</LinearLayout>

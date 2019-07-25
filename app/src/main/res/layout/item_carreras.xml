@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp">
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/gps"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/CodigoCarrera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="CRED-00000"
+        tools:text="Codigo Carrera"/>
+
+    <TextView
+        android:id="@+id/FechaCarrera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/CodigoCarrera"
+        android:layout_below="@id/CodigoCarrera"
+        android:text="Monto"
+        tools:text="00/00/0000"
+        />
+    <TextView
+        android:id="@+id/MontoCarrera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CodigoCarrera"
+        android:layout_below="@+id/FechaCarrera"
+        android:text="Fecha"
+        tools:text="00.0000" />
+    <TextView
+        android:id="@+id/Conductor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CodigoCarrera"
+        android:layout_below="@+id/MontoCarrera"
+        android:text="Resto"
+        tools:text="Conductor" />
+
+</RelativeLayout>
