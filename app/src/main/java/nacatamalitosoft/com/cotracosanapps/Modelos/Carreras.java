@@ -1,9 +1,14 @@
 package nacatamalitosoft.com.cotracosanapps.Modelos;
 
-public class Carreras {
+import java.io.Serializable;
+
+public class Carreras implements Serializable {
 
 
-    public Carreras(int id, String codigoCarrera, String fechaDeCarrera, double montoRecaudado, double multa, String conductor, int conductorId, String vehiculo, int vehiculoId, String lugarFinalRecorrido, String horaDeLlegada, String turno, double carreraAnulada, double montoRestante) {
+    public Carreras(int id, String codigoCarrera, String fechaDeCarrera, double montoRecaudado,
+                    double multa, String conductor, int conductorId, String vehiculo, int vehiculoId,
+                    String lugarFinalRecorrido, String horaDeLlegada, String turno, boolean carreraAnulada,
+                    double montoRestante) {
         Id = id;
         CodigoCarrera = codigoCarrera;
         FechaDeCarrera = fechaDeCarrera;
@@ -116,11 +121,11 @@ public class Carreras {
         Turno = turno;
     }
 
-    public double getCarreraAnulada() {
+    public boolean getCarreraAnulada() {
         return CarreraAnulada;
     }
 
-    public void setCarreraAnulada(double carreraAnulada) {
+    public void setCarreraAnulada(boolean carreraAnulada) {
         CarreraAnulada = carreraAnulada;
     }
 
@@ -144,6 +149,6 @@ public class Carreras {
     private String LugarFinalRecorrido;
     private String HoraDeLlegada;
     private String Turno;
-    private double CarreraAnulada;
+    private boolean CarreraAnulada;
     private double MontoRestante;
 }

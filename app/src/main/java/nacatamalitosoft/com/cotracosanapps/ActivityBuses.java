@@ -69,7 +69,7 @@ public class ActivityBuses extends AppCompatActivity {
                             startActivity(i);
                         };break;
                         case 2:{
-                            Intent i = new Intent(ActivityBuses.this, ActivityCredito.class);
+                            Intent i = new Intent(ActivityBuses.this, ActivityCarreras.class);
                             i.putExtra("idBus", buses.get(position).getId());
                             startActivity(i);
 

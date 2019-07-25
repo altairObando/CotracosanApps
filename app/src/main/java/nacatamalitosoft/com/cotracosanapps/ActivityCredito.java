@@ -1,7 +1,6 @@
 package nacatamalitosoft.com.cotracosanapps;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,10 +19,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
@@ -47,7 +45,7 @@ public class ActivityCredito extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(ActivityCredito.this);
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setMessage("Obteniendo los CreditosActivity");
+        progressDialog.setMessage("Obteniendo los Creditos");
         progressDialog.setCancelable(false);
         progressDialog.show();
         new getCredito().execute();

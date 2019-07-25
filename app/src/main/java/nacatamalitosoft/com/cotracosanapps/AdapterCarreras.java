@@ -1,6 +1,7 @@
 package nacatamalitosoft.com.cotracosanapps;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,13 +36,16 @@ implements View.OnClickListener{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCarreras.ViewHolderAdapterCarreras viewHolderAdapterCarreras, int i) {
+    public void onBindViewHolder(@NonNull AdapterCarreras.ViewHolderAdapterCarreras viewHolderAdapterCarreras, final int i) {
         viewHolderAdapterCarreras.setData(listaCarrera.get(i));
         viewHolderAdapterCarreras.itemView.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-
+                Carreras carreras = listaCarrera.get(i);
+                Intent intent = new Intent(context, ActivityDetalleCarrera.class);
+                intent.putExtra("carrera", carreras);
+                context.startActivity(intent);
             }
         });
 
@@ -54,7 +58,10 @@ implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-
+        if(listener!=null)
+        {
+            listener.onClick(v);
+        }
     }
 
     public class ViewHolderAdapterCarreras extends RecyclerView.ViewHolder {
