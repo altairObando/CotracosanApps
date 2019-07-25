@@ -17,13 +17,12 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="enterAlways"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title="Cotracosan Creditos"/>
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabCaja"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="70dp"
         app:tabMode="fixed"
         app:tabGravity="fill"/>
 </android.support.design.widget.AppBarLayout>

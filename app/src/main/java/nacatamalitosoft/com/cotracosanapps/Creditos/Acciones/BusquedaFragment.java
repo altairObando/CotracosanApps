@@ -12,10 +12,10 @@ import nacatamalitosoft.com.cotracosanapps.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BusquedaActivity extends Fragment {
+public class BusquedaFragment extends Fragment {
 
 
-    public BusquedaActivity() {
+    public BusquedaFragment() {
         // Required empty public constructor
     }
 

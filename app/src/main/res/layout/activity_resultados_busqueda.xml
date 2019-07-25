@@ -13,6 +13,5 @@
         android:layout_height="match_parent"
         android:focusable="true"
         android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        tools:listitem="@layout/recycler_view_item_1" />
+        android:foreground="?android:attr/selectableItemBackground"/>
 </LinearLayout>

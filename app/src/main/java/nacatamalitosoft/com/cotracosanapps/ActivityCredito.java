@@ -74,7 +74,7 @@ public class ActivityCredito extends AppCompatActivity {
                         JSONObject object = new JSONObject(response);
 
                         //Convirtiendo la respuesta a un arreglo
-                        JSONArray jsonArray = object.getJSONArray("CreditosActivity");
+                        JSONArray jsonArray = object.getJSONArray("CreditosFragment");
 
 
                         //Inicializando la nueva lista de creditos
@@ -127,12 +127,12 @@ public class ActivityCredito extends AppCompatActivity {
                                     listaDetalle);
 
 
-                            //Agregando a la lista de CreditosActivity
+                            //Agregando a la lista de CreditosFragment
                             listaInterna.add(temp);
                         }
 
                         if(listaInterna.size() ==0)
-                            Toast.makeText(getBaseContext(), "No hay CreditosActivity", Toast.LENGTH_LONG ).show();
+                            Toast.makeText(getBaseContext(), "No hay CreditosFragment", Toast.LENGTH_LONG ).show();
                         else
                         {
                             AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityCredito.this);

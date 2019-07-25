@@ -13,11 +13,12 @@ public final class UserSingleton {
     private static User currentUser;
 
     public static synchronized User getCurrentUser(Context context){
+        Cursor cursor = null;
         if(currentUser == null)
         {
             try{
                 UserDbHelper helper = new UserDbHelper(context);
-                Cursor cursor = helper.getLocalLoggedUser();
+                cursor = helper.getLocalLoggedUser();
                 if(cursor.moveToNext()){
                     currentUser = new User(
                             cursor.getString(cursor.getColumnIndex(ID)),
@@ -33,6 +34,9 @@ public final class UserSingleton {
                 }
             }catch (Exception ex){
                 System.out.println(ex.getMessage());
+            }finally {
+                if(cursor != null)
+                    cursor.close();
             }
         }
         return currentUser;
@@ -50,6 +54,8 @@ public final class UserSingleton {
             currentUser = null;
         }catch(Exception e){
             System.out.println(e.getMessage());
+        }finally {
+
         }
     }
 

@@ -18,8 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.BusquedaActivity;
-import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.CreditosActivity;
+import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.BusquedaFragment;
+import nacatamalitosoft.com.cotracosanapps.Creditos.Acciones.CreditosFragment;
 import nacatamalitosoft.com.cotracosanapps.LoginActivity;
 import nacatamalitosoft.com.cotracosanapps.R;
 import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
@@ -36,7 +36,7 @@ public class CajaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_caja);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Cotracosan CreditosActivity");
+        //setTitle("Cotracosan Creditos");
         tabLayout = findViewById(R.id.tabCaja);
         viewPager = findViewById(R.id.viewpager);
         // Adaptar
@@ -52,7 +52,7 @@ public class CajaActivity extends AppCompatActivity {
         textView1.setText("Creditos");
         textView2.setText("Buscar Creditos");
 
-        textView1.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.cart, 0,0);
+        textView1.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.vender, 0,0);
         textView2.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.ic_menu_search, 0,0);
 
         tabLayout.getTabAt(0).setCustomView(textView1);
@@ -61,8 +61,8 @@ public class CajaActivity extends AppCompatActivity {
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CreditosActivity(), "CreditosActivity");
-        adapter.addFragment(new BusquedaActivity(), "Buscar CreditosActivity");
+        adapter.addFragment(new CreditosFragment(), "CreditosFragment");
+        adapter.addFragment(new BusquedaFragment(), "Buscar CreditosFragment");
         viewPager.setAdapter(adapter);
     }
     public class ViewPagerAdapter extends FragmentPagerAdapter{

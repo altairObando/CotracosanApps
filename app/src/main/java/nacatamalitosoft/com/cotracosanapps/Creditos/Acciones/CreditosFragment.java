@@ -16,8 +16,12 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -46,7 +50,7 @@ import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
 import nacatamalitosoft.com.cotracosanapps.R;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
-public class CreditosActivity extends Fragment {
+public class CreditosFragment extends Fragment {
     ProgressDialog dialog;
     List<Buses> listaBuses;
     Spinner spBuses;
@@ -57,7 +61,7 @@ public class CreditosActivity extends Fragment {
     List<Articulos> dataSet;
     DetallesAdapter adapter;
     FloatingActionButton fab;
-    public CreditosActivity() {
+    public CreditosFragment() {
         // Required empty public constructor
     }
     @Override
@@ -65,6 +69,7 @@ public class CreditosActivity extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_creditos, container, false);
+        setHasOptionsMenu(true);
         setReferences(view);
         // Obtener los buses.
         new VehiculosTask().execute();
@@ -79,17 +84,6 @@ public class CreditosActivity extends Fragment {
                 Intent busqueda = new Intent(getActivity(), ResultadosBusquedaActivity.class);
                 busqueda.putExtra("parametro", parametro);
                 startActivityForResult(busqueda, 0);
-            }
-        });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Comprobar que existan elementos seleccionados.
-                if(dataSet.size() > 0){
-
-                }else{
-                    Toast.makeText(getActivity().getApplicationContext(), "Agregue un articulo", Toast.LENGTH_LONG).show();
-                }
             }
         });
         return view;
@@ -215,11 +209,42 @@ public class CreditosActivity extends Fragment {
                 Articulos articulo = (Articulos) data.getExtras().get("articulo");
                 int cantidad = data.getExtras().getInt("cantidad");
                 double precioFinal = cantidad > 0 ? cantidad * articulo.getPrecio() :articulo.getPrecio();
+                if(dataSet.contains(articulo)) {
+                    precioFinal += dataSet.get(dataSet.indexOf(articulo)).getPrecio();
+                    dataSet.remove(articulo);
+                }
                 articulo.setPrecio(precioFinal);
                 dataSet.add(articulo);
                 updateTotalCredito();
                 adapter.updateDataSet(dataSet);
+                try{
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    View v = getActivity().getCurrentFocus();
+                    if(v == null)
+                        v = new View(getActivity());
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
             }
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_caja, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.menu.menu_caja)
+        {
+            if(dataSet.size() > 0){
+
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
