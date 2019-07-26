@@ -3,11 +3,11 @@ package nacatamalitosoft.com.cotracosanapps.Modelos;
 import java.io.Serializable;
 
 public class Articulos implements Serializable {
-    int id;
-    String codigo;
-    String descripcion;
-    double precio;
-
+    private int id;
+    private String codigo;
+    private String descripcion;
+    private double precio;
+    public int Cantidad;
     public Articulos(int id, String codigo, String descripcion, double precio) {
         this.id = id;
         this.codigo = codigo;

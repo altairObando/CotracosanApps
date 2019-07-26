@@ -74,18 +74,22 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Art
 
     @Override
     public void onItemClick(final Articulos item) {
-        DialogFragment fragment = new CantidadArticulosDialogFragment();
-        ((CantidadArticulosDialogFragment) fragment).mlistener = new CantidadArticulosDialogFragment.NoticeDialogListener() {
+        CantidadArticulosDialogFragment fragment = new CantidadArticulosDialogFragment();
+        fragment.mlistener = new CantidadArticulosDialogFragment.NoticeDialogListener() {
             @Override
             public void onDialogPositiveClick(DialogFragment dialog) {
                 Dialog view = dialog.getDialog();
                 EditText txtCantidad = view.findViewById(R.id.dialogCantidad);
                 int cant = Integer.parseInt(txtCantidad.getText().toString());
-                Intent data = new Intent();
-                data.putExtra("articulo", item);
-                data.putExtra("cantidad", cant);
-                setResult(Activity.RESULT_OK, data);
-                finish();
+                if(cant > 0){
+                    Intent data = new Intent();
+                    data.putExtra("articulo", item);
+                    data.putExtra("cantidad", cant);
+                    setResult(Activity.RESULT_OK, data);
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Debe seleccionar al menos un articulo", Toast.LENGTH_LONG).show();
+                }
             }
         };
         fragment.show(getSupportFragmentManager(), "Seleccionar_Cantidad");

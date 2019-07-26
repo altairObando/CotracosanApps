@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -39,14 +40,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.DetallesAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.ListaDetallesAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.VehiculosAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.CajaActivity;
+import nacatamalitosoft.com.cotracosanapps.Creditos.DetalleCreditoViewModel;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Articulos;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
+import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
 import nacatamalitosoft.com.cotracosanapps.R;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
@@ -61,6 +66,7 @@ public class CreditosFragment extends Fragment {
     List<Articulos> dataSet;
     DetallesAdapter adapter;
     FloatingActionButton fab;
+    static double total = 0;
     public CreditosFragment() {
         // Required empty public constructor
     }
@@ -86,6 +92,25 @@ public class CreditosFragment extends Fragment {
                 startActivityForResult(busqueda, 0);
             }
         });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // verificar que se haya seleccionado almenos un articulo.
+                if(dataSet.size() > 0){
+                    final Buses bus = (Buses)(spBuses.getSelectedItem());
+                    updateTotalCredito();
+                    ResumenDialog dialog = ResumenDialog.newInstance("Aplicar el credito de: C$ "+ total + "" +
+                            "\nal vehiculo con placa: " +bus.getPlaca()+" ? ");
+                    dialog.listener = new ResumenDialog.onClickListener() {
+                        @Override
+                        public void onRealizarCreditoClick() {
+                            new AgregarCreditoTask(bus.getId()).execute();
+                        }
+                    };
+                    dialog.show(getFragmentManager(), "acreditar");
+                }
+            }
+        });
         return view;
     }
 
@@ -96,12 +121,13 @@ public class CreditosFragment extends Fragment {
         dialog = new ProgressDialog(getContext());
         btnBuscar = view.findViewById(R.id.btnBuscarArticulos);
         textBusqueda = view.findViewById(R.id.etBuscarArticulo);
+        fab = view.findViewById(R.id.fab);
+        /* Seccion para los detalles */
         listaDetalles = view.findViewById(R.id.listaDetalles);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         listaDetalles.setLayoutManager(layoutManager);
         listaDetalles.setHasFixedSize(true);
         listaDetalles.addItemDecoration(new DividerItemDecoration(listaDetalles.getContext(), layoutManager.getOrientation()));
-
         dataSet = new ArrayList<>();
         adapter = new DetallesAdapter(getActivity(), new ArrayList<Articulos>(), new DetallesAdapter.adapterClick() {
             @Override
@@ -112,13 +138,13 @@ public class CreditosFragment extends Fragment {
             }
         });
         listaDetalles.setAdapter(adapter);
-        fab = view.findViewById(R.id.fab);
+        /* Fin de los detalles */
     }
     void updateTotalCredito(){
-        double suma = 0;
+        total = 0;
         for(Articulos a: dataSet)
-            suma += a.getPrecio();
-        totalCredito.setText("C$ " + suma);
+            total += a.getPrecio();
+        totalCredito.setText("C$ " + total);
     }
     // Cargar los creditos.
     @SuppressLint("StaticFieldLeak")
@@ -199,6 +225,94 @@ public class CreditosFragment extends Fragment {
             return null;
         }
     }
+    @SuppressLint("StaticFieldLeak")
+    class AgregarCreditoTask extends AsyncTask<Void, Void, Void>{
+        private final int vehiculoId;
+        private List<DetalleCreditoViewModel> detalle;
+        AgregarCreditoTask(int vehiculoId){
+            detalle = new ArrayList<>();
+            this.vehiculoId = vehiculoId;
+        }
+        String creditoUrlContent;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            StringRequest request = new StringRequest(Request.Method.POST, creditoUrlContent, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        boolean succes = object.getBoolean("success");
+                        String mensaje = object.getString("message");
+                        Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
+                        if(succes)
+                            clearControls();
+                    } catch (JSONException e) {
+                        Toast.makeText(getContext(), "Error al deserializar respuesta", Toast.LENGTH_LONG).show();
+                    }
+                    if(dialog.isShowing())
+                        dialog.dismiss();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    if(dialog.isShowing())
+                        dialog.dismiss();
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<>();
+                    parametros.put("Id", ""+0);
+                    parametros.put("CodigoCredito", tvCodigoCredito.getText().toString());
+                    parametros.put("MontoTotal", ""+total);
+                    parametros.put("EstadoDeCredito", "True");
+                    parametros.put("FechaDeCredito", "2019-07-26");
+                    parametros.put("CreditoAnulado", "False");
+                    parametros.put("VehiculoId", ""+vehiculoId);
+
+                    // Creando objeto para el detalle
+                    JSONArray jsonArray = new JSONArray();
+                    for (int i =0; i < detalle.size(); i++){
+                        try {
+                            JSONObject object = new JSONObject();
+                            object.put("Id", detalle.get(i).getId());
+                            object.put("Cantidad", detalle.get(i).getCantidad());
+                            object.put("CreditoId", detalle.get(i).getCreditoId());
+                            object.put("ArticuloId", detalle.get(i).getArticuloId());
+                            jsonArray.put(object);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    parametros.put("DetalleCredito", jsonArray.toString());
+                    return parametros;
+                }
+            };
+            VolleySingleton.getInstance(getContext()).addToRequestQueue(request);
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog.setMessage("Efectuando nuevo credito...");
+            dialog.setCancelable(false);
+            dialog.setIndeterminate(true);
+            dialog.show();
+
+            //Configurando url.
+            creditoUrlContent = "http://cotracosan.tk/ApiCreditos/AddCredito";
+            // Crear la lista del detalle
+            for (Articulos a: dataSet){
+                DetalleCreditoViewModel model = new DetalleCreditoViewModel(0, a.Cantidad,0,a.getId());
+                detalle.add(model);
+            }
+        }
+    }
+
+    private void clearControls() {
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -208,15 +322,9 @@ public class CreditosFragment extends Fragment {
             if(requestCode == 0){
                 Articulos articulo = (Articulos) data.getExtras().get("articulo");
                 int cantidad = data.getExtras().getInt("cantidad");
-                double precioFinal = cantidad > 0 ? cantidad * articulo.getPrecio() :articulo.getPrecio();
-                if(dataSet.contains(articulo)) {
-                    precioFinal += dataSet.get(dataSet.indexOf(articulo)).getPrecio();
-                    dataSet.remove(articulo);
-                }
-                articulo.setPrecio(precioFinal);
-                dataSet.add(articulo);
+                updateDetalles(articulo, cantidad);
                 updateTotalCredito();
-                adapter.updateDataSet(dataSet);
+                textBusqueda.setText("");
                 try{
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                     View v = getActivity().getCurrentFocus();
@@ -229,22 +337,27 @@ public class CreditosFragment extends Fragment {
             }
         }
     }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_caja, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.menu.menu_caja)
-        {
-            if(dataSet.size() > 0){
-
+    void updateDetalles(Articulos articulos, int cantidad){
+        // Establecer el valor cantidad
+        articulos.Cantidad = cantidad;
+        boolean updated = false;
+        // Buscar el articulo
+        for (int i =0; i< dataSet.size() && !updated; i++ ){
+            // Si existe en el dataset
+            if(dataSet.get(i).getId() == articulos.getId()){
+                double nuevoPrecio = dataSet.get(i).getPrecio() + (articulos.getPrecio() * cantidad);
+                dataSet.get(i).setPrecio(nuevoPrecio);
+                dataSet.get(i).Cantidad+= cantidad;
+                updated = true;
             }
-            return true;
         }
-        return super.onOptionsItemSelected(item);
+        // Si no se ha actualizado un articulo
+        if(!updated)
+        {
+            articulos.setPrecio(articulos.getPrecio() * cantidad);
+            dataSet.add(articulos);
+        }
+        // actualizamos el adapter
+        adapter.updateDataSet(dataSet);
     }
 }
