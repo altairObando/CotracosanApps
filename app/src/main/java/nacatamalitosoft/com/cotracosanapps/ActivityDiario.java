@@ -17,12 +17,13 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
+
+import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
 public class ActivityDiario extends AppCompatActivity {
 
     TextView txtAbono, txtCarreras, txtCreditos;
-    String carrera;
+    double carrera, credito, abono;
     int idBus;
     Date hoy = new Date();
     DateFormat fecha = new SimpleDateFormat("MM/dd/yyyy");
@@ -30,47 +31,54 @@ public class ActivityDiario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diario);
-
-        Bundle extras = getIntent().getExtras();
-        if(extras!=null)
+        idBus = getIntent().getIntExtra("idBus", 0);
+        if(idBus!=0)
         {
-            idBus = extras.getInt("idBus", 0);
+
             new ObtenerValores().execute();
             txtCarreras =(TextView) findViewById(R.id.txtCarreras);
-            txtCarreras.setText(carrera);
+            txtCreditos = (TextView) findViewById(R.id.txtCreditos);
+            txtAbono = (TextView)findViewById(R.id.txtAbonos);
+            txtCarreras.setText(String.valueOf(carrera));
+            txtCreditos.setText(String.valueOf(credito));
+            txtAbono.setText(String.valueOf(abono));
+
         }
         else
         {
-            Toast.makeText(getApplicationContext(), "No se puede hacer la operacion", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "No se puede hacer la operacion", Toast.LENGTH_LONG).show();
         }
 
 
     }
 
     public class ObtenerValores extends AsyncTask<Void, Void, Void>{
-        String uri = "http://cotracosan.tk/ApiVehiculos/getMontoRecaudado?vehiculoId="+ idBus
-                + "&fecha=" + fecha.format(hoy);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    carrera = object.getString("Monto");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
 
         @Override
         protected Void doInBackground(Void... voids) {
+            String uri = "http://cotracosan.tk/ApiVehiculos/getConsolidadoVehiculo?vehiculoId="+ idBus;
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        carrera = object.getDouble("carreras");
+                        credito = object.getDouble("creditos");
+                        abono = object.getDouble("abonos");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
             return null;
         }
     }
