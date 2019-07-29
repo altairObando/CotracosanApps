@@ -135,6 +135,10 @@ public class ActivityDiario extends AppCompatActivity {
                         credito = object.getDouble("creditos");
                         abono = object.getDouble("abonos");
                         onj = response;
+
+                        txtCarreras.setText(String.valueOf(carrera));
+                        txtAbono.setText(String.valueOf(abono));
+                        txtCreditos.setText(String.valueOf(credito));
                         if(progressDialog.isShowing())
                             progressDialog.dismiss();
                     } catch (JSONException e) {
