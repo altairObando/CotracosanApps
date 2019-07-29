@@ -27,20 +27,20 @@
             <item
                 android:id="@+id/MontoFechas"
                 android:icon="@drawable/diagram"
-                android:title="Share" />
+                android:title="Consolidado Carreras" />
             <item
                 android:id="@+id/TodosCreditosBus"
                 android:icon="@drawable/cash"
-                android:title="Send" />
+                android:title="Consolidado Credito Bus" />
 
             <item
                 android:id="@+id/TodosAbonosSocio"
                 android:icon="@drawable/piggybank"
-                android:title="Consolidado"/>
+                android:title="Consolidado Abonos"/>
             <item
                 android:id="@+id/TodosCreditosPendientesSocio"
                 android:icon="@drawable/cash"
-                android:title="@string/txtCuenta" />
+                android:title="Consolidados Creditos Socios" />
         </menu>
     </item>
 

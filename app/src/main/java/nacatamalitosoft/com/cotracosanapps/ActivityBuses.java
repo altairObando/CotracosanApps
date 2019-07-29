@@ -85,6 +85,12 @@ public class ActivityBuses extends AppCompatActivity {
                             i.putExtra("idBus", idbus);
                             startActivity(i);
                         };break;
+                        case 5:{
+                            Intent i = new Intent(ActivityBuses.this, ActivityConsolidadoCreditoBus.class);
+                            int idbus = buses.get(position).getId();
+                            i.putExtra("idBus", idbus);
+                            startActivity(i);
+                        };break;
                         default:{
                             Toast.makeText(ActivityBuses.this, "¡¡¡¡FALTAL ERROR!!!!",
                                     Toast.LENGTH_LONG).show();

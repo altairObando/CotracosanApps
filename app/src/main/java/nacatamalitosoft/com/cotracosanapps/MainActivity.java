@@ -133,7 +133,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
         }
         else if (id == R.id.TodosCreditosBus) {
-
+            Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
+            i.putExtra("operacion", 5);
+            i.putExtra("socioId", 1);
+            startActivity(i);
         } else if (id == R.id.TodosAbonosSocio) {
 
         }

@@ -24,6 +24,7 @@
         android:layout_marginLeft="56dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:text="CRED-00000"
+        android:textSize="15dp"
         tools:text="Codigo Articulo"/>
 
     <TextView
