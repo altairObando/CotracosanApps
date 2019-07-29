@@ -1,6 +1,8 @@
 package nacatamalitosoft.com.cotracosanapps;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,6 +35,9 @@ public class ActivityCarreras extends AppCompatActivity {
     RecyclerView recyclerView;
     int idBus;
     ProgressDialog progressDialog;
+    AlertDialog _dialog;
+    int max;
+    Button btnDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +57,43 @@ public class ActivityCarreras extends AppCompatActivity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation()));
+
+            btnDialog = (Button)findViewById(R.id.button1);
+            btnDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final AlertDialog.Builder mBuilder = new AlertDialog.Builder(ActivityCarreras.this);
+                    View mView = getLayoutInflater().inflate(R.layout.dialogo_cantidad, null);
+                    final EditText dialogCan = (EditText)mView.findViewById(R.id.dialogCantidad);
+                    mBuilder.setView(mView);
+                    mBuilder.setTitle("Ingrese el numero de carreras");
+                    mBuilder.setPositiveButton("Consultar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            max = Integer.parseInt(String.valueOf(dialogCan.getText()));
+                            progressDialog = new ProgressDialog(ActivityCarreras.this);
+                            progressDialog.setCanceledOnTouchOutside(false);
+                            progressDialog.setMessage("Obteniendo los Creditos");
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                            new getCarreras().execute();
+                            closeDialog();
+                        }
+                    });
+
+                    mBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            closeDialog();
+                        }
+                    });
+                    _dialog = mBuilder.show();
+
+
+
+                }
+            });
+
         }
         else {
             Toast.makeText(ActivityCarreras.this, "No se esta recibiendo al Autobus",
@@ -63,8 +108,11 @@ public class ActivityCarreras extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            if(max==0)
+                max=50;
+
             String uri = "http://cotracosan.tk/ApiCarreras/getCarrerasPorVehiculo?vehiculoId=" + idBus
-                    +"&max=50";
+                    +"&max=" + max;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -131,5 +179,12 @@ public class ActivityCarreras extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    void closeDialog()
+    {
+        if(_dialog!=null)
+            _dialog.dismiss();
+
     }
 }

@@ -1,6 +1,8 @@
 package nacatamalitosoft.com.cotracosanapps;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,8 +38,10 @@ public class ActivityCredito extends AppCompatActivity {
 
     ArrayList<Credito> listaCredito;
     RecyclerView recyclerView;
+
     int idBus;
     ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +81,7 @@ public class ActivityCredito extends AppCompatActivity {
                         JSONObject object = new JSONObject(response);
 
                         //Convirtiendo la respuesta a un arreglo
-                        JSONArray jsonArray = object.getJSONArray("CreditosFragment");
+                        JSONArray jsonArray = object.getJSONArray("Creditos");
 
 
                         //Inicializando la nueva lista de creditos
@@ -172,4 +179,6 @@ public class ActivityCredito extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

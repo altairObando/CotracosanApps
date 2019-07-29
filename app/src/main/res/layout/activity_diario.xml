@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ActivityDiario"
     android:padding="30dp">
 
@@ -17,11 +17,33 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/titulo"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movimientos Realizados"
+                android:textSize="30dp"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:id="@+id/button1"
+                android:text="Consultar entre fechas"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titulo"
+                android:paddingTop="10dp"/>
+
+            <TextView
                 android:id="@+id/textView"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/txtCarreras"/>
+                android:text="@string/txtCarreras"
+                android:layout_below="@+id/button1"
+                android:paddingTop="25dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/txtCarreras"
@@ -29,7 +51,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/txtCarreras"
-                android:layout_toRightOf="@id/textView"/>
+                android:paddingTop="25dp"
+                android:layout_toRightOf="@id/textView"
+                android:layout_below="@+id/button1"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/textViewCred"
@@ -38,7 +64,9 @@
                 android:layout_weight="1"
                 android:text="@string/txtCredito"
                 android:layout_below="@id/textView"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/txtCreditos"
@@ -48,7 +76,9 @@
                 android:text="@string/txtCredito"
                 android:layout_below="@id/txtCarreras"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/textViewCred"/>
+                android:layout_toRightOf="@id/textViewCred"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
 
 
             <TextView
@@ -58,7 +88,9 @@
                 android:layout_weight="1"
                 android:text="@string/txtAbonos"
                 android:layout_below="@id/textViewCred"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/txtAbonos"
@@ -68,7 +100,9 @@
                 android:text="@string/txtAbonos"
                 android:layout_below="@id/txtCreditos"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/textViewAb"/>
+                android:layout_toRightOf="@id/textViewAb"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
 
         </RelativeLayout>
     </ScrollView>
