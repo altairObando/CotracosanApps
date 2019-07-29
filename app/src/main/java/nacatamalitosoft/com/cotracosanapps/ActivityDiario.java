@@ -120,9 +120,6 @@ public class ActivityDiario extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
-
-
             //Realizando la consulta
             String uri = "http://cotracosan.tk/ApiVehiculos/getConsolidadoVehiculo?vehiculoId="+ idBus
                     +"&fechaInicio="+fechaInicio + "&fechaFin=" + fechaFin+"";
