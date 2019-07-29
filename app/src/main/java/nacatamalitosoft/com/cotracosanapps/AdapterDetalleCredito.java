@@ -54,8 +54,8 @@ public class AdapterDetalleCredito extends BaseAdapter {
         codigoArticulo.setText("Codigo: " + listaDetalle.get(position).getCodigoArticulo());
         nombreArticulo.setText("Articulo: " +listaDetalle.get(position).getNombreArticulo());
         cantidad.setText("Cantidad: " + listaDetalle.get(position).getCantidad());
-        precio.setText("Precio: " + listaDetalle.get(position).getPrecio());
-        subTotal.setText(String.valueOf(listaDetalle.get(position).getPrecio()*listaDetalle.get(position).getCantidad()));
+        precio.setText("Precio: C$ " + listaDetalle.get(position).getPrecio());
+        subTotal.setText("C$ "+String.valueOf(listaDetalle.get(position).getPrecio()*listaDetalle.get(position).getCantidad()));
 
         return convertView;
     }

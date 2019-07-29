@@ -127,12 +127,19 @@ public class MainActivity extends AppCompatActivity
             i.putExtra("socioId", 1);
             startActivity(i);
         }
-        else if(id == R.id.Consolidado) {
+        else if(id == R.id.MontoFechas) {
+            Intent i =  new Intent(getApplicationContext(), ActivityConsolidadoCarrera.class);
+            i.putExtra("socioId", 1);
+            startActivity(i);
+        }
+        else if (id == R.id.TodosCreditosBus) {
+
+        } else if (id == R.id.TodosAbonosSocio) {
 
         }
-        else if (id == R.id.Configuracion) {
+        else if(id == R.id.TodosCreditosPendientesSocio)
+        {
 
-        } else if (id == R.id.nav_send) {
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

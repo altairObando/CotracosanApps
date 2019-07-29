@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +81,7 @@ public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.
 
         public void setData(Credito credito) {
             codigoCredito.setText(credito.getCodigoCredito());
-            montoCredito.setText(String.valueOf(credito.getMontoTotal()));
+            montoCredito.setText("C$ "+String.valueOf(credito.getMontoTotal()));
             fechaCredito.setText(String.valueOf(credito.getFecha()));
             List<DetalleDeCredito> listaDetalle = credito.getDetallesDeCreditos();
 

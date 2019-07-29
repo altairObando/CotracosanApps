@@ -20,27 +20,27 @@
             android:id="@+id/Abonos"
             android:icon="@drawable/piggybank"
             android:title="@string/txtAbonos" />
-
-        <item
-            android:id="@+id/Consolidado"
-            android:icon="@drawable/diagram"
-            android:title="Consolidado"/>
-        <item
-            android:id="@+id/Configuracion"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/txtCuenta" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Consolidados">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:id="@+id/MontoFechas"
+                android:icon="@drawable/diagram"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/TodosCreditosBus"
+                android:icon="@drawable/cash"
                 android:title="Send" />
+
+            <item
+                android:id="@+id/TodosAbonosSocio"
+                android:icon="@drawable/piggybank"
+                android:title="Consolidado"/>
+            <item
+                android:id="@+id/TodosCreditosPendientesSocio"
+                android:icon="@drawable/cash"
+                android:title="@string/txtCuenta" />
         </menu>
     </item>
 
