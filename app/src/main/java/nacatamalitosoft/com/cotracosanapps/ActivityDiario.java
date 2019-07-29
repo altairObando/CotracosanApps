@@ -46,6 +46,11 @@ public class ActivityDiario extends AppCompatActivity {
         if(idBus!=0)
         {
 
+            progressDialog = new ProgressDialog(ActivityDiario.this);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setMessage("Obteniendo los Montos");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             new ObtenerValores().execute();
             txtCarreras =(TextView) findViewById(R.id.txtCarreras);
             txtCreditos = (TextView) findViewById(R.id.txtCreditos);
