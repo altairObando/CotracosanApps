@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityConsolidadoCreditoBus"></activity>
+        <activity android:name=".ActivityConsolidadoAbonoSocio"></activity>
+        <activity android:name=".ActivityConsolidadoCreditoBus" />
         <activity android:name=".ActivityConsolidadoCarrera" />
         <activity android:name=".ActivityCarreras" />
         <activity android:name=".ActivityDetalleCarrera" />

@@ -138,7 +138,9 @@ public class MainActivity extends AppCompatActivity
             i.putExtra("socioId", 1);
             startActivity(i);
         } else if (id == R.id.TodosAbonosSocio) {
-
+            Intent i =  new Intent(getApplicationContext(), ActivityConsolidadoAbonoSocio.class);
+            i.putExtra("socioId", 1);
+            startActivity(i);
         }
         else if(id == R.id.TodosCreditosPendientesSocio)
         {

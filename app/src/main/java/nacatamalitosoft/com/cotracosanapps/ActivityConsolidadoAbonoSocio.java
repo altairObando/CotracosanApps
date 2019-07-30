@@ -34,13 +34,13 @@ import java.util.Objects;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Abonos;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
-public class ActivityAbonos extends AppCompatActivity {
+public class ActivityConsolidadoAbonoSocio extends AppCompatActivity {
 
     ArrayList<Abonos> listaAbonos;
     RecyclerView recyclerView;
-    TextView textView;
     Button btnConsulta;
-    int idBus;
+    TextView textView;
+    int socioId;
     AlertDialog _dialog;
     ProgressDialog progressDialog;
     String fechaInicio="", fechaFin="";
@@ -49,11 +49,10 @@ public class ActivityAbonos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abonos);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        idBus = (int)getIntent().getIntExtra("idBus", 0);
+        socioId = (int)getIntent().getIntExtra("socioId", 0);
         textView = (TextView)findViewById(R.id.textView2);
-
         setDates();
-        progressDialog = new ProgressDialog(ActivityAbonos.this);
+        progressDialog = new ProgressDialog(ActivityConsolidadoAbonoSocio.this);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("Obteniendo los CreditosFragment");
         progressDialog.setCancelable(false);
@@ -69,7 +68,7 @@ public class ActivityAbonos extends AppCompatActivity {
         btnConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(ActivityAbonos.this);
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(ActivityConsolidadoAbonoSocio.this);
                 final View mView = getLayoutInflater().inflate(R.layout.dialog_date, null);
                 final EditText edtInicio =  (EditText)mView.findViewById(R.id.editText2);
                 final EditText edtFinal = (EditText)mView.findViewById(R.id.editText3);
@@ -84,7 +83,7 @@ public class ActivityAbonos extends AppCompatActivity {
                         {
                             if(fechaFin=="")
                                 fechaFin=fechaInicio;
-                            progressDialog = new ProgressDialog(ActivityAbonos.this);
+                            progressDialog = new ProgressDialog(ActivityConsolidadoAbonoSocio.this);
                             progressDialog.setCanceledOnTouchOutside(false);
                             progressDialog.setMessage("Obteniendo los CreditosFragment");
                             progressDialog.setCancelable(false);
@@ -93,7 +92,7 @@ public class ActivityAbonos extends AppCompatActivity {
                             closeDialog();
                         }
                         else
-                            Toast.makeText(ActivityAbonos.this, "Ingrese la fecha de inicio",
+                            Toast.makeText(ActivityConsolidadoAbonoSocio.this, "Ingrese la fecha de inicio",
                                     Toast.LENGTH_LONG).show();
                     }
                 });
@@ -116,7 +115,7 @@ public class ActivityAbonos extends AppCompatActivity {
         Abonos abonos;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiVehiculos/getAbonosPorVehiculo?vehiculoId=" + idBus
+            String uri = "http://cotracosan.tk/ApiSocios/GetAbonosPorSocio?socioId=" + socioId
                     +"&fechaInicio=" +fechaInicio + "&fechaFin="+fechaFin;
             StringRequest request =  new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
@@ -160,11 +159,11 @@ public class ActivityAbonos extends AppCompatActivity {
                         {
                             double sumar=0;
                             for (Abonos item:
-                                 listaInterna) {
+                                    listaInterna) {
                                 sumar += item.getMontoDeAbono();
                             }
                             textView.setText("Total Abonado: C$ " + String.valueOf(sumar));
-                            AdapterAbonos credito = new AdapterAbonos(listaInterna, ActivityAbonos.this);
+                            AdapterAbonos credito = new AdapterAbonos(listaInterna, ActivityConsolidadoAbonoSocio.this);
                             recyclerView.setAdapter(credito);
                         }
 
@@ -176,7 +175,7 @@ public class ActivityAbonos extends AppCompatActivity {
                     {
                         if(progressDialog.isShowing())
                             progressDialog.dismiss();
-                        Toast.makeText(ActivityAbonos.this, ex.getMessage(), Toast.LENGTH_LONG);
+                        Toast.makeText(ActivityConsolidadoAbonoSocio.this, ex.getMessage(), Toast.LENGTH_LONG);
                     }
                 }
             }, new Response.ErrorListener() {
@@ -185,7 +184,7 @@ public class ActivityAbonos extends AppCompatActivity {
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
 
-                    Toast.makeText(ActivityAbonos.this, error.getMessage(), Toast.LENGTH_LONG ).show();
+                    Toast.makeText(ActivityConsolidadoAbonoSocio.this, error.getMessage(), Toast.LENGTH_LONG ).show();
                 }
             });
             VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
