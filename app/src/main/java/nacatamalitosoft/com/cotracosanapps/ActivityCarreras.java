@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,6 +33,7 @@ import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
 public class ActivityCarreras extends AppCompatActivity {
     ArrayList<Carreras> listaCarreras;
+    TextView textView, textView1;
     RecyclerView recyclerView;
     int idBus;
     ProgressDialog progressDialog;
@@ -44,6 +46,8 @@ public class ActivityCarreras extends AppCompatActivity {
         setContentView(R.layout.activity_carreras);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         idBus = (int)getIntent().getIntExtra("idBus", 0);
+        textView = (TextView)findViewById(R.id.textView2);
+        textView1 = (TextView)findViewById(R.id.textView3);
         if(idBus!=0)
         {
             progressDialog = new ProgressDialog(ActivityCarreras.this);
@@ -132,7 +136,15 @@ public class ActivityCarreras extends AppCompatActivity {
                         }
                         if(listaInterna.size()>0)
                         {
+                            double sum=0, sumMult=0;
+                            for (Carreras item:
+                                 listaInterna) {
+                                sum+=item.getMontoRestante();
+                                sumMult+=item.getMulta();
+                            }
                             listaCarreras = listaInterna;
+                            textView.setText("Monto Recaudado: C$" + sum);
+                            textView1.setText("Multas: C$"+sumMult);
                             AdapterCarreras adapterCarreras =  new AdapterCarreras(listaInterna, ActivityCarreras.this);
                             recyclerView.setAdapter(adapterCarreras);
                             if(progressDialog.isShowing())

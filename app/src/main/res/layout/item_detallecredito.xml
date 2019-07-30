@@ -35,7 +35,6 @@
         android:layout_centerVertical="true"
         android:textAppearance="?attr/textAppearanceListItem"
         android:text="CRED-00000"
-
         tools:text="00000000.00000"/>
 
     <TextView

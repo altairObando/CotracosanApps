@@ -144,7 +144,9 @@ public class MainActivity extends AppCompatActivity
         }
         else if(id == R.id.TodosCreditosPendientesSocio)
         {
-
+            Intent i = new Intent(getApplicationContext(), ActivityConsolidadoCreditoSocio.class);
+            i.putExtra("socioId", 1);
+            startActivity(i);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

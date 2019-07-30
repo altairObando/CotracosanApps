@@ -16,6 +16,15 @@
         android:text="Creditos Pendientes"
         android:textSize="30dp"
         android:layout_marginBottom="20dp"/>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Monto Creditos: C$ 0.00"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="20dp"
+        android:textAlignment="center"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ReciclerId"

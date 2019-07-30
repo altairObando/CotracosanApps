@@ -2,13 +2,12 @@ package nacatamalitosoft.com.cotracosanapps;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,13 +29,12 @@ import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
 import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
-public class ActivityCredito extends AppCompatActivity {
+public class ActivityConsolidadoCreditoSocio extends AppCompatActivity {
 
     ArrayList<Credito> listaCredito;
     RecyclerView recyclerView;
-    TextView textView;
 
-    int idBus;
+    int socioId;
     ProgressDialog progressDialog;
 
 
@@ -45,9 +43,9 @@ public class ActivityCredito extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listacredito);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        idBus = (int)getIntent().getIntExtra("idBus", 0);
-        textView = (TextView) findViewById(R.id.textView2);
-        progressDialog = new ProgressDialog(ActivityCredito.this);
+        socioId = (int)getIntent().getIntExtra("socioId", 0);
+
+        progressDialog = new ProgressDialog(ActivityConsolidadoCreditoSocio.this);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("Obteniendo los Creditos");
         progressDialog.setCancelable(false);
@@ -60,7 +58,7 @@ public class ActivityCredito extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation()));
     }
 
-    public class getCredito extends AsyncTask<Void, Void, Void>{
+    public class getCredito extends AsyncTask<Void, Void, Void> {
 
         ArrayList<Credito> listaInterna;
         Credito temp;
@@ -68,7 +66,7 @@ public class ActivityCredito extends AppCompatActivity {
         DetalleDeCredito tempDet;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditosPorBus?idBus=" + idBus;
+            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditosPendientePorSocio/" + socioId;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -139,13 +137,7 @@ public class ActivityCredito extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "No hay Creditos", Toast.LENGTH_LONG ).show();
                         else
                         {
-                            double sum=0;
-                            for (Credito item:
-                                 listaInterna) {
-                                sum+=item.getMontoTotal();
-                            }
-                            textView.setText("Credito Total: C$" + sum);
-                            AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityCredito.this);
+                            AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityConsolidadoCreditoSocio.this);
                             recyclerView.setAdapter(credito);
                         }
                         if(progressDialog.isShowing())
@@ -163,7 +155,7 @@ public class ActivityCredito extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-            VolleySingleton.getInstance(ActivityCredito.this).addToRequestQueue(request);
+            VolleySingleton.getInstance(ActivityConsolidadoCreditoSocio.this).addToRequestQueue(request);
             return null;
         }
     }
@@ -182,6 +174,7 @@ public class ActivityCredito extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }
