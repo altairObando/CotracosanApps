@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityContador">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#00aacc"
+            android:drawableLeft="@drawable/cash"
+            android:text="Creditos Pendientes"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#00aacc"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/cash"
+            android:text="Ultimos Creditos"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#00aacc"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/schoolbus"
+            android:text="Carreras"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#00aacc"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/diagram"
+            android:text="Gastos"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</ScrollView>

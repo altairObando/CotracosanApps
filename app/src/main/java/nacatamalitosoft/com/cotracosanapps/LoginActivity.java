@@ -167,5 +167,9 @@ public class LoginActivity extends AppCompatActivity {
         } else if ("Cajero".equals(rol)) {
             MostrarPantallaCajero();
         }
+        else if ("Contador".equals(rol))
+        {
+
+        }
     }
 }
