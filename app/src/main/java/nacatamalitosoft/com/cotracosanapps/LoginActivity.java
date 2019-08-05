@@ -90,6 +90,13 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    void MostrarPantallaContador()
+    {
+        Intent i = new Intent(this, ActivityContador.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+
     @SuppressLint("StaticFieldLeak")
     public class LoginTask extends AsyncTask<Void, Void, Void> {
 
@@ -167,9 +174,8 @@ public class LoginActivity extends AppCompatActivity {
         } else if ("Cajero".equals(rol)) {
             MostrarPantallaCajero();
         }
-        else if ("Contador".equals(rol))
-        {
-
+        else if ("Contador".equals(rol)){
+            MostrarPantallaContador();
         }
     }
 }

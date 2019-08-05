@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,45 +31,42 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-import nacatamalitosoft.com.cotracosanapps.Modelos.Abonos;
+import nacatamalitosoft.com.cotracosanapps.Modelos.ArticuloSubClass;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
-public class ActivityAbonos extends AppCompatActivity {
+public class ActivityGastos extends AppCompatActivity {
 
-    ArrayList<Abonos> listaAbonos;
+    Button btnConsultar;
     RecyclerView recyclerView;
     TextView textView;
-    Button btnConsulta;
-    int idBus;
-    AlertDialog _dialog;
     ProgressDialog progressDialog;
+    AlertDialog _dialog;
+
     String fechaInicio="", fechaFin="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_abonos);
+        setContentView(R.layout.activity_gastos);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        idBus = (int)getIntent().getIntExtra("idBus", 0);
-        textView = (TextView)findViewById(R.id.textView2);
-
+        btnConsultar = (Button)findViewById(R.id.button1);
+        textView  = (TextView)findViewById(R.id.textView2);
         setDates();
-        progressDialog = new ProgressDialog(ActivityAbonos.this);
+        progressDialog = new ProgressDialog(ActivityGastos.this);
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setMessage("Obteniendo los Abonos");
+        progressDialog.setMessage("Obteniendo los Gastos");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        new getAbonos().execute();
+        new getGastos().execute();
 
-        recyclerView = (RecyclerView)findViewById(R.id.ReciclerAbonos);
+        recyclerView = (RecyclerView)findViewById(R.id.ReciclerId);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation()));
 
-        btnConsulta = (Button)findViewById(R.id.button1);
-        btnConsulta.setOnClickListener(new View.OnClickListener() {
+        btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(ActivityAbonos.this);
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(ActivityGastos.this);
                 final View mView = getLayoutInflater().inflate(R.layout.dialog_date, null);
                 final EditText edtInicio =  (EditText)mView.findViewById(R.id.editText2);
                 final EditText edtFinal = (EditText)mView.findViewById(R.id.editText3);
@@ -84,16 +81,16 @@ public class ActivityAbonos extends AppCompatActivity {
                         {
                             if(fechaFin=="")
                                 fechaFin=fechaInicio;
-                            progressDialog = new ProgressDialog(ActivityAbonos.this);
+                            progressDialog = new ProgressDialog(ActivityGastos.this);
                             progressDialog.setCanceledOnTouchOutside(false);
-                            progressDialog.setMessage("Obteniendo los CreditosFragment");
+                            progressDialog.setMessage("Obteniendo los Gastos");
                             progressDialog.setCancelable(false);
                             progressDialog.show();
-                            new getAbonos().execute();
+                            new getGastos().execute();
                             closeDialog();
                         }
                         else
-                            Toast.makeText(ActivityAbonos.this, "Ingrese la fecha de inicio",
+                            Toast.makeText(ActivityGastos.this, "Ingrese la fecha de inicio",
                                     Toast.LENGTH_LONG).show();
                     }
                 });
@@ -108,75 +105,57 @@ public class ActivityAbonos extends AppCompatActivity {
                 _dialog = dialog.show();
             }
         });
+
+
+
     }
 
-    public class getAbonos extends AsyncTask<Void, Void, Void>
-    {
-        ArrayList<Abonos> listaInterna;
-        Abonos abonos;
+    public class  getGastos extends AsyncTask<Void, Void, Void>{
+
+        ArrayList<ArticuloSubClass> listaArticulo;
+        ArticuloSubClass articulo;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiVehiculos/getAbonosPorVehiculo?vehiculoId=" + idBus
+            String uri = "http://cotracosan.tk/ApiArticulos/getGastosPorArticulos?"
                     +"&fechaInicio=" +fechaInicio + "&fechaFin="+fechaFin;
-            StringRequest request =  new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try{
                         JSONObject object = new JSONObject(response);
-                        JSONArray jsonArray = object.getJSONArray("abonos");
-                        listaInterna = new ArrayList<>();
-                        for(int i=0;i<jsonArray.length();i++)
+                        JSONArray array = object.getJSONArray("gastoPorRubro");
+                        listaArticulo =  new ArrayList<>();
+                        for(int i = 0; i<array.length(); i++)
                         {
-                            Date fecha=null;
-                            JSONObject temp = jsonArray.getJSONObject(i);
-                            String cadena = temp.getString("FechaDeAbono");
+                            JSONObject temp = array.getJSONObject(i);
+                            articulo =  new ArticuloSubClass(temp.getString("CodigoDeArticulo"),
+                                    temp.getString("DescripcionDeArticulo"),
+                                    temp.getDouble("Gasto"));
 
-                            try{
-                                cadena = cadena.replace("/\"","" ).toString();
-                            }catch(Exception e){
-
-                                cadena = "07/22/2019";
-                            }
-                            try{
-                                fecha =(Date) new SimpleDateFormat("MM/dd/yyyy").parse(cadena);
-                            }catch (Exception ex)
-                            {
-                                if(progressDialog.isShowing())
-                                    progressDialog.dismiss();
-                                ex.getMessage();
-                            }
-                            abonos = new Abonos(temp.getInt("IdAbono"), temp.getInt("CreditoId"), temp.getInt("VehiculoId"),
-                                    temp.getString("Placa"), fecha, temp.getString("CodigoAbono"), temp.getDouble("MontoDeAbono"),
-                                    temp.getBoolean("AbonoAnulado"));
-
-                            listaInterna.add(abonos);
+                            listaArticulo.add(articulo);
                         }
 
-                        listaAbonos = listaInterna;
-
-                        if(listaInterna.size() ==0)
-                            Toast.makeText(ActivityAbonos.this, "No hay Abonos", Toast.LENGTH_LONG ).show();
+                        if(listaArticulo.size()>0)
+                        {
+                            textView.setText("Gasto Total: C$ " + String.valueOf(SumaTotal(listaArticulo)));
+                            AdapterGastos adapterGastos = new AdapterGastos(listaArticulo, ActivityGastos.this);
+                            recyclerView.setAdapter(adapterGastos);
+                            if(progressDialog.isShowing())
+                                progressDialog.dismiss();
+                        }
                         else
                         {
-                            double sumar=0;
-                            for (Abonos item:
-                                 listaInterna) {
-                                sumar += item.getMontoDeAbono();
-                            }
-                            textView.setText("Total Abonado: C$ " + String.valueOf(sumar));
-                            AdapterAbonos credito = new AdapterAbonos(listaInterna, ActivityAbonos.this);
-                            recyclerView.setAdapter(credito);
+                            if(progressDialog.isShowing())
+                                progressDialog.dismiss();
+                            Toast.makeText(ActivityGastos.this, "No hay Gastos", Toast.LENGTH_LONG ).show();
                         }
-
-                        if(progressDialog.isShowing())
-                            progressDialog.dismiss();
-
 
                     }catch (JSONException ex)
                     {
                         if(progressDialog.isShowing())
                             progressDialog.dismiss();
-                        Toast.makeText(ActivityAbonos.this, ex.getMessage(), Toast.LENGTH_LONG);
+
+                        Toast.makeText(ActivityGastos.this, ex.getMessage(), Toast.LENGTH_LONG ).show();
                     }
                 }
             }, new Response.ErrorListener() {
@@ -185,13 +164,16 @@ public class ActivityAbonos extends AppCompatActivity {
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
 
-                    Toast.makeText(ActivityAbonos.this, error.getMessage(), Toast.LENGTH_LONG ).show();
+                    Toast.makeText(ActivityGastos.this, error.getMessage(), Toast.LENGTH_LONG ).show();
                 }
             });
-            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
             return null;
         }
     }
+
+
+
 
     @Override
     public boolean onNavigateUp() {
@@ -238,6 +220,16 @@ public class ActivityAbonos extends AppCompatActivity {
         }
         if(fechaInicio=="")
             fechaInicio=getDateLastWeek();
+    }
+
+    double SumaTotal(ArrayList<ArticuloSubClass> list)
+    {
+        double sum = 0;
+        for (ArticuloSubClass item:
+             list) {
+            sum+=item.getGasto();
+        }
+        return  sum;
     }
 
     void closeDialog()

@@ -52,7 +52,7 @@ public class ActivityCarreras extends AppCompatActivity {
         {
             progressDialog = new ProgressDialog(ActivityCarreras.this);
             progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setMessage("Obteniendo los Creditos");
+            progressDialog.setMessage("Obteniendo las Carreras");
             progressDialog.setCancelable(false);
             progressDialog.show();
             new getCarreras().execute();
@@ -63,6 +63,7 @@ public class ActivityCarreras extends AppCompatActivity {
             recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation()));
 
             btnDialog = (Button)findViewById(R.id.button1);
+            btnDialog.setText("CONSULTE CARRERAS");
             btnDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
