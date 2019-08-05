@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,15 +38,40 @@ public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCreditosBus.ViewHolderAdapterCreditosBus viewHolderAdapterCreditosBus, final int i) {
+    public void onBindViewHolder(@NonNull final AdapterCreditosBus.ViewHolderAdapterCreditosBus viewHolderAdapterCreditosBus, final int i) {
         viewHolderAdapterCreditosBus.setData(lista.get(i));
         viewHolderAdapterCreditosBus.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Credito credito = lista.get(i);
-                Intent intent = new Intent(context, DetalleCredito.class);
-                intent.putExtra("objetoCredito", credito);
-                context.startActivity(intent);
+                final Credito credito = lista.get(i);
+                PopupMenu popupMenu = new PopupMenu(context, viewHolderAdapterCreditosBus.itemView, Gravity.RIGHT);
+                popupMenu.inflate(R.menu.menu_credito_item);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId())
+                        {
+                            case R.id.item_abono:{
+                                Intent intent = new Intent(context, ActivityAbonosCred.class);
+                                intent.putExtra("objetoCredito", credito);
+                                context.startActivity(intent);
+                            };break;
+                            case R.id.item_credito:{
+                                Intent intent = new Intent(context, DetalleCredito.class);
+                                intent.putExtra("objetoCredito", credito);
+                                context.startActivity(intent);
+                            };break;
+                            default:
+                                break;
+                        }
+
+                        return false;
+                    }
+                });
+
+                popupMenu.show();
+
+
             }
         });
     }
