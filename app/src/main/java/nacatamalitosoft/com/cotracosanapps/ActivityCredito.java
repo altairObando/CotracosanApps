@@ -35,11 +35,8 @@ public class ActivityCredito extends AppCompatActivity {
     ArrayList<Credito> listaCredito;
     RecyclerView recyclerView;
     TextView textView;
-
     int idBus;
     ProgressDialog progressDialog;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
