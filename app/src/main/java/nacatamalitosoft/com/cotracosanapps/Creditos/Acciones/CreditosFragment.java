@@ -3,28 +3,23 @@ package nacatamalitosoft.com.cotracosanapps.Creditos.Acciones;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,13 +40,10 @@ import java.util.List;
 import java.util.Map;
 
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.DetallesAdapter;
-import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.ListaDetallesAdapter;
 import nacatamalitosoft.com.cotracosanapps.Creditos.Adapters.VehiculosAdapter;
-import nacatamalitosoft.com.cotracosanapps.Creditos.CajaActivity;
 import nacatamalitosoft.com.cotracosanapps.Creditos.DetalleCreditoViewModel;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Articulos;
 import nacatamalitosoft.com.cotracosanapps.Modelos.Buses;
-import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
 import nacatamalitosoft.com.cotracosanapps.R;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
@@ -264,7 +256,7 @@ public class CreditosFragment extends Fragment {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<>();
                     parametros.put("Id", ""+0);
-                    parametros.put("CodigoCredito", tvCodigoCredito.getText().toString());
+                    parametros.put("CodigoCredito", tvCodigoCredito.getText().toString().split(":")[1].trim());
                     parametros.put("MontoTotal", ""+total);
                     parametros.put("EstadoDeCredito", "True");
                     parametros.put("FechaDeCredito", "2019-07-26");
@@ -326,11 +318,9 @@ public class CreditosFragment extends Fragment {
                 updateTotalCredito();
                 textBusqueda.setText("");
                 try{
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    View v = getActivity().getCurrentFocus();
-                    if(v == null)
-                        v = new View(getActivity());
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    textBusqueda.clearFocus();
+                    InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(textBusqueda.getWindowToken(), 0);
                 }catch (Exception e){
                     System.out.println(e.getMessage());
                 }

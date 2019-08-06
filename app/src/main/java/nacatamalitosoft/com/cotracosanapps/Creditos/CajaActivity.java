@@ -43,6 +43,7 @@ public class CajaActivity extends AppCompatActivity {
         setupViewPager();
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+        setTitle("Caja");
     }
 
     private void setupTabIcons() {

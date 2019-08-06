@@ -38,4 +38,5 @@
     <string name="btnBuscarArticulo">Buscar Articulo</string>
     <string name="buscar">Buscar</string>
     <string name="listArticulosHeader">Articulos seleccionados</string>
+    <string name="buscarCredito">Número de credito</string>
 </resources>

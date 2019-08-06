@@ -9,20 +9,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">||
         <android.support.design.widget.TextInputLayout
             android:layout_width="300dp"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/txtBuscarCredito"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Buscar Credito" />
+                android:layout_height="40dp"
+                android:hint="@string/buscarCredito"
+                android:inputType="number"
+                android:imeOptions="actionSearch" />
         </android.support.design.widget.TextInputLayout>
         <Button
             android:id="@+id/btnBuscarCreditos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:hint="@string/buscar" />
     </LinearLayout>
     <!-- Seccion para resultados de busqueda -->

@@ -6,7 +6,10 @@ import java.util.Date;
 
 public class Credito implements Serializable {
 
+    public Credito()
+    {
 
+    }
     public Credito(int id, String codigoCredito, Date fecha, double montoTotal, double totalAbonado, int numeroAbonos, boolean creditoAnulado, boolean estadoCredito, ArrayList<DetalleDeCredito> detallesDeCreditos) {
         this.id = id;
         this.codigoCredito = codigoCredito;
