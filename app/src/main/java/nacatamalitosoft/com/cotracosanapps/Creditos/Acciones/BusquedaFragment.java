@@ -72,7 +72,6 @@ public class BusquedaFragment extends Fragment {
     {
         resultados = v.findViewById(R.id.recyclerResultados);
         txtBusqueda = v.findViewById(R.id.txtBuscarCredito);
-        btnBuscar = v.findViewById(R.id.btnBuscarCreditos);
         listaCredito = new ArrayList<>();
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setCanceledOnTouchOutside(false);
@@ -96,12 +95,6 @@ public class BusquedaFragment extends Fragment {
                     in.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
                     return true;
                 }return  false;
-            }
-        });
-        btnBuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BuscarCredito();
             }
         });
     }
