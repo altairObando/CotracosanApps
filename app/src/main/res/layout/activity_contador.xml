@@ -57,6 +57,17 @@
             android:textSize="30dp"
             android:textColor="@color/white"/>
 
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#00aacc"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/diagram"
+            android:text="Resumen Global"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </ScrollView>

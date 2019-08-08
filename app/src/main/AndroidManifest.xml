@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityAbonosCred"></activity>
+        <activity android:name=".Dashboard.ResumenContador"></activity>
+        <activity android:name=".ActivityAbonosCred" />
         <activity android:name=".ActivityGastos" />
         <activity android:name=".ActivityUltimosCreditos" />
         <activity android:name=".ActivityBusesContador" />

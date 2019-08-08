@@ -9,12 +9,13 @@ import android.view.View;
 import android.widget.Button;
 
 import nacatamalitosoft.com.cotracosanapps.Creditos.CajaActivity;
+import nacatamalitosoft.com.cotracosanapps.Dashboard.ResumenContador;
 import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 public class ActivityContador extends AppCompatActivity {
 
-    Button btnCredPendiente, btnCredUlt, btnGastos, btnCarreras;
+    Button btnCredPendiente, btnCredUlt, btnGastos, btnCarreras, btnDashboard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,14 @@ public class ActivityContador extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityContador.this, ActivityGastos.class);
                 startActivity(intent);
+            }
+        });
+
+        btnDashboard = findViewById(R.id.btn4);
+        btnDashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityContador.this, ResumenContador.class));
             }
         });
     }
