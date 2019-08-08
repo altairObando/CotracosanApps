@@ -22,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.AbonoSubClass;
@@ -82,18 +81,19 @@ public class ActivityAbonosCred extends AppCompatActivity {
                         listaInterna = new ArrayList<>();
                         for(int i=0;i<jsonArray.length();i++)
                         {
-                            Date fecha=null;
                             JSONObject temp = jsonArray.getJSONObject(i);
                             String cadena = temp.getString("FechaDeAbono");
+                            String[] fechaArray = cadena.split("/");
+                            String fecha = fechaArray[1] + "-" + fechaArray[0] + "-" + fechaArray[2];
 
-                            try{
+                            /*try{
                                 cadena = cadena.replace("/\"","" ).toString();
                             }catch(Exception e){
 
                                 cadena = "07/22/2019";
-                            }
+                            }*/
                             abonos = new AbonoSubClass(temp.getInt("Id"), temp.getInt("CreditoId"), temp.getString("CodigoAbono"),
-                                    cadena,  temp.getDouble("MontoDeAbono"));
+                                    fecha,  temp.getDouble("MontoDeAbono"));
 
                             listaInterna.add(abonos);
                         }

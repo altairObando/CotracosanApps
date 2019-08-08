@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
@@ -28,9 +29,10 @@ public class DetalleCredito extends AppCompatActivity {
         credito = (Credito)getIntent().getSerializableExtra("objetoCredito");
         if(credito!=null)
         {
-            codigoCredito.setText(credito.getCodigoCredito());
-            fechaCredito.setText(String.valueOf(credito.getFecha()));
-            montoCredito.setText(String.valueOf(credito.getMontoTotal()));
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            codigoCredito.setText("Codigo: " + credito.getCodigoCredito());
+            fechaCredito.setText("Fecha: " +formatter.format(credito.getFecha()));
+            montoCredito.setText("Monto: C$"+String.valueOf(credito.getMontoTotal()));
 
             AdapterDetalleCredito adapter = new AdapterDetalleCredito(this, credito.getDetallesDeCreditos());
             listView.setAdapter(adapter);

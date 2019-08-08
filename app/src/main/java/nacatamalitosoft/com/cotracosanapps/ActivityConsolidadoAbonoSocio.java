@@ -129,7 +129,6 @@ public class ActivityConsolidadoAbonoSocio extends AppCompatActivity {
                             Date fecha=null;
                             JSONObject temp = jsonArray.getJSONObject(i);
                             String cadena = temp.getString("FechaDeAbono");
-
                             try{
                                 cadena = cadena.replace("/\"","" ).toString();
                             }catch(Exception e){

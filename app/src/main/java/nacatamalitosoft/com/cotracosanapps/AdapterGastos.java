@@ -55,7 +55,7 @@ public class AdapterGastos extends RecyclerView.Adapter<AdapterGastos.ViewHolder
         {
             codigoArticulo.setText("Codigo: " + articuloSubClass.getCodigo());
             articulo.setText("Articulo: " + articuloSubClass.getDescripcion());
-            gasto.setText("Gasto: " + articuloSubClass.getGasto());
+            gasto.setText("Gasto: C$" + articuloSubClass.getGasto());
         }
     }
 }

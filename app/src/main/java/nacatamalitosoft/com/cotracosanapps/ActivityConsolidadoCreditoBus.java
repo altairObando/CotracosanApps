@@ -33,7 +33,7 @@ import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 public class ActivityConsolidadoCreditoBus extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    TextView textView;
+    TextView textView, textView2;
     int idBus;
     ProgressDialog progressDialog;
 
@@ -43,7 +43,9 @@ public class ActivityConsolidadoCreditoBus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listacredito);
         textView = (TextView)findViewById(R.id.textView1);
+        textView2 = (TextView)findViewById(R.id.textView2);
         recyclerView = (RecyclerView)findViewById(R.id.ReciclerId);
+        textView.setText("Creditos Realizados");
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         idBus = (int)getIntent().getIntExtra("idBus", 0);
 
@@ -139,6 +141,7 @@ public class ActivityConsolidadoCreditoBus extends AppCompatActivity {
                             Toast.makeText(ActivityConsolidadoCreditoBus.this, "No hay Creditos", Toast.LENGTH_LONG ).show();
                         else
                         {
+                            textView2.setText("Monto: C$"+MontoTotal(listaInterna));
                             AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityConsolidadoCreditoBus.this);
                             recyclerView.setAdapter(credito);
                         }
@@ -176,5 +179,15 @@ public class ActivityConsolidadoCreditoBus extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public double MontoTotal(ArrayList<Credito> lista)
+    {
+        double sum=0;
+        for (Credito item:
+             lista) {
+            sum+=item.getMontoTotal();
+        }
+        return  sum;
     }
 }

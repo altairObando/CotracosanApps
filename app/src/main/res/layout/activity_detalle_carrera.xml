@@ -23,7 +23,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Codigo Carrera"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
 
             <TextView
@@ -31,56 +32,64 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha De Carrera"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
             <TextView
                 android:id="@+id/Placa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Placa"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
             <TextView
                 android:id="@+id/MontoRecaudado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Monto Recaudado"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
             <TextView
                 android:id="@+id/Multa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Multa"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
             <TextView
                 android:id="@+id/MontoRestante"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Monto Restante"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
             <TextView
                 android:id="@+id/LugarFinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lugar Final"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
             <TextView
                 android:id="@+id/TurnoOficial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Turno"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
             <TextView
                 android:id="@+id/HoraLlegada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Llegada"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:paddingTop="10dp"/>
 
 

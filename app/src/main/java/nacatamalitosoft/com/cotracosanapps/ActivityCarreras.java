@@ -127,8 +127,12 @@ public class ActivityCarreras extends AppCompatActivity {
                         for(int i = 0; i<array.length();i++)
                         {
                             JSONObject jsonObject = array.getJSONObject(i);
-                            temp = new Carreras(jsonObject.getInt("Id"), jsonObject.getString("CodigoCarrera"),
-                                    jsonObject.getString("FechaDeCarrera"), jsonObject.getDouble("MontoRecaudado"),
+                            String fecha = jsonObject.getString("FechaDeCarrera");
+                            String [] fechaArray = fecha.split("/");
+                            fecha="";
+                            fecha = fechaArray[1] + "-" + fechaArray[0] +"-"+ fechaArray[2];
+                                    temp = new Carreras(jsonObject.getInt("Id"), jsonObject.getString("CodigoCarrera"),
+                                    fecha, jsonObject.getDouble("MontoRecaudado"),
                                     jsonObject.getDouble("Multa"), jsonObject.getString("Conductor"),
                                     jsonObject.getInt("ConductorId"), jsonObject.getString("Vehiculo"), jsonObject.getInt("VehiculoId"),
                                     jsonObject.getString("LugarFinalRecorrido"), jsonObject.getString("HoraDeLlegada"), jsonObject.getString("Turno"),

@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,7 +37,7 @@ public class ActivityConsolidadoCreditoSocio extends AppCompatActivity {
 
     int socioId;
     ProgressDialog progressDialog;
-
+    TextView textView1, textView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,9 @@ public class ActivityConsolidadoCreditoSocio extends AppCompatActivity {
         setContentView(R.layout.activity_listacredito);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         socioId = (int)getIntent().getIntExtra("socioId", 0);
+        textView1 = (TextView)findViewById(R.id.textView1);
+        textView2 = (TextView)findViewById(R.id.textView2);
+        textView1.setText("Creditos Pendientes");
 
         progressDialog = new ProgressDialog(ActivityConsolidadoCreditoSocio.this);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -137,6 +141,7 @@ public class ActivityConsolidadoCreditoSocio extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "No hay Creditos", Toast.LENGTH_LONG ).show();
                         else
                         {
+                            textView2.setText("Monto: C$" + MontoTotal(listaInterna));
                             AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityConsolidadoCreditoSocio.this);
                             recyclerView.setAdapter(credito);
                         }
@@ -175,6 +180,14 @@ public class ActivityConsolidadoCreditoSocio extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    public double MontoTotal(ArrayList<Credito> lista)
+    {
+        double sum=0;
+        for (Credito item:
+                lista) {
+            sum+=item.getMontoTotal();
+        }
+        return  sum;
+    }
 
 }

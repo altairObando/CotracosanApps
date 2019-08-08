@@ -102,7 +102,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        int socioId = Integer.parseInt(UserSingleton.getCurrentUser(MainActivity.this).getId());
+
+        int socioId = Integer.parseInt(UserSingleton.getCurrentUser(MainActivity.this).getSocioId());
         if (id == R.id.Buses) {
             Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
             i.putExtra("operacion", 1);

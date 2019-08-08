@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.ConsolidadoCarrerasBus;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
@@ -47,6 +48,7 @@ public class ActivityConsolidadoCarrera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monto_carreras);
         socioId = (int)getIntent().getIntExtra("socioId", 0);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         txtTotal =(TextView)findViewById(R.id.textView2);
         gridView = (GridView)findViewById(R.id.mainGridView);
         btnConsulta = (Button)findViewById(R.id.button1);

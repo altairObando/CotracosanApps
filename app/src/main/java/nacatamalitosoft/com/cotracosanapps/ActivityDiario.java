@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 
@@ -41,6 +43,7 @@ public class ActivityDiario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diario);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         idBus = getIntent().getIntExtra("idBus", 0);
         setDates();
         if(idBus!=0)
@@ -218,5 +221,20 @@ public class ActivityDiario extends AppCompatActivity {
         }
         if(fechaInicio=="")
             fechaInicio=getDateLastWeek();
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

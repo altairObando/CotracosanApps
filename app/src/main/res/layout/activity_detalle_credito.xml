@@ -13,19 +13,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="COD-000000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="@color/black"/>
     <TextView
         android:id="@+id/txtFechaCredito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="fecha"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:textColor="@color/black"/>
     <TextView
         android:id="@+id/txtMontoCredito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MontoCredito"
         android:textSize="24sp"
+        android:textColor="@color/black"
         />
     <TextView
         android:id="@+id/txtDetalle"
@@ -33,6 +36,7 @@
         android:layout_height="wrap_content"
         android:text="Detalles"
         android:textSize="24sp"
+        android:textColor="@color/black"
         />
 
     <ListView

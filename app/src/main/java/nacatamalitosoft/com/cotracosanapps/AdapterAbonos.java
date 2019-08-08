@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Abonos;
@@ -47,6 +48,7 @@ public class AdapterAbonos extends RecyclerView.Adapter<AdapterAbonos.ViewHolder
 
         public ViewHolderAdapterAbonos(@NonNull View itemView) {
             super(itemView);
+
             codigoAbono = (TextView)itemView.findViewById(R.id.CodigoAbono);
             codigoCredito = (TextView)itemView.findViewById(R.id.CodigoCredito);
             fechaAbono = (TextView)itemView.findViewById(R.id.FechaAbono);
@@ -56,9 +58,10 @@ public class AdapterAbonos extends RecyclerView.Adapter<AdapterAbonos.ViewHolder
 
         public void setData(Abonos abonos)
         {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             codigoAbono.setText("Abono: " + abonos.getCodigoAbono());
             codigoCredito.setText("Credito: CRED-" +abonos.getCreditoId() );
-            fechaAbono.setText("Fecha: " + abonos.getFechaDeAbono());
+            fechaAbono.setText("Fecha: " + format.format(abonos.getFechaDeAbono()));
             montoAbono.setText("Monto: " + abonos.getMontoDeAbono());
             placa.setText("Placa: " +abonos.getPlaca());
         }
