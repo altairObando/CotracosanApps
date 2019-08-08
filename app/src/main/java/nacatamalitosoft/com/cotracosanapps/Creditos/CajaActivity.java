@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +30,7 @@ public class CajaActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     private Toolbar toolbar;
-
+    Menu menuView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,8 @@ public class CajaActivity extends AppCompatActivity {
         setupViewPager();
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-        setTitle("Caja");
+        setTitle("Cotracosan Caja");
+
     }
 
     private void setupTabIcons() {
@@ -87,7 +89,6 @@ public class CajaActivity extends AppCompatActivity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
         @Nullable
         @Override
         public CharSequence getPageTitle(int i) {
@@ -98,7 +99,8 @@ public class CajaActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_caja, menu);
+        menuView = menu;
         return true;
     }
     @Override

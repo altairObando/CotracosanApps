@@ -71,25 +71,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp">
-                    <EditText android:id="@+id/etBuscarArticulo"
+
+                    <EditText
+                        android:id="@+id/etBuscarArticulo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
                         android:hint="@string/btnBuscarArticulo"
-                        android:importantForAutofill="no" tools:targetApi="o" />
+                        android:imeOptions="actionSearch"
+
+                        android:importantForAutofill="no"
+                        android:inputType="textEmailAddress"
+                        tools:targetApi="o" />
                 </android.support.design.widget.TextInputLayout>
-                <Button
-                    android:id="@+id/btnBuscarArticulos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:drawableEnd="@android:drawable/ic_menu_search"
-                    android:backgroundTint="@color/primary"
-                    android:textColor="@color/white"/>
             </LinearLayout>
             <!-- Aqui se muestra el detalle de credito -->
             <TextView

@@ -46,6 +46,7 @@ import nacatamalitosoft.com.cotracosanapps.Modelos.Credito;
 import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
 import nacatamalitosoft.com.cotracosanapps.R;
 import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
+import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 import static android.support.v4.content.ContextCompat.getSystemService;
 
@@ -97,6 +98,7 @@ public class BusquedaFragment extends Fragment {
                 }return  false;
             }
         });
+
     }
 
     private void BuscarCredito()

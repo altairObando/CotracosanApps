@@ -14,11 +14,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -52,8 +52,7 @@ public class CreditosFragment extends Fragment {
     List<Buses> listaBuses;
     Spinner spBuses;
     TextView tvCodigoCredito, totalCredito;
-    Button btnBuscar;
-    EditText textBusqueda;
+    EditText txtBusqueda;
     RecyclerView listaDetalles;
     List<Articulos> dataSet;
     DetallesAdapter adapter;
@@ -73,15 +72,15 @@ public class CreditosFragment extends Fragment {
         new VehiculosTask().execute();
         // Obtener el codigo del credito nuevo
         new CreditosTask().execute();
-        // Agregar escucha al boton buscar.
-        btnBuscar.setOnClickListener(new View.OnClickListener() {
+        // Agregar evento IME al buscar
+        txtBusqueda.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View v) {
-                // Obtener los parametros de la busqueda
-                String parametro = textBusqueda.getText().toString();
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                String parametro = txtBusqueda.getText().toString();
                 Intent busqueda = new Intent(getActivity(), ResultadosBusquedaActivity.class);
                 busqueda.putExtra("parametro", parametro);
                 startActivityForResult(busqueda, 0);
+                return true;
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -111,8 +110,7 @@ public class CreditosFragment extends Fragment {
         tvCodigoCredito = view.findViewById(R.id.tvCodigoCredito);
         spBuses = view.findViewById(R.id.spinnerVehiculos);
         dialog = new ProgressDialog(getContext());
-        btnBuscar = view.findViewById(R.id.btnBuscarArticulos);
-        textBusqueda = view.findViewById(R.id.etBuscarArticulo);
+        txtBusqueda = view.findViewById(R.id.etBuscarArticulo);
         fab = view.findViewById(R.id.fab);
         /* Seccion para los detalles */
         listaDetalles = view.findViewById(R.id.listaDetalles);
@@ -303,7 +301,10 @@ public class CreditosFragment extends Fragment {
     }
 
     private void clearControls() {
-
+        dataSet.clear();
+        adapter.updateDataSet(new ArrayList<Articulos>());
+        txtBusqueda.setText("");
+        txtBusqueda.clearFocus();
     }
 
     @Override
@@ -316,11 +317,11 @@ public class CreditosFragment extends Fragment {
                 int cantidad = data.getExtras().getInt("cantidad");
                 updateDetalles(articulo, cantidad);
                 updateTotalCredito();
-                textBusqueda.setText("");
+                txtBusqueda.setText("");
                 try{
-                    textBusqueda.clearFocus();
+                    txtBusqueda.clearFocus();
                     InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    in.hideSoftInputFromWindow(textBusqueda.getWindowToken(), 0);
+                    in.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
                 }catch (Exception e){
                     System.out.println(e.getMessage());
                 }
