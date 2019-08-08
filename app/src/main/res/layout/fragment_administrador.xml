@@ -7,6 +7,7 @@
     tools:context=".Dashboard.Administrador"
     android:orientation="vertical">
     <ScrollView
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -42,7 +43,7 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/BusRojo"/>
+                        android:src="@drawable/bus_rojo"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -52,7 +53,7 @@
                         android:text="Vehiculo con más Carreras"/>
 
                     <TextView
-                        android:id="@+id/txtCarrera1"
+                        android:id="@+id/txt1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
@@ -77,7 +78,7 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/UbicacionAmarillo"/>
+                        android:src="@drawable/ubicacion_amarillo"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -87,7 +88,7 @@
                         android:text="Total de Carreras"/>
 
                     <TextView
-                        android:id="@+id/txtTotalCarrera"
+                        android:id="@+id/txt2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
@@ -111,17 +112,17 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/BusVerde"/>
+                        android:src="@drawable/bus_verde"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Bus con mas recaudaciones"/>
+                        android:text="Vehiculo con mas recaudaciones"/>
 
                     <TextView
-                        android:id="@+id/txtRecaudaciones"
+                        android:id="@+id/txt3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
@@ -145,17 +146,17 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/DineroVerde"/>
+                        android:src="@drawable/dinero_verde"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Total de Carreras"/>
+                        android:text="Total Recaudado"/>
 
                     <TextView
-                        android:id="@+id/txtDineroCarreras"
+                        android:id="@+id/txt4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
@@ -195,17 +196,17 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/CarretaVerde"/>
+                        android:src="@drawable/carreta_verde"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Vehiculo con más Carreras"/>
+                        android:text="Articulo mas buscado"/>
 
                     <TextView
-                        android:id="@+id/txtCarritoVerde"
+                        android:id="@+id/txt5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
@@ -230,17 +231,17 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/CarretaRoja"/>
+                        android:src="@drawable/dinero_verde"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Total de Carreras"/>
+                        android:text="Total acreditado"/>
 
                     <TextView
-                        android:id="@+id/txtCarritoRojo"
+                        android:id="@+id/txt6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
@@ -264,15 +265,16 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/DineroVerde"/>
+                        android:src="@drawable/carreta_roja"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Bus con mas recaudaciones"/>
+                        android:text="Articulo menos solicitado"/>
                     <TextView
+                        android:id="@+id/txt7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
@@ -296,15 +298,16 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/DineroRojo"/>
+                        android:src="@drawable/dinero_rojo"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Total de Carreras"/>
+                        android:text="Total acreditado"/>
                     <TextView
+                        android:id="@+id/txt8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"

@@ -1,6 +1,7 @@
 package nacatamalitosoft.com.cotracosanapps;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,9 +21,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import nacatamalitosoft.com.cotracosanapps.Dashboard.Administrador;
 import nacatamalitosoft.com.cotracosanapps.UserManager.UserDetailsActivity;
+import nacatamalitosoft.com.cotracosanapps.Web.VolleySingleton;
 import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 public class MainActivity extends AppCompatActivity
@@ -34,15 +46,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         // Actualizar con la imagen del perfil
         new updateUserImage().execute();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.contendor_fragmentos, new Administrador()).commit();
     }
 
     @Override
@@ -172,4 +175,5 @@ public class MainActivity extends AppCompatActivity
             view.setImageBitmap(bitmap);
         }
     }
+
 }
