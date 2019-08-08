@@ -102,50 +102,50 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        int socioId = Integer.parseInt(UserSingleton.getCurrentUser(MainActivity.this).getId());
         if (id == R.id.Buses) {
             Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
             i.putExtra("operacion", 1);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
 
         } else if (id == R.id.Carreras) {
 
             Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
             i.putExtra("operacion", 2);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
         } else if (id == R.id.Creditos) {
 
             Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
             i.putExtra("operacion", 3);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
         } else if (id == R.id.Abonos) {
             Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
             i.putExtra("operacion", 4);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
         }
         else if(id == R.id.MontoFechas) {
             Intent i =  new Intent(getApplicationContext(), ActivityConsolidadoCarrera.class);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
         }
         else if (id == R.id.TodosCreditosBus) {
             Intent i = new Intent(getApplicationContext(), ActivityBuses.class);
             i.putExtra("operacion", 5);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
         } else if (id == R.id.TodosAbonosSocio) {
             Intent i =  new Intent(getApplicationContext(), ActivityConsolidadoAbonoSocio.class);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
         }
         else if(id == R.id.TodosCreditosPendientesSocio)
         {
             Intent i = new Intent(getApplicationContext(), ActivityConsolidadoCreditoSocio.class);
-            i.putExtra("socioId", 1);
+            i.putExtra("socioId", socioId);
             startActivity(i);
         }
 
