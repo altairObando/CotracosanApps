@@ -179,6 +179,4 @@ public class ActivityCredito extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
