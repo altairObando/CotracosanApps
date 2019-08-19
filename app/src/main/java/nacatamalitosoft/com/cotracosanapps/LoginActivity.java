@@ -80,20 +80,20 @@ public class LoginActivity extends AppCompatActivity {
 
     void MostrarPantallaPrincipal(){
         Intent i = new Intent(this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 
     private void MostrarPantallaCajero() {
         Intent i = new Intent(this, CajaActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 
     void MostrarPantallaContador()
     {
         Intent i = new Intent(this, ActivityContador.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 
@@ -169,12 +169,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void seleccionarMenu(String rol) {
-        if ("Administrador".equals(rol)) {
+        if ("Socio".equals(rol)) {
             MostrarPantallaPrincipal();
         } else if ("Cajero".equals(rol)) {
             MostrarPantallaCajero();
         }
-        else if ("Contador".equals(rol)){
+        else if ("Contador".equals(rol) || "Administrador".equals(rol)){
             MostrarPantallaContador();
         }
     }

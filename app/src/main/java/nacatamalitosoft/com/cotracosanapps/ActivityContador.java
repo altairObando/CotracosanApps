@@ -88,7 +88,7 @@ public class ActivityContador extends AppCompatActivity {
             return true;
         }else if(id == R.id.action_exit){
             // Cambiar el usuario a logged false.
-            UserSingleton.CerrarSesion(ActivityContador.this);
+            UserSingleton.CerrarSesion(getApplicationContext());
             Intent i = new Intent(ActivityContador.this, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

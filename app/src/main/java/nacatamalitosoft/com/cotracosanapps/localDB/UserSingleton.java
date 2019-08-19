@@ -50,10 +50,11 @@ public final class UserSingleton {
     public static void CerrarSesion(Context context) {
         try{
             UserDbHelper db = new UserDbHelper(context);
+            getCurrentUser(context);
             db.CerrarSesion(currentUser.getId());
             currentUser = null;
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            currentUser = null;
         }finally {
 
         }

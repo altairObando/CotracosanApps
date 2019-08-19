@@ -1,18 +1,24 @@
 package nacatamalitosoft.com.cotracosanapps.UserManager;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -60,6 +66,7 @@ import nacatamalitosoft.com.cotracosanapps.localDB.UserSingleton;
 
 public class UserDetailsActivity extends AppCompatActivity {
 
+    private static final String TAG = "Chkc Permiso Escritura";
     private CircleImageView imagenPerfil;
     private ImageView optionsCamera;
     private TextView detalleUsuario, detalleCorreo, cambiarContrasenia;
@@ -67,6 +74,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String mCurrentPhotoPath;
     private Bitmap photoBitmap;
+    private File tempFile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +111,8 @@ public class UserDetailsActivity extends AppCompatActivity {
                         {
                             File photoFile = null;
                             try{
-                                photoFile = createImageFile();
+                                createImageFile();
+                                photoFile = tempFile;
                             }catch (IOException ex)
                             {
                                 Log.i("Camera Error", "Error al crear el archivo de imagen.");
@@ -288,15 +297,47 @@ public class UserDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private File createImageFile() throws IOException{
+    private void createImageFile() throws IOException{
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String filename = "JPG_"+timeStamp+"_";
         File storageDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES
         );
-        File image = File.createTempFile(filename, ".jpg", storageDir);
-        mCurrentPhotoPath = "file:"+image.getAbsolutePath();
-        return image;
+        if(isStoragePermissionGranted())
+        {
+            tempFile = File.createTempFile(filename, ".jpg", storageDir);
+            mCurrentPhotoPath = "file:"+tempFile.getAbsolutePath();
+        }
+    }
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            try {
+                createImageFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

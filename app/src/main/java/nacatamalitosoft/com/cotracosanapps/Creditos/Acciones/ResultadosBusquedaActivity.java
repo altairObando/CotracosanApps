@@ -83,12 +83,11 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Art
                 int cant = Integer.parseInt(txtCantidad.getText().toString());
                 if(cant > 0){
                     Intent data = new Intent();
+                    item.setDescripcion(cant+" Unidades de: " +item.getDescripcion());
                     data.putExtra("articulo", item);
                     data.putExtra("cantidad", cant);
                     setResult(Activity.RESULT_OK, data);
                     finish();
-                }else {
-                    Toast.makeText(getApplicationContext(), "Debe seleccionar al menos un articulo", Toast.LENGTH_LONG).show();
                 }
             }
         };
