@@ -50,20 +50,19 @@ public final class UserSingleton {
     public static void CerrarSesion(Context context) {
         try{
             UserDbHelper db = new UserDbHelper(context);
+            getCurrentUser(context);
             db.CerrarSesion(currentUser.getId());
             currentUser = null;
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            currentUser = null;
         }finally {
 
         }
     }
 
-    public static void updateUserImage(Bitmap bitmap) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-        byte[] bytes = outputStream.toByteArray();
-        String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
-        currentUser.setAvatar(temp);
+    public static void ActualizarImagen(String temp, Context context) {
+        currentUser.setAvatar("data:image/jpeg," +temp);
+        UserDbHelper db = new UserDbHelper(context);
+        db.ActualizarImagen(currentUser.getId(), currentUser.toContentValues());
     }
 }

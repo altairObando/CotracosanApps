@@ -1,5 +1,6 @@
 package nacatamalitosoft.com.cotracosanapps.localDB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -67,5 +68,10 @@ public class UserDbHelper extends SQLiteOpenHelper {
     public void CerrarSesion(String id) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_NAME, "ID = ?", new String[]{id});
+    }
+
+    public void ActualizarImagen(String id, ContentValues contentValues) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.update(TABLE_NAME, contentValues, "ID = ?", new String[]{id});
     }
 }

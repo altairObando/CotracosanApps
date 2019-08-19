@@ -34,7 +34,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +53,7 @@ public class CreditosFragment extends Fragment {
     ProgressDialog dialog;
     List<Buses> listaBuses;
     Spinner spBuses;
-    TextView tvCodigoCredito, totalCredito;
+    TextView tvCodigoCredito, totalCredito, tvCreditoFecha;
     EditText txtBusqueda;
     RecyclerView listaDetalles;
     List<Articulos> dataSet;
@@ -108,6 +110,7 @@ public class CreditosFragment extends Fragment {
     private void setReferences(View view) {
         totalCredito = view.findViewById(R.id.tvTotalCredito);
         tvCodigoCredito = view.findViewById(R.id.tvCodigoCredito);
+        tvCreditoFecha =view.findViewById(R.id.tvCreditoFecha);
         spBuses = view.findViewById(R.id.spinnerVehiculos);
         dialog = new ProgressDialog(getContext());
         txtBusqueda = view.findViewById(R.id.etBuscarArticulo);
@@ -129,6 +132,9 @@ public class CreditosFragment extends Fragment {
         });
         listaDetalles.setAdapter(adapter);
         /* Fin de los detalles */
+        // Obtener la fecha
+        String fecha = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        tvCreditoFecha.setText(fecha);
     }
     void updateTotalCredito(){
         total = 0;

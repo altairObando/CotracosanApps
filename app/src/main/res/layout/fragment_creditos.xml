@@ -80,11 +80,13 @@
                         android:id="@+id/etBuscarArticulo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:capitalize="words"
                         android:hint="@string/btnBuscarArticulo"
                         android:imeOptions="actionSearch"
-
                         android:importantForAutofill="no"
                         android:inputType="textEmailAddress"
+                        android:selectAllOnFocus="true"
+                        android:singleLine="true"
                         tools:targetApi="o" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>

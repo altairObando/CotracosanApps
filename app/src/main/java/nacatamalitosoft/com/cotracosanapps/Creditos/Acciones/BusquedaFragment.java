@@ -84,7 +84,6 @@ public class BusquedaFragment extends Fragment {
         resultados.addItemDecoration(new DividerItemDecoration(resultados.getContext(), layoutManager.getOrientation()));
         adapter = new AdapterCreditosBus(new ArrayList<Credito>(), getActivity());
         resultados.setAdapter(adapter);
-        new GetCredito(0).execute();
         txtBusqueda.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -103,25 +102,10 @@ public class BusquedaFragment extends Fragment {
 
     private void BuscarCredito()
     {
-        if(listaCredito.isEmpty())
-        {
-            progressDialog.show();
-            new GetCredito(1).execute();
-        }
         // Buscarlos creditos en la lista
         String parametro = txtBusqueda.getText().toString().trim();
-        if(!TextUtils.isEmpty(parametro))
-        {
-            List<Credito> tmp  = new ArrayList<>();
-            for(Credito i : listaCredito)
-            {
-                if(i.getCodigoCredito().split("-")[1].toLowerCase().contains(parametro.toLowerCase()))
-                {
-                    tmp.add(i);
-                }
-            }
-            adapter.updateDataSet(tmp);
-        }
+        progressDialog.show();
+        new GetCredito(Integer.parseInt(parametro)).execute();
     }
 
     public class GetCredito extends AsyncTask<Void, Void, Void> {
@@ -130,14 +114,15 @@ public class BusquedaFragment extends Fragment {
         Credito temp;
         ArrayList<DetalleDeCredito> listaDetalle;
         DetalleDeCredito tempDet;
-        int requestType;
-        public GetCredito(int i) {
-            requestType = i;
+        int idCredito;
+        public GetCredito(int id) {
+
+            idCredito = id;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditos";
+            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditos?idCredito="+idCredito;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -197,10 +182,9 @@ public class BusquedaFragment extends Fragment {
                         else
                         {
                             listaCredito.addAll(listaInterna);
+                            adapter.updateDataSet(listaInterna);
                             Toast.makeText(getActivity(), "Creditos Actualizados", Toast.LENGTH_LONG ).show();
-                            if(requestType > 0){
-                                BuscarCredito();
-                            }
+
                         }
                         if(progressDialog.isShowing())
                             progressDialog.dismiss();
@@ -216,7 +200,7 @@ public class BusquedaFragment extends Fragment {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getActivity(), "Error de conexion", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Error de conexion", Toast.LENGTH_SHORT).show();
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
 
@@ -225,15 +209,5 @@ public class BusquedaFragment extends Fragment {
             VolleySingleton.getInstance(getActivity()).addToRequestQueue(request);
             return null;
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_actualizar)
-        {
-            progressDialog.show();
-            new GetCredito(0).execute();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
