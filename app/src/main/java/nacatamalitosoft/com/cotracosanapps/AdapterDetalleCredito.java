@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.DetalleDeCredito;
@@ -20,6 +21,7 @@ public class AdapterDetalleCredito extends BaseAdapter {
 
     private Context context;
     private ArrayList<DetalleDeCredito> listaDetalle;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
 
     @Override
     public int getCount() {
@@ -54,8 +56,8 @@ public class AdapterDetalleCredito extends BaseAdapter {
         codigoArticulo.setText("Codigo: " + listaDetalle.get(position).getCodigoArticulo());
         nombreArticulo.setText("Articulo: " +listaDetalle.get(position).getNombreArticulo());
         cantidad.setText("Cantidad: " + listaDetalle.get(position).getCantidad());
-        precio.setText("Precio: C$ " + listaDetalle.get(position).getPrecio());
-        subTotal.setText("Sub Total: C$ "+String.valueOf(listaDetalle.get(position).getPrecio()*listaDetalle.get(position).getCantidad()));
+        precio.setText("Precio: C$ " + formato.format(listaDetalle.get(position).getPrecio()));
+        subTotal.setText("Sub Total: C$ "+formato.format(listaDetalle.get(position).getPrecio()*listaDetalle.get(position).getCantidad()));
 
         return convertView;
     }

@@ -237,7 +237,7 @@
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Total acreditado"/>
+                        android:text="Total acreditado del articulo máys buscado"/>
 
                     <TextView
                         android:id="@+id/txt6"
@@ -304,7 +304,7 @@
                         android:layout_marginStart="75dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:text="Total acreditado"/>
+                        android:text="Total acreditado del articulo menos buscado"/>
                     <TextView
                         android:id="@+id/txt8"
                         android:layout_width="wrap_content"

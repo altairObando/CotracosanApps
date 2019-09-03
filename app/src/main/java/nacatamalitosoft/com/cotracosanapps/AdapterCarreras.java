@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.Carreras;
@@ -23,6 +24,7 @@ implements View.OnClickListener{
 
     ArrayList<Carreras> listaCarrera;
     private Context context;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
     private View.OnClickListener listener;
 
     @NonNull
@@ -79,7 +81,7 @@ implements View.OnClickListener{
         {
             codigoCarrera.setText(carreras.getCodigoCarrera());
             fechaCarrera.setText(carreras.getFechaDeCarrera());
-            montoCarrera.setText(String.valueOf(carreras.getMontoRestante()));
+            montoCarrera.setText("C$ " +formato.format(carreras.getMontoRestante()));
             conductor.setText(carreras.getConductor());
         }
     }

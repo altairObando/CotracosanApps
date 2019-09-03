@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class ActivityConsolidadoCreditoBus extends AppCompatActivity {
     TextView textView, textView2;
     int idBus;
     ProgressDialog progressDialog;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +143,7 @@ public class ActivityConsolidadoCreditoBus extends AppCompatActivity {
                             Toast.makeText(ActivityConsolidadoCreditoBus.this, "No hay Creditos", Toast.LENGTH_LONG ).show();
                         else
                         {
-                            textView2.setText("Monto: C$"+MontoTotal(listaInterna));
+                            textView2.setText("Monto: C$ "+ formato.format(MontoTotal(listaInterna)));
                             AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityConsolidadoCreditoBus.this);
                             recyclerView.setAdapter(credito);
                         }

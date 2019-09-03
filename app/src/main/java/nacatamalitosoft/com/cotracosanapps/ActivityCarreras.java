@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -40,6 +41,7 @@ public class ActivityCarreras extends AppCompatActivity {
     AlertDialog _dialog;
     int max;
     Button btnDialog;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,8 +150,8 @@ public class ActivityCarreras extends AppCompatActivity {
                                 sumMult+=item.getMulta();
                             }
                             listaCarreras = listaInterna;
-                            textView.setText("Monto Recaudado: C$" + sum);
-                            textView1.setText("Multas: C$"+sumMult);
+                            textView.setText("Monto Recaudado: C$ " + formato.format(sum));
+                            textView1.setText("Multas: C$ "+ formato.format(sumMult));
                             AdapterCarreras adapterCarreras =  new AdapterCarreras(listaInterna, ActivityCarreras.this);
                             recyclerView.setAdapter(adapterCarreras);
                             if(progressDialog.isShowing())

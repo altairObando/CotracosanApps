@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,6 +45,7 @@ public class ActivityConsolidadoAbonoSocio extends AppCompatActivity {
     AlertDialog _dialog;
     ProgressDialog progressDialog;
     String fechaInicio="", fechaFin="";
+    DecimalFormat formato = new DecimalFormat("#,###.##");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,7 +163,7 @@ public class ActivityConsolidadoAbonoSocio extends AppCompatActivity {
                                     listaInterna) {
                                 sumar += item.getMontoDeAbono();
                             }
-                            textView.setText("Total Abonado: C$ " + String.valueOf(sumar));
+                            textView.setText("Total Abonado: C$ " + formato.format(sumar));
                             AdapterAbonos credito = new AdapterAbonos(listaInterna, ActivityConsolidadoAbonoSocio.this);
                             recyclerView.setAdapter(credito);
                         }

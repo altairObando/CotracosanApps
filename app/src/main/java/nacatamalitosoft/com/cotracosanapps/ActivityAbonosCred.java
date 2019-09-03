@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -35,6 +36,7 @@ public class ActivityAbonosCred extends AppCompatActivity {
     Credito credito;
     AlertDialog _dialog;
     ProgressDialog progressDialog;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +105,7 @@ public class ActivityAbonosCred extends AppCompatActivity {
                         else
                         {
 
-                            textView.setText("Total Abonado: C$ " + Suma(listaInterna));
+                            textView.setText("Total Abonado: C$ " + formato.format(Suma(listaInterna)));
                             AdapterAbonoCred credito = new AdapterAbonoCred(listaInterna, ActivityAbonosCred.this);
                             recyclerView.setAdapter(credito);
                         }

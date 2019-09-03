@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.AbonoSubClass;
@@ -21,6 +22,7 @@ public class AdapterAbonoCred extends RecyclerView.Adapter<AdapterAbonoCred.View
 
     private ArrayList<AbonoSubClass> lista;
     private Context context;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
 
 
     @NonNull
@@ -62,7 +64,7 @@ public class AdapterAbonoCred extends RecyclerView.Adapter<AdapterAbonoCred.View
             codigoAbono.setText("Abono: " + abonos.getCodigoAbono());
             codigoCredito.setText("Credito: CRED-" +abonos.getCreditoId() );
             fechaAbono.setText("Fecha: " + abonos.getFechaAbono());
-            montoAbono.setText("Monto: " + abonos.getMontoAbono());
+            montoAbono.setText("Monto: " + formato.format(abonos.getMontoAbono()));
         }
     }
 }

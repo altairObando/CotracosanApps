@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import nacatamalitosoft.com.cotracosanapps.Modelos.ConsolidadoCarrerasBus;
@@ -17,7 +18,7 @@ public class AdapterConsolidadoCarrera extends BaseAdapter {
         this.lista = lista;
         this.context = context;
     }
-
+    DecimalFormat formato = new DecimalFormat("#,###.##");
     ArrayList<ConsolidadoCarrerasBus> lista;
 Context context;
 
@@ -47,7 +48,7 @@ Context context;
         txtPlaca =convertView.findViewById(R.id.textView1);
         txtMonto = convertView.findViewById(R.id.textView2);
         txtPlaca.setText(lista.get(position).getPlaca());
-        txtMonto.setText("C$ " +String.valueOf(lista.get(position).getMonto()));
+        txtMonto.setText("C$ " + formato.format(lista.get(position).getMonto()));
 
         return convertView;
     }

@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,6 +43,7 @@ public class ActivityConsolidadoCarrera extends AppCompatActivity {
     AlertDialog _dialog;
     ProgressDialog progressDialog;
     String fechaInicio="", fechaFin="";
+    DecimalFormat formato = new DecimalFormat("#,###.##");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -148,7 +150,7 @@ public class ActivityConsolidadoCarrera extends AppCompatActivity {
                         // Estando fuera del for actualizamos el adaptador.
                         AdapterConsolidadoCarrera adapter = new AdapterConsolidadoCarrera(buses,ActivityConsolidadoCarrera.this);
                         gridView.setAdapter(adapter);
-                        txtTotal.setText( "Monto Total: C$ " +String.valueOf(getSumTotalList(buses)));
+                        txtTotal.setText( "Monto Total: C$ " +formato.format(getSumTotalList(buses)));
 
                     } catch (JSONException e) {
                         e.printStackTrace();

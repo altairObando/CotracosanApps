@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class AdapterAbonos extends RecyclerView.Adapter<AdapterAbonos.ViewHolder
 
     private ArrayList<Abonos> listaAbonos;
     private Context context;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
 
     @NonNull
     @Override
@@ -62,7 +64,7 @@ public class AdapterAbonos extends RecyclerView.Adapter<AdapterAbonos.ViewHolder
             codigoAbono.setText("Abono: " + abonos.getCodigoAbono());
             codigoCredito.setText("Credito: CRED-" +abonos.getCreditoId() );
             fechaAbono.setText("Fecha: " + format.format(abonos.getFechaDeAbono()));
-            montoAbono.setText("Monto: " + abonos.getMontoDeAbono());
+            montoAbono.setText("Monto: " + formato.format(abonos.getMontoDeAbono()));
             placa.setText("Placa: " +abonos.getPlaca());
         }
     }

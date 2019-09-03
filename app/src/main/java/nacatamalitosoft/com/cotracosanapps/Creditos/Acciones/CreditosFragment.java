@@ -240,7 +240,9 @@ public class CreditosFragment extends Fragment {
                         String mensaje = object.getString("message");
                         Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
                         if(succes)
+                        {
                             clearControls();
+                        }
                     } catch (JSONException e) {
                         Toast.makeText(getContext(), "Error al deserializar respuesta", Toast.LENGTH_LONG).show();
                     }
@@ -310,6 +312,7 @@ public class CreditosFragment extends Fragment {
         adapter.updateDataSet(new ArrayList<Articulos>());
         txtBusqueda.setText("");
         txtBusqueda.clearFocus();
+        new CreditosTask().execute();
     }
 
     @Override

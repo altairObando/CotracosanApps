@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.
         this.lista = lista;
         this.context = context;
     }
+    DecimalFormat formato = new DecimalFormat("#,###.##");
     ArrayList<Credito> lista;
     private  View.OnClickListener listener;
     @NonNull
@@ -111,10 +113,10 @@ public class AdapterCreditosBus extends RecyclerView.Adapter<AdapterCreditosBus.
         public void setData(Credito credito) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             codigoCredito.setText("Codigo: " + credito.getCodigoCredito());
-            montoCredito.setText("Monto Credito: C$ "+String.valueOf(credito.getMontoTotal()));
+            montoCredito.setText("Monto Credito: C$ "+ formato.format(credito.getMontoTotal()));
             fechaCredito.setText("Fecha del Credito: " + formatter.format(credito.getFecha()));
             List<DetalleDeCredito> listaDetalle = credito.getDetallesDeCreditos();
-            restoCredito.setText("Monto Pendiente: C$ " + (credito.getMontoTotal() - credito.getTotalAbonado()) );
+            restoCredito.setText("Monto Pendiente: C$ " + formato.format(credito.getMontoTotal() - credito.getTotalAbonado()) );
         }
     }
 

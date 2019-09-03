@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,6 +40,7 @@ public class ActivityDiario extends AppCompatActivity {
     ProgressDialog progressDialog;
     int idBus;
     String onj;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,9 +138,9 @@ public class ActivityDiario extends AppCompatActivity {
                         abono = object.getDouble("abonos");
                         onj = response;
 
-                        txtCarreras.setText(String.valueOf(carrera));
-                        txtAbono.setText(String.valueOf(abono));
-                        txtCreditos.setText(String.valueOf(credito));
+                        txtCarreras.setText("C$ " + formato.format(carrera));
+                        txtAbono.setText("C$ " + formato.format(abono));
+                        txtCreditos.setText("C$ " + formato.format(credito));
                         if(progressDialog.isShowing())
                             progressDialog.dismiss();
                     } catch (JSONException e) {

@@ -11,8 +11,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,6 +45,8 @@ public class ActivityUltimosCreditos extends AppCompatActivity {
     int max=50;
     Button btnConsultar;
     AlertDialog _dialog;
+    TextView txtMonto, txtTitulo;
+    DecimalFormat formato = new DecimalFormat("#,###.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,14 @@ public class ActivityUltimosCreditos extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation()));
 
+        txtTitulo = (TextView)findViewById(R.id.textView1);
+        txtTitulo.setText("Ultimos Creditos");
+
+        txtMonto = (TextView)findViewById(R.id.textView2);
+
+
         btnConsultar =(Button) findViewById(R.id.button1);
+        btnConsultar.setText("CONSULTAR CREDITOS");
         btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +187,7 @@ public class ActivityUltimosCreditos extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "No hay Creditos", Toast.LENGTH_LONG ).show();
                         else
                         {
+                            txtMonto.setText("Monto: C$ " + formato.format(SumaTotal(listaInterna)));
                             AdapterCreditosBus credito = new AdapterCreditosBus(listaInterna, ActivityUltimosCreditos.this);
                             recyclerView.setAdapter(credito);
                         }
@@ -218,6 +231,16 @@ public class ActivityUltimosCreditos extends AppCompatActivity {
         if(_dialog!=null)
             _dialog.dismiss();
 
+    }
+
+    double SumaTotal(ArrayList<Credito> lista)
+    {
+        double suma = 0;
+        for (Credito item:
+             lista) {
+            suma += item.getMontoTotal();
+        }
+        return  suma;
     }
 
 }
