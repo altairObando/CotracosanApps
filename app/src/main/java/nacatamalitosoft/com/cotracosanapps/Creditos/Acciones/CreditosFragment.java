@@ -204,9 +204,8 @@ public class CreditosFragment extends Fragment {
                 public void onResponse(String s) {
                     try {
                         JSONObject response = new JSONObject(s);
-                        String codigo = response.getString("codigoCredito").split("-")[1];
-                        int nuevo = Integer.parseInt(codigo);
-                        tvCodigoCredito.setText("Codigo: CRED-"+ (nuevo +1));
+                        String codigo = response.getString("codigoCredito");
+                        tvCodigoCredito.setText("Codigo: " + codigo);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
