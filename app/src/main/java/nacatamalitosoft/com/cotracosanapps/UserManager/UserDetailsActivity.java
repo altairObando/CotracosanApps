@@ -96,6 +96,8 @@ public class UserDetailsActivity extends AppCompatActivity {
                         // Tomar una foto
                        // StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
                         //StrictMode.setVmPolicy(builder.build());
+                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                        StrictMode.setVmPolicy(builder.build());
                         Intent tomarFoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if(tomarFoto.resolveActivity(getPackageManager()) != null)
                         {
@@ -107,7 +109,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                             {
                                 Log.i("Camera Error", "Error al crear el archivo de imagen.");
                             }
-                            if(photoFile !=null){
+                            if(photoFile !=null && PermisoCamara()){
 
                                 tomarFoto.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                                 startActivityForResult(tomarFoto, 1888);
@@ -185,7 +187,6 @@ public class UserDetailsActivity extends AppCompatActivity {
         this.progressDialog.setMessage("Subiendo imagen");
         this.progressDialog.setIndeterminate(true);
         this.progressDialog.setCancelable(false);
-        isStoragePermissionGranted();
     }
 
     @Override
@@ -315,6 +316,24 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         }
         else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
+    public boolean PermisoCamara()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            if (checkSelfPermission(Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
             Log.v(TAG,"Permission is granted");
             return true;
         }
