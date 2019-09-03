@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -93,6 +94,8 @@ public class UserDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // Tomar una foto
+                       // StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                        //StrictMode.setVmPolicy(builder.build());
                         Intent tomarFoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if(tomarFoto.resolveActivity(getPackageManager()) != null)
                         {
@@ -105,6 +108,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                                 Log.i("Camera Error", "Error al crear el archivo de imagen.");
                             }
                             if(photoFile !=null){
+
                                 tomarFoto.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                                 startActivityForResult(tomarFoto, 1888);
                             }
@@ -181,6 +185,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         this.progressDialog.setMessage("Subiendo imagen");
         this.progressDialog.setIndeterminate(true);
         this.progressDialog.setCancelable(false);
+        isStoragePermissionGranted();
     }
 
     @Override
