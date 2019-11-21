@@ -126,7 +126,7 @@ public class ActivityDiario extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             //Realizando la consulta
-            String uri = "http://cotracosan.tk/ApiVehiculos/getConsolidadoVehiculo?vehiculoId="+ idBus
+            String uri = "http://cotracosan.somee.com/ApiVehiculos/getConsolidadoVehiculo?vehiculoId="+ idBus
                     +"&fechaInicio="+fechaInicio + "&fechaFin=" + fechaFin+"";
             StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override

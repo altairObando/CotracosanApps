@@ -56,7 +56,7 @@ public class Administrador extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            String url = "http://cotracosan.tk/Home/GetDashboardData";
+            String url = "http://cotracosan.somee.com/Home/GetDashboardData";
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

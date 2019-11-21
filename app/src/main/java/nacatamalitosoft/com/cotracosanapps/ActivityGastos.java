@@ -116,7 +116,7 @@ public class ActivityGastos extends AppCompatActivity {
         ArticuloSubClass articulo;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiArticulos/getGastosPorArticulos?"
+            String uri = "http://cotracosan.somee.com/ApiArticulos/getGastosPorArticulos?"
                     +"&fechaInicio=" +fechaInicio + "&fechaFin="+fechaFin;
             StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override

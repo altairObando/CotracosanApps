@@ -73,6 +73,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         loadReferences();
         currentUser = UserSingleton.getCurrentUser(this);
         setValues();
+       // isStoragePermissionGranted();
         // Mostrar una actividad para visualizar una imagen.
         imagenPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,10 +207,10 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     public class SubirImagenTask extends AsyncTask<Void, Void, Boolean>
     {
-        String NAMESPACE = "http://cotracosan.tk/";
+        String NAMESPACE = "http://cotracosan.somee.com/";
         String METHOD_NAME = "CambiarImagen";
-        String SOAPAction = "http://cotracosan.tk/CambiarImagen";
-        String SURL = "http://cotracosan.tk/Manage.asmx";
+        String SOAPAction = "http://cotracosan.somee.com/CambiarImagen";
+        String SURL = "http://cotracosan.somee.com/Manage.asmx";
         Bitmap bitmap;
         int size;
         boolean result = false;

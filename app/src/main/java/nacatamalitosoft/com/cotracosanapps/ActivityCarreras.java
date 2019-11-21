@@ -118,7 +118,7 @@ public class ActivityCarreras extends AppCompatActivity {
             if(max==0)
                 max=50;
 
-            String uri = "http://cotracosan.tk/ApiCarreras/getCarrerasPorVehiculo?vehiculoId=" + idBus
+            String uri = "http://cotracosan.somee.com/ApiCarreras/getCarrerasPorVehiculo?vehiculoId=" + idBus
                     +"&max=" + max;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override

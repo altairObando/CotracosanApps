@@ -72,7 +72,7 @@ public class ActivityConsolidadoCreditoSocio extends AppCompatActivity {
         DetalleDeCredito tempDet;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditosPendientePorSocio/" + socioId;
+            String uri = "http://cotracosan.somee.com/ApiCreditos/GetCreditosPendientePorSocio/" + socioId;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

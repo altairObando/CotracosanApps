@@ -122,7 +122,7 @@ public class BusquedaFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditos?idCredito="+idCredito;
+            String uri = "http://cotracosan.somee.com/ApiCreditos/GetCreditos?idCredito="+idCredito;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

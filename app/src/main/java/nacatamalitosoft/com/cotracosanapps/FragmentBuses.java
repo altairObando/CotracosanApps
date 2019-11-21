@@ -100,7 +100,7 @@ public class FragmentBuses extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            String uri = "http://cotracosan.tk/ApiVehiculos/getVehiculosPorSocio?socioId="+socioId;
+            String uri = "http://cotracosan.somee.com/ApiVehiculos/getVehiculosPorSocio?socioId="+socioId;
             buses = new ArrayList<>();
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override

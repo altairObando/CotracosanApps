@@ -90,7 +90,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiAccount/CambiarContraseña";
+            String uri = "http://cotracosan.somee.com/ApiAccount/CambiarContraseña";
             StringRequest request = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

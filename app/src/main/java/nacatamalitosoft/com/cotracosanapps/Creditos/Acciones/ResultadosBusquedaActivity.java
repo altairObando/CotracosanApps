@@ -98,7 +98,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Art
 
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiArticulos/getArticulos";
+            String uri = "http://cotracosan.somee.com/ApiArticulos/getArticulos";
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {

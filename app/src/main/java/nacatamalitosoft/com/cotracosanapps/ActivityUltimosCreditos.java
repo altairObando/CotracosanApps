@@ -116,7 +116,7 @@ public class ActivityUltimosCreditos extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             if(max==0)
                 max=50;
-            String uri = "http://cotracosan.tk/ApiCreditos/GetUltimosCreditos?max=" + max;
+            String uri = "http://cotracosan.somee.com/ApiCreditos/GetUltimosCreditos?max=" + max;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

@@ -118,7 +118,7 @@ public class ActivityAbonos extends AppCompatActivity {
         Abonos abonos;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiVehiculos/getAbonosPorVehiculo?vehiculoId=" + idBus
+            String uri = "http://cotracosan.somee.com/ApiVehiculos/getAbonosPorVehiculo?vehiculoId=" + idBus
                     +"&fechaInicio=" +fechaInicio + "&fechaFin="+fechaFin;
             StringRequest request =  new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override

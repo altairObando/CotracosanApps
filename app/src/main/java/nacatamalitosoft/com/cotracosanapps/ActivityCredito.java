@@ -67,7 +67,7 @@ public class ActivityCredito extends AppCompatActivity {
         DetalleDeCredito tempDet;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiCreditos/GetCreditosPorBus?idBus=" + idBus;
+            String uri = "http://cotracosan.somee.com/ApiCreditos/GetCreditosPorBus?idBus=" + idBus;
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

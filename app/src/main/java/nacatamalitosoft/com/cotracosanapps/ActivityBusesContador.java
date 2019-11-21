@@ -82,7 +82,7 @@ public class ActivityBusesContador extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            String uri = "http://cotracosan.tk/ApiVehiculos/getVehiculos";
+            String uri = "http://cotracosan.somee.com/ApiVehiculos/getVehiculos";
             buses = new ArrayList<>();
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override

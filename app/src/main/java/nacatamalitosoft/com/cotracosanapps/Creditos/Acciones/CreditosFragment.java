@@ -155,7 +155,7 @@ public class CreditosFragment extends Fragment {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri ="http://cotracosan.tk/ApiVehiculos/getVehiculos";
+            String uri ="http://cotracosan.somee.com/ApiVehiculos/getVehiculos";
         StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -199,7 +199,7 @@ public class CreditosFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            StringRequest request = new StringRequest(Request.Method.GET, "http://cotracosan.tk/ApiCreditos/GetUltimoCodigo", new Response.Listener<String>() {
+            StringRequest request = new StringRequest(Request.Method.GET, "http://cotracosan.somee.com/ApiCreditos/GetUltimoCodigo", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String s) {
                     try {
@@ -298,7 +298,7 @@ public class CreditosFragment extends Fragment {
             dialog.show();
 
             //Configurando url.
-            creditoUrlContent = "http://cotracosan.tk/ApiCreditos/AddCredito";
+            creditoUrlContent = "http://cotracosan.somee.com/ApiCreditos/AddCredito";
             // Crear la lista del detalle
             for (Articulos a: dataSet){
                 DetalleCreditoViewModel model = new DetalleCreditoViewModel(0, a.Cantidad,0,a.getId());

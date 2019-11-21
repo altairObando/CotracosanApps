@@ -73,7 +73,7 @@ public class ActivityAbonosCred extends AppCompatActivity {
         AbonoSubClass abonos;
         @Override
         protected Void doInBackground(Void... voids) {
-            String uri = "http://cotracosan.tk/ApiAbonos/AbonosPorCredito?creditoid=" + credito.getId();
+            String uri = "http://cotracosan.somee.com/ApiAbonos/AbonosPorCredito?creditoid=" + credito.getId();
             StringRequest request =  new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

@@ -120,7 +120,7 @@ public class ActivityConsolidadoCarrera extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            String uri = "http://cotracosan.tk/ApiVehiculos/getMontoTotalRecaudado?socioId="+socioId
+            String uri = "http://cotracosan.somee.com/ApiVehiculos/getMontoTotalRecaudado?socioId="+socioId
                     +"&fechaInicio=" + fechaInicio + "&fechaFin="+fechaFin;
             buses = new ArrayList<>();
             StringRequest request = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {

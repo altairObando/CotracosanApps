@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             // Url  de la consulta
-            String uri = "http://cotracosan.tk/ApiAccount/IniciarSesion";
+            String uri = "http://cotracosan.somee.com/ApiAccount/IniciarSesion";
             StringRequest request = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
