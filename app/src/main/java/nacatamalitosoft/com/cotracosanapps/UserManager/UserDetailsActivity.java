@@ -82,6 +82,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 startActivity(imagePreview);
             }
         });
+        PermisoCamara();
         // Mostrar una actividad para cambiar la imagen.
         optionsCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,10 +208,10 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     public class SubirImagenTask extends AsyncTask<Void, Void, Boolean>
     {
-        String NAMESPACE = "http://cotracosan.somee.com/";
+        String NAMESPACE = "http://10.1.32.56/Cotracosan/";
         String METHOD_NAME = "CambiarImagen";
-        String SOAPAction = "http://cotracosan.somee.com/CambiarImagen";
-        String SURL = "http://cotracosan.somee.com/Manage.asmx";
+        String SOAPAction = "http://10.1.32.56/Cotracosan//CambiarImagen";
+        String SURL = "http://10.1.32.56/Cotracosan/Manage.asmx";
         Bitmap bitmap;
         int size;
         boolean result = false;
@@ -287,7 +288,9 @@ public class UserDetailsActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(UserDetailsActivity.this, "Error al actualizar", Toast.LENGTH_LONG).show();
                 setValues();
+
             }
+            progressDialog.hide();
         }
     }
 
