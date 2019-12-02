@@ -72,7 +72,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         loadReferences();
         currentUser = UserSingleton.getCurrentUser(this);
-        setValues();
+        new SetValuesTask().execute();
        // isStoragePermissionGranted();
         // Mostrar una actividad para visualizar una imagen.
         imagenPerfil.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +179,18 @@ public class UserDetailsActivity extends AppCompatActivity {
         detalleCorreo.setText(currentUser.getEmail());
     }
 
+    public class SetValuesTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                setValues();
+            }catch (Exception ex){
+                Log.v("Imagen:", ex.getMessage());
+            }
+            return null;
+        }
+    }
     private void loadReferences() {
         this.imagenPerfil = findViewById(R.id.imagenDetallePerfil);
         this.optionsCamera = findViewById(R.id.ivCameraOptions);
@@ -208,10 +220,10 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     public class SubirImagenTask extends AsyncTask<Void, Void, Boolean>
     {
-        String NAMESPACE = "http://10.1.32.56/Cotracosan/";
+        String NAMESPACE = "http://cotracosan.somee.com/";
         String METHOD_NAME = "CambiarImagen";
-        String SOAPAction = "http://10.1.32.56/Cotracosan//CambiarImagen";
-        String SURL = "http://10.1.32.56/Cotracosan/Manage.asmx";
+        String SOAPAction = "http://cotracosan.somee.com/CambiarImagen";
+        String SURL = "http://cotracosan.somee.com/Manage.asmx";
         Bitmap bitmap;
         int size;
         boolean result = false;
@@ -288,9 +300,8 @@ public class UserDetailsActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(UserDetailsActivity.this, "Error al actualizar", Toast.LENGTH_LONG).show();
                 setValues();
-
+                progressDialog.hide();
             }
-            progressDialog.hide();
         }
     }
 
